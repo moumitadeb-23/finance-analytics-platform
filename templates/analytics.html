@@ -1,0 +1,810 @@
+{% extends "base.html" %}
+
+{% block title %}Spending Pattern Analysis{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/analytics.css') }}">
+
+<div class="container-fluid analytics-page py-4">
+
+    <!-- ======================================= -->
+    <!-- Header -->
+    <!-- ======================================= -->
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+
+        <div>
+
+            <h2 class="fw-bold analytics-title">
+
+                <i class="fas fa-chart-line text-primary me-2"></i>
+
+                Spending Pattern Analysis
+
+            </h2>
+
+            <p class="analytics-subtitle">
+
+                Analyze your spending habits and understand where your money goes.
+
+            </p>
+
+        </div>
+
+        <div>
+
+            <span class="badge bg-primary fs-6 px-3 py-2">
+
+                <i class="fas fa-calendar-alt me-2"></i>
+
+                Current Month
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- ======================================= -->
+    <!-- Summary Cards -->
+    <!-- ======================================= -->
+
+    <div class="row g-4 mb-4">
+
+        <!-- Total Expense -->
+
+        <div class="col-xl-3 col-lg-6">
+
+            <div class="card analytics-card card-expense">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <small class="card-title-small">
+
+                                Total Expenses
+
+                            </small>
+
+                            <h3 class="mt-2 mb-1 text-primary fw-bold">
+
+                                ₹ {{ "{:,.2f}".format(total_expense) }}
+
+                            </h3>
+
+                            <small class="text-muted">
+
+                                This Month
+
+                            </small>
+
+                        </div>
+
+                        <div class="analytics-icon bg-primary">
+
+                            <i class="fas fa-wallet"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Monthly Budget -->
+
+        <div class="col-xl-3 col-lg-6">
+
+            <div class="card analytics-card card-budget">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <small class="card-title-small">
+
+                                Monthly Budget
+
+                            </small>
+
+                            <h3 class="mt-2 mb-1 text-success fw-bold">
+
+                                ₹ {{ "{:,.2f}".format(monthly_budget) }}
+
+                            </h3>
+
+                            <small class="text-muted">
+
+                                Planned Budget
+
+                            </small>
+
+                        </div>
+
+                        <div class="analytics-icon bg-success">
+
+                            <i class="fas fa-chart-line"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Remaining Budget -->
+
+        <div class="col-xl-3 col-lg-6">
+
+            <div class="card analytics-card card-remaining">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <small class="card-title-small">
+
+                                Remaining Budget
+
+                            </small>
+
+                            <h3 class="mt-2 mb-1 text-warning fw-bold">
+
+                                ₹ {{ "{:,.2f}".format(remaining_budget) }}
+
+                            </h3>
+
+                            <small class="text-muted">
+
+                                Available Balance
+
+                            </small>
+
+                        </div>
+
+                        <div class="analytics-icon bg-warning">
+
+                            <i class="fas fa-money-bill-wave"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Highest Spending -->
+
+        <div class="col-xl-3 col-lg-6">
+
+            <div class="card analytics-card card-highest">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <small class="card-title-small">
+
+                                Highest Spending
+
+                            </small>
+
+                            <h3 class="mt-2 mb-1 text-danger fw-bold">
+
+                                {{ highest_category }}
+
+                            </h3>
+
+                            <small class="text-muted">
+
+                                {{ highest_percentage }}% of Total
+
+                            </small>
+
+                        </div>
+
+                        <div class="analytics-icon bg-danger">
+
+                            <i class="fas fa-chart-pie"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ======================================= -->
+    <!-- Charts Row Starts -->
+    <!-- ======================================= -->
+
+    <div class="row">
+
+            <!-- ======================================= -->
+    <!-- Pie Chart -->
+    <!-- ======================================= -->
+
+    <div class="col-xl-6 col-lg-12 mb-4">
+
+        <div class="card analytics-card h-100">
+
+            <div class="card-header bg-transparent border-0 pt-4 px-4">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h5 class="mb-1 fw-bold">
+
+                            <i class="fas fa-chart-pie text-primary me-2"></i>
+
+                            Expenses by Category
+
+                        </h5>
+
+                        <small class="text-muted">
+
+                            Distribution of your monthly expenses
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card-body pt-0">
+
+                <div class="chart-container">
+
+                    <canvas id="pieChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ======================================= -->
+    <!-- Monthly Expense Trend -->
+    <!-- ======================================= -->
+
+    <div class="col-xl-6 col-lg-12 mb-4">
+
+        <div class="card analytics-card h-100">
+
+            <div class="card-header bg-transparent border-0 pt-4 px-4">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h5 class="mb-1 fw-bold">
+
+                            <i class="fas fa-chart-bar text-success me-2"></i>
+
+                            Monthly Expense Trend
+
+                        </h5>
+
+                        <small class="text-muted">
+
+                            Monthly spending comparison
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card-body pt-0">
+
+                <div class="chart-container">
+
+                    <canvas id="barChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ======================================= -->
+<!-- Category Wise Spending -->
+<!-- ======================================= -->
+
+<div class="card analytics-card mb-4">
+
+    <div class="card-header bg-transparent border-0 pt-4 px-4">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h5 class="mb-1 fw-bold">
+
+                    <i class="fas fa-table text-info me-2"></i>
+
+                    Category Wise Spending
+
+                </h5>
+
+                <small class="text-muted">
+
+                    Detailed breakdown of expenses by category
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Category</th>
+
+                        <th>Amount</th>
+
+                        <th>Percentage</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% if category_data %}
+
+                    {% for row in category_data %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ loop.index }}
+
+                        </td>
+
+                        <td>
+
+                            <strong>
+
+                                {{ row.category }}
+
+                            </strong>
+
+                        </td>
+
+                        <td>
+
+                            ₹ {{ "{:,.2f}".format(row.amount) }}
+
+                        </td>
+
+                        <td>
+
+                            {{ row.percentage }}%
+
+                        </td>
+
+                        <td>
+
+                            {% if row.status=="High" %}
+
+                                <span class="badge bg-danger rounded-pill px-3">
+
+                                    High
+
+                                </span>
+
+                            {% elif row.status=="Medium" %}
+
+                                <span class="badge bg-warning text-dark rounded-pill px-3">
+
+                                    Medium
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-success rounded-pill px-3">
+
+                                    Low
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <tr>
+
+                        <td colspan="5" class="text-center py-5 text-muted">
+
+                            <i class="fas fa-folder-open fa-2x mb-3"></i>
+
+                            <br>
+
+                            No expense data available.
+
+                        </td>
+
+                    </tr>
+
+                {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ======================================= -->
+<!-- Insights & Recommendations -->
+<!-- ======================================= -->
+
+<div class="row">
+
+    <!-- Insights -->
+
+    <div class="col-lg-8 mb-4">
+
+        <div class="card analytics-card h-100">
+
+            <div class="card-header bg-transparent border-0 pt-4 px-4">
+
+                <h5 class="fw-bold">
+
+                    <i class="fas fa-lightbulb text-warning me-2"></i>
+
+                    Insights & Recommendations
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="alert alert-primary border-0">
+
+                    <strong>
+
+                        Highest Spending Category
+
+                    </strong>
+
+                    <br>
+
+                    {{ highest_category }}
+
+                    ({{ highest_percentage }}%)
+
+                </div>
+
+                <div class="alert alert-success border-0">
+
+                    <strong>
+
+                        Budget Utilization
+
+                    </strong>
+
+                    <br>
+
+                    {{ budget_utilization }}%
+
+                </div>
+
+                <div class="alert alert-warning border-0">
+
+                    <strong>
+
+                        Smart Recommendations
+
+                    </strong>
+
+                    <ul class="mt-2 mb-0">
+
+                        {% for rec in recommendations %}
+
+                        <li>{{ rec }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Budget Progress -->
+
+    <div class="col-lg-4 mb-4">
+
+        <div class="card analytics-card h-100">
+
+            <div class="card-header bg-transparent border-0 pt-4 px-4">
+
+                <h5 class="fw-bold">
+
+                    <i class="fas fa-bullseye text-success me-2"></i>
+
+                    Budget Progress
+
+                </h5>
+
+            </div>
+
+            <div class="card-body text-center">
+
+                <h2 class="fw-bold text-success">
+
+                    {{ budget_utilization }}%
+
+                </h2>
+
+                <p class="text-muted">
+
+                    Monthly Budget Used
+
+                </p>
+
+                <div class="progress rounded-pill" style="height:14px;">
+
+                    <div
+                        class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                        role="progressbar"
+                        style="width: {{ budget_utilization }}%;"
+                        aria-valuenow="{{ budget_utilization }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100">
+
+                    </div>
+
+                </div>
+
+                <div class="mt-4">
+
+                    <h5>
+
+                        Remaining
+
+                    </h5>
+
+                    <h3 class="text-primary">
+
+                        ₹ {{ "{:,.2f}".format(remaining_budget) }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ======================================= -->
+<!-- Hidden Chart Data -->
+<!-- ======================================= -->
+
+<div id="chartData"
+
+     data-labels='{{ labels | tojson | safe }}'
+
+     data-values='{{ amounts | tojson | safe }}'
+
+     data-monthlabels='{{ monthly_labels | tojson | safe }}'
+
+     data-monthvalues='{{ monthly_values | tojson | safe }}'>
+
+</div>
+
+<!-- ======================================= -->
+<!-- Chart JS -->
+<!-- ======================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded",function(){
+
+const chartData=document.getElementById("chartData");
+
+const pieLabels=JSON.parse(chartData.dataset.labels);
+
+const pieValues=JSON.parse(chartData.dataset.values);
+
+const monthlyLabels=JSON.parse(chartData.dataset.monthlabels);
+
+const monthlyValues=JSON.parse(chartData.dataset.monthvalues);
+
+// ================= PIE CHART =================
+
+new Chart(document.getElementById("pieChart"),{
+
+type:"doughnut",
+
+data:{
+
+labels:pieLabels,
+
+datasets:[{
+
+data:pieValues,
+
+backgroundColor:[
+
+"#0d6efd",
+
+"#198754",
+
+"#ffc107",
+
+"#dc3545",
+
+"#6610f2",
+
+"#20c997",
+
+"#fd7e14",
+
+"#6c757d"
+
+],
+
+borderWidth:2,
+
+hoverOffset:20
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+position:"bottom"
+
+}
+
+}
+
+}
+
+});
+
+// ================= BAR CHART =================
+
+new Chart(document.getElementById("barChart"),{
+
+type:"bar",
+
+data:{
+
+labels:monthlyLabels,
+
+datasets:[{
+
+label:"Monthly Expense",
+
+data:monthlyValues,
+
+backgroundColor:"#0d6efd",
+
+borderRadius:10,
+
+maxBarThickness:45
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+display:false
+
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true
+
+}
+
+}
+
+}
+
+});
+
+});
+
+</script>
+
+{% endblock %}

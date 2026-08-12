@@ -1,0 +1,1623 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    /* ========================================================
+       FINANCIAL GOAL PLANNING
+    ======================================================== */
+
+    .goal-page {
+        padding: 30px;
+    }
+
+    .goal-page-header {
+        margin-bottom: 25px;
+    }
+
+    .goal-page-header h2 {
+        font-weight: 700;
+        color: #172b4d;
+        margin-bottom: 5px;
+    }
+
+    .goal-page-header p {
+        color: #6c757d;
+        margin-bottom: 0;
+    }
+
+
+    /* ========================================================
+       ANALYTICS CARDS
+    ======================================================== */
+
+    .goal-stat-card {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        min-height: 165px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease,
+                    box-shadow 0.3s ease;
+    }
+
+    .goal-stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.13);
+    }
+
+    .goal-stat-icon {
+        font-size: 36px;
+        margin-bottom: 8px;
+    }
+
+    .goal-stat-title {
+        color: #6c757d;
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+
+    .goal-stat-value {
+        font-size: 27px;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    .goal-blue {
+        color: #1268f3;
+    }
+
+    .goal-green {
+        color: #159447;
+    }
+
+    .goal-orange {
+        color: #f0a500;
+    }
+
+
+    /* ========================================================
+       OVERALL PROGRESS
+    ======================================================== */
+
+    .goal-progress-card {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        margin-top: 25px;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .goal-progress-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 18px;
+    }
+
+    .goal-progress-header h4 {
+        color: #172b4d;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    .goal-progress-header p {
+        color: #6c757d;
+        margin-bottom: 0;
+    }
+
+    .goal-progress-percent {
+        color: #1268f3;
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .goal-progress-track {
+        height: 18px;
+        background: #e7ebf0;
+        border-radius: 30px;
+        overflow: hidden;
+    }
+
+    .goal-progress-fill {
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            #1268f3,
+            #16a34a
+        );
+        border-radius: 30px;
+        transition: width 0.6s ease;
+    }
+
+    .goal-progress-summary {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 14px;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .goal-progress-saved {
+        color: #159447;
+        font-weight: 600;
+    }
+
+    .goal-progress-remaining {
+        color: #dc3545;
+        font-weight: 600;
+    }
+
+
+    /* ========================================================
+       CREATE GOAL CARD
+    ======================================================== */
+
+    .create-goal-card {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        margin-top: 25px;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .create-goal-card h4 {
+        color: #172b4d;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .create-goal-card p {
+        color: #6c757d;
+    }
+
+    .goal-form-label {
+        font-weight: 600;
+        color: #172b4d;
+        margin-bottom: 7px;
+    }
+
+    .goal-form-control {
+        width: 100%;
+        border: 1px solid #d9e1ec;
+        border-radius: 10px;
+        padding: 11px 13px;
+        outline: none;
+        background: white;
+        transition: border 0.2s ease,
+                    box-shadow 0.2s ease;
+    }
+
+    .goal-form-control:focus {
+        border-color: #1268f3;
+        box-shadow: 0 0 0 3px rgba(18, 104, 243, 0.12);
+    }
+
+    .create-goal-btn {
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        background: #198c50;
+        color: white;
+        font-weight: 600;
+        transition: transform 0.2s ease,
+                    background 0.2s ease;
+    }
+
+    .create-goal-btn:hover {
+        background: #137341;
+        transform: translateY(-2px);
+    }
+
+
+    /* ========================================================
+       FINANCIAL GOAL CARDS
+    ======================================================== */
+
+    .financial-goals-title {
+        color: #172b4d;
+        font-weight: 700;
+        margin-top: 30px;
+        margin-bottom: 18px;
+    }
+
+    .financial-goal-card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        height: 100%;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease,
+                    box-shadow 0.3s ease;
+    }
+
+    .financial-goal-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.13);
+    }
+
+    .goal-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    .goal-type-badge {
+        display: inline-block;
+        background: #e9f1ff;
+        color: #1268f3;
+        padding: 5px 11px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .goal-card-name {
+        font-size: 21px;
+        color: #172b4d;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    .goal-status {
+        padding: 6px 11px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .goal-status-achieved {
+        color: #08783c;
+        background: #d9f5e5;
+    }
+
+    .goal-status-active {
+        color: #9a6700;
+        background: #fff1c7;
+    }
+
+    .goal-saved-amount {
+        color: #159447;
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 2px;
+    }
+
+    .goal-target-text {
+        color: #6c757d;
+        margin-bottom: 18px;
+    }
+
+    .goal-card-progress-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    .goal-card-progress-track {
+        height: 13px;
+        background: #e7ebf0;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 18px;
+    }
+
+    .goal-card-progress-fill {
+        height: 100%;
+        background: #1268f3;
+        border-radius: 20px;
+    }
+
+    .goal-information {
+        background: #f7f9fc;
+        border: 1px solid #e4e9f0;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 18px;
+    }
+
+    .goal-info-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 6px 0;
+    }
+
+    .goal-info-label {
+        color: #6c757d;
+    }
+
+    .goal-info-value {
+        color: #172b4d;
+        font-weight: 600;
+        text-align: right;
+    }
+
+    .goal-info-green {
+        color: #159447;
+    }
+
+    .goal-info-red {
+        color: #dc3545;
+    }
+
+    .goal-action-row {
+        display: flex;
+        gap: 10px;
+    }
+
+    .goal-action-row .btn {
+        flex: 1;
+        border-radius: 9px;
+        font-weight: 600;
+    }
+
+
+    /* ========================================================
+       EMPTY STATE
+    ======================================================== */
+
+    .goal-empty-state {
+        background: white;
+        border-radius: 16px;
+        padding: 60px 25px;
+        text-align: center;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .goal-empty-icon {
+        font-size: 65px;
+        margin-bottom: 15px;
+    }
+
+    .goal-empty-state h3 {
+        color: #172b4d;
+        font-weight: 700;
+    }
+
+    .goal-empty-state p {
+        color: #6c757d;
+    }
+
+
+    /* ========================================================
+       RESPONSIVE
+    ======================================================== */
+
+    @media (max-width: 768px) {
+
+        .goal-page {
+            padding: 20px 15px;
+        }
+
+        .goal-progress-header {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .goal-action-row {
+            flex-direction: column;
+        }
+
+    }
+
+    /* ========================================================
+       FINANCIAL GOALS - DARK MODE
+    ======================================================== */
+
+    body.dark-mode .goal-page { color: #f8fafc !important; }
+
+    body.dark-mode .goal-page-header h2,
+    body.dark-mode .financial-goals-title { color: #ffffff !important; }
+
+    body.dark-mode .goal-page-header p { color: #cbd5e1 !important; }
+
+    body.dark-mode .goal-stat-card {
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,.25) !important;
+    }
+
+    body.dark-mode .goal-stat-card:hover { background: #263449 !important; }
+    body.dark-mode .goal-stat-title { color: #cbd5e1 !important; }
+    body.dark-mode .goal-stat-value.goal-blue { color: #60a5fa !important; }
+    body.dark-mode .goal-stat-value.goal-green { color: #4ade80 !important; }
+    body.dark-mode .goal-stat-value.goal-orange { color: #fbbf24 !important; }
+
+    body.dark-mode .goal-progress-card {
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,.25) !important;
+    }
+
+    body.dark-mode .goal-progress-header h4 { color: #ffffff !important; }
+    body.dark-mode .goal-progress-header p { color: #cbd5e1 !important; }
+    body.dark-mode .goal-progress-percent { color: #60a5fa !important; }
+
+    body.dark-mode .goal-progress-track,
+    body.dark-mode .goal-card-progress-track { background: #475569 !important; }
+
+    body.dark-mode .goal-progress-saved { color: #4ade80 !important; }
+    body.dark-mode .goal-progress-remaining { color: #f87171 !important; }
+
+    body.dark-mode .create-goal-card {
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,.25) !important;
+    }
+
+    body.dark-mode .create-goal-card h4 { color: #ffffff !important; }
+    body.dark-mode .create-goal-card p { color: #cbd5e1 !important; }
+    body.dark-mode .goal-form-label { color: #e2e8f0 !important; }
+
+    body.dark-mode .goal-form-control {
+        background: #0f172a !important;
+        color: #ffffff !important;
+        border-color: #475569 !important;
+    }
+
+    body.dark-mode .goal-form-control:focus {
+        background: #0f172a !important;
+        color: #ffffff !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 3px rgba(59,130,246,.20) !important;
+    }
+
+    body.dark-mode .goal-form-control::placeholder { color: #94a3b8 !important; }
+
+    body.dark-mode select.goal-form-control option {
+        background: #0f172a;
+        color: #ffffff;
+    }
+
+    body.dark-mode .financial-goal-card {
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #f8fafc !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,.25) !important;
+    }
+
+    body.dark-mode .financial-goal-card:hover { background: #263449 !important; }
+    body.dark-mode .goal-card-name { color: #ffffff !important; }
+
+    body.dark-mode .goal-type-badge {
+        background: #1e3a5f !important;
+        color: #93c5fd !important;
+    }
+
+    body.dark-mode .goal-status-achieved {
+        background: #14532d !important;
+        color: #86efac !important;
+    }
+
+    body.dark-mode .goal-status-active {
+        background: #713f12 !important;
+        color: #fde68a !important;
+    }
+
+    body.dark-mode .goal-saved-amount { color: #4ade80 !important; }
+    body.dark-mode .goal-target-text { color: #94a3b8 !important; }
+    body.dark-mode .goal-card-progress-info { color: #f8fafc !important; }
+    body.dark-mode .goal-card-progress-info .goal-blue { color: #60a5fa !important; }
+
+    body.dark-mode .goal-information {
+        background: #0f172a !important;
+        border-color: #334155 !important;
+    }
+
+    body.dark-mode .goal-info-label { color: #cbd5e1 !important; }
+    body.dark-mode .goal-info-value { color: #f8fafc !important; }
+    body.dark-mode .goal-info-value.goal-info-green { color: #4ade80 !important; }
+    body.dark-mode .goal-info-value.goal-info-red { color: #f87171 !important; }
+
+    body.dark-mode .goal-empty-state {
+        background: #1e293b !important;
+        border: 1px solid #334155 !important;
+        color: #f8fafc !important;
+    }
+
+    body.dark-mode .goal-empty-state h3 { color: #ffffff !important; }
+    body.dark-mode .goal-empty-state p { color: #cbd5e1 !important; }
+
+    body.dark-mode .modal-content {
+        background: #1e293b !important;
+        color: #f8fafc !important;
+        border: 1px solid #334155 !important;
+    }
+
+    body.dark-mode .modal-header,
+    body.dark-mode .modal-footer { border-color: #334155 !important; }
+
+    body.dark-mode .modal-title,
+    body.dark-mode .modal-body h5 { color: #ffffff !important; }
+
+    body.dark-mode .modal-body .text-muted { color: #94a3b8 !important; }
+
+    body.dark-mode .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
+    }
+
+</style>
+
+
+<div class="goal-page">
+
+
+    <!-- ======================================================
+         PAGE HEADER
+    ======================================================= -->
+
+    <div class="goal-page-header">
+
+        <h2>
+            🎯 Financial Goal Planning
+        </h2>
+
+        <p>
+            Create financial goals, track savings progress
+            and achieve your future financial objectives.
+        </p>
+
+    </div>
+
+
+    <!-- ======================================================
+         FLASH MESSAGES
+    ======================================================= -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div
+                    class="alert alert-{{ category }} alert-dismissible fade show"
+                    role="alert">
+
+                    {{ message }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <!-- ======================================================
+         ANALYTICS CARDS
+    ======================================================= -->
+
+    <div class="row g-4">
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="goal-stat-card">
+
+                <div>
+
+                    <div class="goal-stat-icon">
+                        🎯
+                    </div>
+
+                    <div class="goal-stat-title">
+                        Total Goals
+                    </div>
+
+                    <h2 class="goal-stat-value goal-blue">
+
+                        {{ total_goals }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="goal-stat-card">
+
+                <div>
+
+                    <div class="goal-stat-icon">
+                        🏆
+                    </div>
+
+                    <div class="goal-stat-title">
+                        Total Target Amount
+                    </div>
+
+                    <h2 class="goal-stat-value goal-blue">
+
+                        ₹{{ "{:,.2f}".format(total_target) }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="goal-stat-card">
+
+                <div>
+
+                    <div class="goal-stat-icon">
+                        💰
+                    </div>
+
+                    <div class="goal-stat-title">
+                        Total Saved
+                    </div>
+
+                    <h2 class="goal-stat-value goal-green">
+
+                        ₹{{ "{:,.2f}".format(total_saved) }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="goal-stat-card">
+
+                <div>
+
+                    <div class="goal-stat-icon">
+                        ✅
+                    </div>
+
+                    <div class="goal-stat-title">
+                        Goals Achieved
+                    </div>
+
+                    <h2 class="goal-stat-value goal-green">
+
+                        {{ goals_achieved }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ======================================================
+         OVERALL GOAL PROGRESS
+    ======================================================= -->
+
+    <div class="goal-progress-card">
+
+        <div class="goal-progress-header">
+
+            <div>
+
+                <h4>
+                    📊 Overall Financial Goal Progress
+                </h4>
+
+                <p>
+                    Combined savings progress across all your
+                    active financial goals.
+                </p>
+
+            </div>
+
+
+            <div class="goal-progress-percent">
+
+                {{ overall_progress|round(1) }}%
+
+            </div>
+
+        </div>
+
+
+        <div class="goal-progress-track">
+
+            <div
+                class="goal-progress-fill"
+                style="width: {{ overall_progress }}%;">
+            </div>
+
+        </div>
+
+
+        <div class="goal-progress-summary">
+
+            <span class="goal-progress-saved">
+
+                💰 Saved:
+                ₹{{ "{:,.2f}".format(total_saved) }}
+
+            </span>
+
+
+            <span class="goal-progress-remaining">
+
+                📉 Remaining:
+                ₹{{ "{:,.2f}".format(remaining_savings) }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         CREATE FINANCIAL GOAL
+    ======================================================= -->
+
+    <div class="create-goal-card">
+
+        <h4>
+            ➕ Create Financial Goal
+        </h4>
+
+        <p class="mb-4">
+            Define a financial objective and start tracking
+            your savings journey.
+        </p>
+
+
+        <form
+            action="{{ url_for('create_financial_goal') }}"
+            method="POST">
+
+
+            <div class="row">
+
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="goal-form-label">
+                        Goal Type
+                    </label>
+
+
+                    <select
+                        class="goal-form-control"
+                        name="goal_type"
+                        required>
+
+                        <option value="">
+                            Select Goal Type
+                        </option>
+
+                        <option value="Emergency Fund">
+                            🛡️ Emergency Fund
+                        </option>
+
+                        <option value="Vacation Savings">
+                            ✈️ Vacation Savings
+                        </option>
+
+                        <option value="Education Fund">
+                            🎓 Education Fund
+                        </option>
+
+                        <option value="Home Purchase">
+                            🏠 Home Purchase
+                        </option>
+
+                        <option value="Vehicle Purchase">
+                            🚗 Vehicle Purchase
+                        </option>
+
+                        <option value="Retirement Planning">
+                            👴 Retirement Planning
+                        </option>
+
+                        <option value="Wealth Creation">
+                            💰 Wealth Creation
+                        </option>
+
+                        <option value="Other">
+                            📌 Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="goal-form-label">
+                        Goal Name
+                    </label>
+
+
+                    <input
+                        type="text"
+                        class="goal-form-control"
+                        name="goal_name"
+                        placeholder="Example: My Emergency Fund"
+                        required>
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="goal-form-label">
+                        Target Amount (₹)
+                    </label>
+
+
+                    <input
+                        type="number"
+                        class="goal-form-control"
+                        name="target_amount"
+                        placeholder="100000"
+                        min="1"
+                        step="0.01"
+                        required>
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="goal-form-label">
+                        Current Saved Amount (₹)
+                    </label>
+
+
+                    <input
+                        type="number"
+                        class="goal-form-control"
+                        name="saved_amount"
+                        value="0"
+                        min="0"
+                        step="0.01"
+                        required>
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="goal-form-label">
+                        Target Completion Date
+                    </label>
+
+
+                    <input
+                        type="date"
+                        class="goal-form-control"
+                        name="target_date"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="create-goal-btn">
+
+                🎯 Create Financial Goal
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- ======================================================
+         MY FINANCIAL GOALS
+    ======================================================= -->
+
+    <h3 class="financial-goals-title">
+
+        🏆 My Financial Goals
+
+    </h3>
+
+
+    <div class="row g-4">
+
+
+        {% if financial_goals %}
+
+
+             {% for goal in financial_goals %}
+
+
+                {% if goal[4] > 0 %}
+
+                    {% set progress = (
+                        goal[5] /
+                        goal[4]
+                    ) * 100 %}
+
+                {% else %}
+
+                    {% set progress = 0 %}
+
+                {% endif %}
+
+
+                {% if progress > 100 %}
+
+                    {% set display_progress = 100 %}
+
+                {% else %}
+
+                    {% set display_progress = progress %}
+
+                {% endif %}
+
+
+                {% set remaining = goal[4] - goal[5] %}
+
+
+                <div class="col-xl-4 col-md-6">
+
+                    <div class="financial-goal-card">
+
+
+                        <div class="goal-card-header">
+
+
+                            <div>
+
+                                <span class="goal-type-badge">
+
+                                    {{ goal[2] }}
+
+                                </span>
+
+
+                                <h4 class="goal-card-name">
+
+                                    {{ goal[3] }}
+
+                                </h4>
+
+                            </div>
+
+
+                            {% if progress >= 100 %}
+
+                                <span
+                                    class="goal-status goal-status-achieved">
+
+                                    ✓ ACHIEVED
+
+                                </span>
+
+                            {% else %}
+
+                                <span
+                                    class="goal-status goal-status-active">
+
+                                    ● ACTIVE
+
+                                </span>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                        <div class="goal-saved-amount">
+
+                            ₹{{ "{:,.2f}".format(goal[5]) }}
+
+                        </div>
+
+
+                        <div class="goal-target-text">
+
+                            saved of
+                            ₹{{ "{:,.2f}".format(goal[4]) }}
+
+                        </div>
+
+
+                        <div class="goal-card-progress-info">
+
+                            <span>
+                                Savings Progress
+                            </span>
+
+
+                            <span class="goal-blue">
+
+                                {{ progress|round(1) }}%
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="goal-card-progress-track">
+
+                            <div
+                                class="goal-card-progress-fill"
+                                style="width: {{ display_progress }}%;">
+                            </div>
+
+                        </div>
+
+
+                        <div class="goal-information">
+
+
+                            <div class="goal-info-row">
+
+                                <span class="goal-info-label">
+                                    🎯 Target
+                                </span>
+
+                                <span class="goal-info-value">
+
+                                    ₹{{ "{:,.2f}".format(goal[4]) }}
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="goal-info-row">
+
+                                <span class="goal-info-label">
+                                    💰 Saved
+                                </span>
+
+                                <span
+                                    class="goal-info-value goal-info-green">
+
+                                    ₹{{ "{:,.2f}".format(goal[5]) }}
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="goal-info-row">
+
+                                <span class="goal-info-label">
+                                    📉 Remaining
+                                </span>
+
+                                <span
+                                    class="goal-info-value goal-info-red">
+
+                                    ₹{{ "{:,.2f}".format(
+                                        [remaining, 0]|max
+                                    ) }}
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="goal-info-row">
+
+                                <span class="goal-info-label">
+                                    📅 Target Date
+                                </span>
+
+                                <span class="goal-info-value">
+
+                                    {{ goal[6] }}
+
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        {% if progress < 100 %}
+
+                            <button
+                                type="button"
+                                class="btn btn-success w-100 mb-2"
+                                data-bs-toggle="modal"
+                                data-bs-target="#savingsModal{{ goal[0] }}">
+
+                                💰 Add Savings
+
+                            </button>
+
+                        {% endif %}
+
+
+                        <div class="goal-action-row">
+
+
+                            <button
+                                type="button"
+                                class="btn btn-warning"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editGoalModal{{ goal[0] }}">
+
+                                ✏️ Edit
+
+                            </button>
+
+
+                            <a
+                                href="{{ url_for(
+                                    'remove_financial_goal',
+                                    id=goal[0]
+                                ) }}"
+                                class="btn btn-danger"
+                                onclick="return confirm(
+                                    'Delete this financial goal?'
+                                )">
+
+                                🗑️ Delete
+
+                            </a>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================================
+                     ADD SAVINGS MODAL
+                =================================================== -->
+
+                <div
+                    class="modal fade"
+                    id="savingsModal{{ goal[0] }}"
+                    tabindex="-1">
+
+                    <div
+                        class="modal-dialog modal-dialog-centered">
+
+                        <div class="modal-content">
+
+
+                            <form
+                                action="{{ url_for(
+                                    'add_savings_to_goal',
+                                    id=goal[0]
+                                ) }}"
+                                method="POST">
+
+
+                                <div class="modal-header">
+
+                                    <h5 class="modal-title">
+
+                                        💰 Add Savings
+
+                                    </h5>
+
+
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal">
+                                    </button>
+
+                                </div>
+
+
+                                <div class="modal-body">
+
+
+                                    <h5 class="fw-bold">
+
+                                        {{ goal[3] }}
+
+                                    </h5>
+
+
+                                    <p class="text-muted">
+
+                                        Current Savings:
+                                        ₹{{ "{:,.2f}".format(goal[5]) }}
+
+                                    </p>
+
+
+                                    <label class="goal-form-label">
+
+                                        Savings Amount (₹)
+
+                                    </label>
+
+
+                                    <input
+                                        type="number"
+                                        class="goal-form-control"
+                                        name="savings_amount"
+                                        min="0.01"
+                                        step="0.01"
+                                        placeholder="Enter amount"
+                                        required>
+
+
+                                </div>
+
+
+                                <div class="modal-footer">
+
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">
+
+                                        Cancel
+
+                                    </button>
+
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-success">
+
+                                        💰 Add Savings
+
+                                    </button>
+
+
+                                </div>
+
+
+                            </form>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================================
+                     EDIT GOAL MODAL
+                =================================================== -->
+
+                <div
+                    class="modal fade"
+                    id="editGoalModal{{ goal[0] }}"
+                    tabindex="-1">
+
+                    <div
+                        class="modal-dialog modal-dialog-centered">
+
+                        <div class="modal-content">
+
+
+                            <form
+                                action="{{ url_for(
+                                    'edit_financial_goal',
+                                    id=goal[0]
+                                ) }}"
+                                method="POST">
+
+
+                                <div class="modal-header">
+
+                                    <h5 class="modal-title">
+
+                                        ✏️ Edit Financial Goal
+
+                                    </h5>
+
+
+                                    <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal">
+                                    </button>
+
+
+                                </div>
+
+
+                                <div class="modal-body">
+
+
+                                    <div class="mb-3">
+
+                                        <label class="goal-form-label">
+                                            Goal Type
+                                        </label>
+
+
+                                        <select
+                                            class="goal-form-control"
+                                            name="goal_type"
+                                            required>
+
+
+                                            <option
+                                                value="Emergency Fund"
+                                                {% if goal[2] == "Emergency Fund" %}
+                                                selected
+                                                {% endif %}>
+
+                                                Emergency Fund
+
+                                            </option>
+
+
+                                            <option
+                                                value="Vacation Savings"
+                                                {% if goal[2] == "Vacation Savings" %}
+                                                selected
+                                                {% endif %}>
+
+                                                Vacation Savings
+
+                                            </option>
+
+
+                                            <option
+                                                value="Education Fund"
+                                                {% if goal[2] == "Education Fund" %}
+                                                selected
+                                                {% endif %}>
+
+                                                Education Fund
+
+                                            </option>
+
+
+                                            <option
+                                                value="Home Purchase"
+                                                {% if goal[2] == "Home Purchase" %}
+                                                selected
+                                                {% endif %}>
+
+                                                Home Purchase
+
+                                            </option>
+
+
+                                            <option
+                                                value="Vehicle Purchase"
+                                                {% if goal[2] == "Vehicle Purchase" %}
+                                                selected
+                                                {% endif %}>
+
+                                                Vehicle Purchase
+
+                                            </option>
+
+
+                                            <option
+                                                value="Retirement Planning"
+                                                {% if goal[2] == "Retirement Planning" %}
+                                                selected
+                                                {% endif %}>
+
+                                                Retirement Planning
+
+                                            </option>
+
+
+                                            <option
+                                                value="Wealth Creation"
+                                                {% if goal[2] == "Wealth Creation" %}
+                                                selected
+                                                {% endif %}>
+
+                                                Wealth Creation
+
+                                            </option>
+
+
+                                            <option
+                                                value="Other"
+                                                {% if goal[2] == "Other" %}
+                                                selected
+                                                {% endif %}>
+
+                                                Other
+
+                                            </option>
+
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="mb-3">
+
+                                        <label class="goal-form-label">
+                                            Goal Name
+                                        </label>
+
+
+                                        <input
+                                            type="text"
+                                            class="goal-form-control"
+                                            name="goal_name"
+                                            value="{{ goal[3] }}"
+                                            required>
+
+                                    </div>
+
+
+                                    <div class="mb-3">
+
+                                        <label class="goal-form-label">
+                                            Target Amount (₹)
+                                        </label>
+
+
+                                        <input
+                                            type="number"
+                                            class="goal-form-control"
+                                            name="target_amount"
+                                            value="{{ goal[4] }}"
+                                            min="1"
+                                            step="0.01"
+                                            required>
+
+                                    </div>
+
+
+                                    <div class="mb-3">
+
+                                        <label class="goal-form-label">
+                                            Saved Amount (₹)
+                                        </label>
+
+
+                                        <input
+                                            type="number"
+                                            class="goal-form-control"
+                                            name="saved_amount"
+                                            value="{{ goal[5] }}"
+                                            min="0"
+                                            step="0.01"
+                                            required>
+
+                                    </div>
+
+
+                                    <div class="mb-3">
+
+                                        <label class="goal-form-label">
+                                            Target Completion Date
+                                        </label>
+
+
+                                        <input
+                                            type="date"
+                                            class="goal-form-control"
+                                            name="target_date"
+                                            value="{{ goal[6] }}"
+                                            required>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="modal-footer">
+
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal">
+
+                                        Cancel
+
+                                    </button>
+
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary">
+
+                                        💾 Save Changes
+
+                                    </button>
+
+
+                                </div>
+
+
+                            </form>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <div class="col-12">
+
+                <div class="goal-empty-state">
+
+                    <div class="goal-empty-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        No Financial Goals Yet
+                    </h3>
+
+                    <p>
+                        Create your first financial goal and
+                        start tracking your savings journey.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}

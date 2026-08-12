@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Finance Analytics Platform</title>
+
+    <!-- Home CSS -->
+    <!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<!-- Custom CSS -->
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/home.css') }}">
+
+</head>
+
+<body>
+
+<!-- ===================== NAVBAR ====================== -->
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar">
+
+<div class="container">
+
+<a class="navbar-brand fw-bold fs-3" href="#">
+
+<i class="fas fa-wallet me-2 text-warning"></i>
+
+Finance Analytics Platform for Financial Reporting and Budget Tracking
+
+</a>
+
+<button class="navbar-toggler"
+
+type="button"
+
+data-bs-toggle="collapse"
+
+data-bs-target="#navbar">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse"
+
+id="navbar">
+
+<ul class="navbar-nav ms-auto align-items-lg-center">
+
+<li class="nav-item">
+
+<a class="nav-link" href="#features">
+
+Features
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="#ai">
+
+AI Assistant
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="#developer">
+
+Developer
+
+</a>
+
+</li>
+
+<li class="nav-item">
+
+<a class="nav-link" href="#contact">
+
+Contact
+
+</a>
+
+</li>
+
+<li class="nav-item ms-lg-3">
+
+<a href="{{ url_for('login') }}" class="nav-login">Login</a>
+
+</li>
+
+<li class="nav-item ms-lg-2">
+
+<a href="{{ url_for('register') }}"
+
+class="btn btn-warning rounded-pill px-4">
+
+Get Started
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="container">
+
+<div class="row align-items-center gy-5">
+
+    <!-- LEFT SIDE -->
+
+    <div class="col-lg-6">
+
+        <span class="hero-badge">
+            🚀 AI Powered Personal Finance
+        </span>
+
+        <h1 class="hero-title">
+
+            Manage Your
+
+            <span class="gradient-text">
+                Money Smarter
+            </span>
+
+            with AI
+
+        </h1>
+
+        <p>
+
+            Finance Analytics Platform helps you track income,
+            expenses, budgets, investments, financial goals
+            and receive AI-powered recommendations
+            for smarter financial decisions.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{{ url_for('register') }}"
+               class="btn btn-success btn-lg rounded-pill px-5">
+
+                Get Started
+
+            </a>
+
+            <a href="{{ url_for('login') }}"
+               class="btn btn-light btn-lg rounded-pill px-5 ms-3">
+
+                Login
+
+            </a>
+
+        </div>
+
+        <div class="hero-stats">
+
+            <div>
+                <h2>₹5L+</h2>
+                <p>Managed</p>
+            </div>
+
+            <div>
+                <h2>100+</h2>
+                <p>Users</p>
+            </div>
+
+            <div>
+                <h2>99%</h2>
+                <p>Accuracy</p>
+            </div>
+
+            <div>
+                <h2>24/7</h2>
+                <p>AI</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="col-lg-6">
+
+        <div class="hero-card">
+
+            <div class="d-flex justify-content-between">
+
+                <h5>Current Balance</h5>
+
+                <i class="fas fa-wallet"></i>
+
+            </div>
+
+            <h1 class="hero-balance">
+
+                ₹84,500
+
+            </h1>
+
+            <div class="balance-divider"></div>
+
+            <div class="balance-row">
+
+                <span>💰 Income</span>
+
+                <strong>₹85,000</strong>
+
+            </div>
+
+            <div class="balance-row">
+
+                <span>💸 Expense</span>
+
+                <strong>₹500</strong>
+
+            </div>
+
+            <div class="balance-row">
+
+                <span>🏦 Savings</span>
+
+                <strong>₹84,500</strong>
+
+            </div>
+
+            <p class="progress-title">
+
+                Monthly Budget
+
+            </p>
+
+            <div class="progress">
+
+                <div class="progress-bar bg-success"
+                     style="width:82%;">
+
+                </div>
+
+            </div>
+
+            <p class="progress-text">
+
+                82% Budget Remaining
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===================================================== -->
+<!-- FEATURES -->
+<!-- ===================================================== -->
+
+<section class="features-section py-5" id="features">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<span class="badge bg-primary px-4 py-2 rounded-pill fs-6">
+
+✨ Features
+
+</span>
+
+<h2 class="display-5 fw-bold mt-3">
+
+Everything You Need To Manage Your Money
+
+</h2>
+
+<p class="text-muted fs-5">
+
+Powerful tools to monitor, analyze and improve your finances.
+
+</p>
+
+</div>
+
+<div class="row g-4">
+
+<!-- CARD 1 -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="feature-card h-100">
+
+<div class="feature-icon bg-success">
+
+<i class="fas fa-wallet"></i>
+
+</div>
+
+<h4 class="mt-4">
+
+Income Management
+
+</h4>
+
+<p>
+
+Track multiple income sources including salary,
+
+business, freelance work and passive income.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 2 -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="feature-card h-100">
+
+<div class="feature-icon bg-danger">
+
+<i class="fas fa-credit-card"></i>
+
+</div>
+
+<h4 class="mt-4">
+
+Expense Tracking
+
+</h4>
+
+<p>
+
+Categorize expenses automatically and
+
+monitor where your money goes every month.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="feature-card h-100">
+
+<div class="feature-icon bg-warning">
+
+<i class="fas fa-piggy-bank"></i>
+
+</div>
+
+<h4 class="mt-4">
+
+Budget Planner
+
+</h4>
+
+<p>
+
+Set monthly budgets and receive alerts
+
+before overspending.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 4 -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="feature-card h-100">
+
+<div class="feature-icon bg-primary">
+
+<i class="fas fa-chart-line"></i>
+
+</div>
+
+<h4 class="mt-4">
+
+Analytics Dashboard
+
+</h4>
+
+<p>
+
+Interactive charts and financial insights
+
+to understand your spending patterns.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 5 -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="feature-card h-100">
+
+<div class="feature-icon bg-info">
+
+<i class="fas fa-coins"></i>
+
+</div>
+
+<h4 class="mt-4">
+
+Investment Portfolio
+
+</h4>
+
+<p>
+
+Manage mutual funds, SIPs, stocks,
+
+gold and crypto investments.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- CARD 6 -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="feature-card h-100">
+
+<div class="feature-icon bg-dark">
+
+<i class="fas fa-robot"></i>
+
+</div>
+
+<h4 class="mt-4">
+
+AI Finance Assistant
+
+</h4>
+
+<p>
+
+Ask financial questions naturally and
+
+receive personalized AI recommendations.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- AI ASSISTANT -->
+<!-- ===================================================== -->
+
+<section class="ai-section py-5" id="ai">
+
+<div class="container">
+
+<div class="row align-items-center gy-5">
+
+<!-- LEFT -->
+
+<div class="col-lg-6">
+
+<span class="badge bg-primary px-4 py-2 rounded-pill fs-6">
+
+🤖 AI Powered
+
+</span>
+
+<h2>
+
+Meet Your Personal
+
+<span class="text-primary">
+
+Finance Assistant
+
+</span>
+
+</h2>
+
+<p class="lead text-secondary mt-4">
+
+Our intelligent AI Assistant analyzes your financial records
+and provides personalized recommendations to help you
+save more, spend wisely and achieve your financial goals.
+
+</p>
+
+<div class="mt-5">
+
+<div class="ai-point">
+
+<i class="fas fa-check-circle text-success"></i>
+
+<span>Analyze income & expenses instantly</span>
+
+</div>
+
+<div class="ai-point">
+
+<i class="fas fa-check-circle text-success"></i>
+
+<span>Budget planning & saving suggestions</span>
+
+</div>
+
+<div class="ai-point">
+
+<i class="fas fa-check-circle text-success"></i>
+
+<span>Investment recommendations</span>
+
+</div>
+
+<div class="ai-point">
+
+<i class="fas fa-check-circle text-success"></i>
+
+<span>Financial health score</span>
+
+</div>
+
+<div class="ai-point">
+
+<i class="fas fa-check-circle text-success"></i>
+
+<span>Natural conversation powered by AI</span>
+
+</div>
+
+</div>
+
+<div class="mt-5">
+
+<a href="{{ url_for('login') }}"
+
+class="btn btn-primary btn-lg rounded-pill px-5">
+
+Try AI Assistant
+
+</a>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="col-lg-6">
+
+<div class="chat-preview">
+
+<div class="chat-header">
+
+<div>
+
+<i class="fas fa-robot"></i>
+
+AI Finance Assistant
+
+</div>
+
+<span class="online-status">
+
+● Online
+
+</span>
+
+</div>
+
+<div class="chat-body">
+
+<div class="bot-message">
+
+👋 Hello!
+
+I'm your Finance AI Assistant Assistant.
+
+How can I help you today?
+
+</div>
+
+<div class="user-message">
+
+How much did I save this month?
+
+</div>
+
+<div class="bot-message">
+
+📊 Based on your transactions,
+
+you have saved
+
+<strong>₹18,450</strong>
+
+this month.
+
+Great job! 🎉
+
+</div>
+
+<div class="user-message">
+
+Can I improve my savings?
+
+</div>
+
+<div class="bot-message">
+
+Yes!
+
+Reducing Shopping expenses by
+
+15%
+
+could increase your monthly
+
+savings by nearly
+
+<strong>₹2,300</strong>.
+
+</div>
+
+</div>
+
+<div class="chat-footer">
+
+<input
+
+type="text"
+
+placeholder="Ask your AI Assistant..."
+
+disabled
+
+>
+
+<button>
+
+<i class="fas fa-paper-plane"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- DEVELOPER -->
+<!-- ===================================================== -->
+
+<section class="developer-section py-5" id="developer">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<span class="badge bg-primary px-4 py-2 rounded-pill fs-6">
+
+👨‍💻 Developer
+
+</span>
+
+<h2 class="fw-bold mt-3">
+
+Meet The Developer
+
+</h2>
+
+<p class="text-muted fs-5">
+
+The creator behind Finance Analytics Platform.
+
+</p>
+
+</div>
+
+<div class="row align-items-center gy-5">
+
+<!-- LEFT -->
+
+<div class="col-lg-4">
+
+<div class="developer-card">
+
+<img src="{{ url_for('static', filename='images/developer.jpg') }}"
+
+class="developer-image"
+
+alt="Developer">
+
+<h3 class="mt-4">
+
+Moumita Deb
+
+</h3>
+
+<p class="text-primary fw-semibold">
+
+AI • Full Stack Developer • Data Analytics
+
+</p>
+
+<div class="social-icons">
+
+<a href="https://www.linkedin.com/in/moumitadebofficial"
+
+target="_blank">
+
+<i class="fab fa-linkedin"></i>
+
+</a>
+
+<a href="https://github.com/moumitadeb-23"
+
+target="_blank">
+
+<i class="fab fa-github"></i>
+
+</a>
+
+<a href="https://portfolio-nu-green-13.vercel.app/"
+
+target="_blank">
+
+<i class="fas fa-globe"></i>
+
+</a>
+
+<a href="mailto:moumitadeb.official@gmail.com">
+
+<i class="fas fa-envelope"></i>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="col-lg-8">
+
+<div class="about-card">
+
+<h2>
+
+About Finance Analytics Platform
+
+</h2>
+
+<p>
+
+Finance Analytics Platform is an AI-powered Personal Finance
+Management System designed to help users manage
+their complete financial life from a single dashboard.
+
+</p>
+
+<div class="row mt-4">
+
+<div class="col-md-6">
+
+<div class="info-box">
+
+<i class="fas fa-wallet text-success"></i>
+
+<div>
+
+<h5>
+
+Expense Tracking
+
+</h5>
+
+<p>
+
+Track all daily expenses easily.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="info-box">
+
+<i class="fas fa-chart-line text-primary"></i>
+
+<div>
+
+<h5>
+
+Analytics
+
+</h5>
+
+<p>
+
+Visual reports & charts.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="info-box">
+
+<i class="fas fa-robot text-warning"></i>
+
+<div>
+
+<h5>
+
+AI Assistant
+
+</h5>
+
+<p>
+
+Financial advice using Ollama AI.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="info-box">
+
+<i class="fas fa-shield-alt text-danger"></i>
+
+<div>
+
+<h5>
+
+Secure
+
+</h5>
+
+<p>
+
+Private local AI processing.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="text-center mt-5">
+
+<a href="{{ url_for('register') }}"
+class="btn btn-success btn-lg rounded-pill px-5 py-3">
+
+Start Managing Your Finance
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CONTACT SECTION -->
+<!-- ===================================================== -->
+
+<section class="contact-section py-5" id="contact">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<span class="badge bg-primary px-4 py-2 rounded-pill fs-6">
+
+📞 Contact
+
+</span>
+
+<h2 class="fw-bold mt-3">
+
+Let's Connect
+
+</h2>
+
+<p class="text-muted fs-5">
+
+Have questions or suggestions? Feel free to reach out.
+
+</p>
+
+</div>
+
+<div class="row g-4">
+
+<div class="col-lg-4">
+
+<div class="contact-card">
+
+<div class="contact-icon">
+
+<i class="fas fa-envelope"></i>
+
+</div>
+
+<h4>Email</h4>
+
+<p>
+
+moumitadeb.official@gmail.com
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="contact-card">
+
+<div class="contact-icon">
+
+<i class="fab fa-linkedin"></i>
+
+</div>
+
+<h4>LinkedIn</h4>
+
+<p>
+
+linkedin.com/in/moumitadebofficial
+
+</p>
+
+</div>
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="contact-card">
+
+<div class="contact-icon">
+
+<i class="fas fa-globe"></i>
+
+</div>
+
+<h4>Portfolio</h4>
+
+<p>
+
+portfolio-nu-green-13.vercel.app
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- FOOTER -->
+<!-- ===================================================== -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="row gy-5">
+
+<div class="col-lg-5">
+
+<h2 class="footer-logo">
+
+<i class="fas fa-wallet text-warning me-2"></i>
+
+Finance Analytics Platform
+
+</h2>
+
+<p>
+
+An AI-powered personal finance management platform
+that helps users monitor income, expenses,
+budgets, investments and financial goals
+with intelligent insights.
+
+</p>
+
+</div>
+
+<div class="col-lg-3">
+
+<h4>
+
+Quick Links
+
+</h4>
+
+<ul class="footer-links">
+
+<li>
+
+<a href="#features">
+
+Features
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#ai">
+
+AI Assistant
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#developer">
+
+Developer
+
+</a>
+
+</li>
+
+<li>
+
+<a href="#contact">
+
+Contact
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+<div class="col-lg-4">
+
+<h4>
+
+Get Started
+
+</h4>
+
+<p>
+
+Join Finance Analytics Platform
+and start managing your finances
+like a professional.
+
+</p>
+
+<a href="{{ url_for('register') }}"
+
+class="btn btn-warning rounded-pill px-4 mt-3">
+
+Create Account
+
+</a>
+
+</div>
+
+</div>
+
+<hr class="my-5">
+
+<div class="text-center">
+
+<p>
+
+© 2026 Finance Analytics Platform
+
+<br>
+
+Designed & Developed with by
+
+<strong>Moumita Deb</strong>
+
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- Floating Login Button -->
+
+<a href="{{ url_for('login') }}"
+
+class="floating-login">
+
+<i class="fas fa-comment-dollar"></i>
+
+</a>
+
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

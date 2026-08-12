@@ -1,0 +1,338 @@
+{% extends "base.html" %}
+
+{% block title %}Bills & Subscriptions{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/bills.css') }}">
+{% endblock %}
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% block content %}
+
+<div class="bills-dashboard">
+
+    <!-- ==========================================
+         PAGE HEADER
+    =========================================== -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>
+
+                <i class="fas fa-file-invoice-dollar"></i>
+
+                Bills & Subscriptions
+
+            </h1>
+
+            <p>
+
+                Manage all your recurring bills and payment reminders.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         ADD BILL FORM
+    =========================================== -->
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="fas fa-plus-circle"></i>
+
+                Add New Bill / Subscription
+
+            </h2>
+
+        </div>
+
+        <form action="{{ url_for('add_bill') }}" method="POST">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Bill Name</label>
+
+                    <input
+                        type="text"
+                        name="bill_name"
+                        placeholder="Electricity Bill"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Category</label>
+
+                    <select name="category">
+
+                        <option>Utilities</option>
+
+                        <option>Internet</option>
+
+                        <option>EMI</option>
+
+                        <option>Insurance</option>
+
+                        <option>Subscription</option>
+
+                        <option>Rent</option>
+
+                        <option>Other</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Amount</label>
+
+                    <input
+                        type="number"
+                        name="amount"
+                        placeholder="1000"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Due Date</label>
+
+                    <input
+                        type="date"
+                        name="due_date"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Frequency</label>
+
+                    <select name="frequency">
+
+                        <option>Monthly</option>
+
+                        <option>Weekly</option>
+
+                        <option>Quarterly</option>
+
+                        <option>Yearly</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Reminder (Days Before)</label>
+
+                    <input
+                        type="number"
+                        name="reminder_days"
+                        value="3">
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Notes</label>
+
+                <textarea
+                    name="notes"
+                    rows="4"
+                    placeholder="Optional notes..."></textarea>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                <i class="fas fa-save"></i>
+
+                Save Bill
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- ==========================================
+         SEARCH
+    =========================================== -->
+
+    <div class="search-box">
+
+        <input
+
+            type="text"
+
+            id="searchBill"
+
+            placeholder="Search bills...">
+
+    </div>
+
+    <!-- ==========================================
+         BILL TABLE
+    =========================================== -->
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h2>
+
+                <i class="fas fa-list"></i>
+
+                Your Bills
+
+            </h2>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table id="billTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Bill</th>
+
+                        <th>Category</th>
+
+                        <th>Amount</th>
+
+                        <th>Due Date</th>
+
+                        <th>Frequency</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for bill in bills %}
+
+                    <tr>
+
+                        <td>{{ bill.bill_name }}</td>
+
+                        <td>{{ bill.category }}</td>
+
+                        <td>₹{{ bill.amount }}</td>
+
+                        <td>{{ bill.due_date }}</td>
+
+                        <td>{{ bill.frequency }}</td>
+
+                        <td>
+
+                            {% if bill.status=="Paid" %}
+
+                                <span class="badge paid">
+
+                                    Paid
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge pending">
+
+                                    Pending
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <a
+
+                              href="{{ url_for('mark_bill_paid', id=bill.id) }}"
+
+                              class="btn-success">
+
+                                Paid
+
+                            </a>
+
+                            <a
+
+                              href="{{ url_for('edit_bill', id=bill.id) }}"
+
+                              class="btn-warning">
+
+                                Edit
+
+                            </a>
+
+                            <a
+
+                              href="{{ url_for('delete_bill', id=bill.id) }}"
+
+                              class="btn-danger"
+
+                              onclick="return confirm('Delete this bill?')">
+
+                                Delete
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/bills.js') }}"></script>
+
+{% endblock %}

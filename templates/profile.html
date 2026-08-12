@@ -1,0 +1,1492 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Profile
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/profile.css') }}">
+
+<div class="container-fluid profile-page">
+
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+
+    <div class="profile-header">
+
+        <div>
+
+            <h1>
+
+                <i class="fa-solid fa-user-circle"></i>
+
+                My Profile
+
+            </h1>
+
+            <p>
+
+                Manage your personal information and financial profile.
+
+            </p>
+
+        </div>
+
+        <div>
+
+            <a
+            href="{{ url_for('dashboard') }}"
+            class="btn btn-outline-light">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- PROFILE HERO -->
+    <!-- ========================= -->
+
+    <div class="profile-hero">
+
+        <div class="row align-items-center">
+
+            <!-- LEFT -->
+
+            <div class="col-lg-4 text-center">
+
+                <div class="profile-image-card">
+
+                    <div class="profile-image">
+
+                        {% if user["profile_photo"] %}
+
+                        <img
+                        src="{{ url_for('static', filename=user['profile_photo']) }}"
+                        id="profilePreview">
+
+                        {% else %}
+
+                        <img
+                        src="{{ url_for('static', filename='images/default-user.png') }}"
+                        id="profilePreview">
+
+                        {% endif %}
+
+                    </div>
+
+                    <label
+                    for="photoUpload"
+                    class="change-photo-btn">
+
+                        <i class="fa-solid fa-camera"></i>
+
+                        Change Photo
+
+                    </label>
+
+                    <input
+                    type="file"
+                    id="photoUpload"
+                    hidden>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="col-lg-8">
+
+                <div class="profile-info-card">
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                        <div>
+
+                            <h2>
+
+                                {{ user["name"] }}
+
+                            </h2>
+
+                            <p>
+
+                                {{ user["occupation"] or "Professional" }}
+
+                            </p>
+
+                        </div>
+
+                        <span class="status-badge">
+
+                            <i class="fa-solid fa-circle"></i>
+
+                            Active User
+
+                        </span>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row mt-4">
+
+                        <div class="col-md-6 mb-3">
+
+                            <div class="info-box">
+
+                                <i class="fa-solid fa-envelope"></i>
+
+                                <div>
+
+                                    <small>Email</small>
+
+                                    <h6>
+
+                                        {{ user["email"] }}
+
+                                    </h6>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <div class="info-box">
+
+                                <i class="fa-solid fa-phone"></i>
+
+                                <div>
+
+                                    <small>Phone</small>
+
+                                    <h6>
+
+                                        {{ user["phone"] or "Not Available" }}
+
+                                    </h6>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <div class="info-box">
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                <div>
+
+                                    <small>Location</small>
+
+                                    <h6>
+
+                                        {{ user["city"] }}, {{ user["state"] }}
+
+                                    </h6>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <div class="info-box">
+
+                                <i class="fa-solid fa-calendar"></i>
+
+                                <div>
+
+                                    <small>Member Since</small>
+
+                                    <h6>
+
+                                        {{ user["created_at"][:10] if user["created_at"] else "N/A" }}
+
+                                    </h6>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4 d-flex gap-3 flex-wrap">
+
+                        <a
+                        href="{{ url_for('settings') }}"
+                        class="btn btn-primary">
+
+                            <i class="fa-solid fa-user-pen"></i>
+
+                            Edit Profile
+
+                        </a>
+
+                        <a
+                        href="{{ url_for('settings') }}"
+                        class="btn btn-outline-light">
+
+                            <i class="fa-solid fa-gear"></i>
+
+                            Settings
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+        <!-- ========================================= -->
+    <!-- FINANCIAL OVERVIEW -->
+    <!-- ========================================= -->
+
+    <div class="financial-overview mt-5">
+
+        <div class="section-title">
+
+            <h3>
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                Financial Overview
+
+            </h3>
+
+            <p>
+
+                A quick summary of your financial performance.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4 mt-2">
+
+            <!-- Income -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card income-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-wallet"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <h6>Total Income</h6>
+
+                        <h2 id="incomeCounter">
+
+                            ₹{{ "{:,.2f}".format(total_income or 0) }}
+
+                        </h2>
+
+                        <span class="positive">
+
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+
+                            Income Generated
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Expense -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card expense-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-credit-card"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <h6>Total Expense</h6>
+
+                        <h2 id="expenseCounter">
+
+                            ₹{{ "{:,.2f}".format(total_expense or 0) }}
+
+                        </h2>
+
+                        <span class="negative">
+
+                            <i class="fa-solid fa-arrow-trend-down"></i>
+
+                            Money Spent
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Savings -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card savings-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-piggy-bank"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <h6>Total Savings</h6>
+
+                        <h2 id="savingCounter">
+
+                            ₹{{ "{:,.2f}".format(total_savings or 0) }}
+
+                        </h2>
+
+                        <span class="positive">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Great Progress
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Investments -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-card investment-card">
+
+                    <div class="stat-icon">
+
+                        <i class="fa-solid fa-coins"></i>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <h6>Investments</h6>
+
+                        <h2 style="color:red;">
+                            {{ total_investment }}
+                        </h2>
+
+                        <p style="color:yellow;">
+                            {{ total_investment|default("NOT FOUND") }}
+                        </p>
+
+                        <span class="neutral">
+
+                            <i class="fa-solid fa-chart-pie"></i>
+
+                            Portfolio Value
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- FINANCIAL HEALTH -->
+    <!-- ========================================= -->
+
+    <div class="row mt-5">
+
+        <!-- Health Score -->
+
+        <div class="col-lg-7 mb-4">
+
+            <div class="profile-card">
+
+                <div class="section-title">
+
+                    <h3>
+
+                        <i class="fa-solid fa-heart-pulse"></i>
+
+                        Financial Health
+
+                    </h3>
+
+                </div>
+
+                <div class="health-score">
+
+                    <div class="score-circle">
+
+                        {{ health_score }}%
+
+                    </div>
+
+                    <div class="score-details">
+
+                        <h4>
+
+                            Excellent Financial Health
+
+                        </h4>
+
+                        <p>
+
+                            Keep maintaining healthy savings and balanced spending.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="progress mt-4">
+
+                    <div
+                    class="progress-bar bg-success"
+                    style="width: {{ health_score }}%;">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Monthly Summary -->
+
+        <div class="col-lg-5 mb-4">
+
+            <div class="profile-card">
+
+                <div class="section-title">
+
+                    <h3>
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        Monthly Summary
+
+                    </h3>
+
+                </div>
+
+                <table class="table table-borderless">
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+
+                                Budget
+
+                            </td>
+
+                            <td class="text-end">
+
+                                ₹{{ "{:,.2f}".format(monthly_budget or 0) }}
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                Expense
+
+                            </td>
+
+                            <td class="text-end">
+
+                                ₹{{ "{:,.2f}".format(total_expense or 0) }}
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                Savings
+
+                            </td>
+
+                            <td class="text-end text-success">
+
+                                ₹{{ "{:,.2f}".format(total_savings or 0) }}
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>
+
+                                Goal Completion
+
+                            </td>
+
+                            <td class="text-end">
+
+                                {{ goal_percentage or 0 }}%
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+        <!-- ========================================= -->
+    <!-- PERSONAL INFORMATION & GOALS -->
+    <!-- ========================================= -->
+
+    <div class="row mt-5">
+
+        <!-- Personal Information -->
+
+        <div class="col-lg-7 mb-4">
+
+            <div class="profile-card">
+
+                <div class="section-title">
+
+                    <h3>
+
+                        <i class="fa-solid fa-address-card"></i>
+
+                        Personal Information
+
+                    </h3>
+
+                </div>
+
+                <div class="row mt-4">
+
+                    <div class="col-md-6 mb-4">
+
+                        <div class="info-item">
+
+                            <span>
+
+                                <i class="fa-solid fa-user"></i>
+
+                                Full Name
+
+                            </span>
+
+                            <h5>{{ user["name"] }}</h5>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <div class="info-item">
+
+                            <span>
+
+                                <i class="fa-solid fa-envelope"></i>
+
+                                Email
+
+                            </span>
+
+                            <h5>{{ user["email"] }}</h5>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <div class="info-item">
+
+                            <span>
+
+                                <i class="fa-solid fa-phone"></i>
+
+                                Phone Number
+
+                            </span>
+
+                            <h5>{{ user["phone"] or "Not Available" }}</h5>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <div class="info-item">
+
+                            <span>
+
+                                <i class="fa-solid fa-briefcase"></i>
+
+                                Occupation
+
+                            </span>
+
+                            <h5>{{ user["occupation"] or "Not Specified" }}</h5>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <div class="info-item">
+
+                            <span>
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                Address
+
+                            </span>
+
+                            <h5>
+
+                                {{ user["address"] or "Not Available" }}
+
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <div class="info-item">
+
+                            <span>
+
+                                <i class="fa-solid fa-earth-asia"></i>
+
+                                Country
+
+                            </span>
+
+                            <h5>{{ user["country"] or "India" }}</h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Financial Goal -->
+
+        <div class="col-lg-5 mb-4">
+
+            <div class="profile-card">
+
+                <div class="section-title">
+
+                    <h3>
+
+                        <i class="fa-solid fa-bullseye"></i>
+
+                        Financial Goal
+
+                    </h3>
+
+                </div>
+
+                <div class="goal-progress mt-4">
+
+                    <h2>
+
+                        {{ goal_percentage or 0 }}%
+
+                    </h2>
+
+                    <p>
+
+                        Goal Completed
+
+                    </p>
+
+                    <div class="progress mt-4">
+
+                        <div
+                        class="progress-bar bg-primary"
+                        style="width:{{ goal_percentage or 0 }}%;">
+
+                        </div>
+
+                    </div>
+
+                    <div class="goal-details mt-4">
+
+                        <div class="d-flex justify-content-between">
+
+                            <span>Target Savings</span>
+
+                            <strong>
+
+                                ₹{{ "{:,.2f}".format(goal_amount or 0) }}
+
+                            </strong>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-3">
+
+                            <span>Current Savings</span>
+
+                            <strong class="text-success">
+
+                                ₹{{ "{:,.2f}".format(total_savings or 0) }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- ACHIEVEMENTS -->
+    <!-- ========================================= -->
+
+    <div class="profile-card mt-4">
+
+        <div class="section-title">
+
+            <h3>
+
+                <i class="fa-solid fa-award"></i>
+
+                Achievements
+
+            </h3>
+
+        </div>
+
+        <div class="row mt-4">
+
+            <div class="col-lg-3 col-md-6 mb-3">
+
+                <div class="achievement-card">
+
+                    <div class="achievement-icon">
+
+                        🏆
+
+                    </div>
+
+                    <h5>
+
+                        Budget Master
+
+                    </h5>
+
+                    <p>
+
+                        Created your first monthly budget.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-3">
+
+                <div class="achievement-card">
+
+                    <div class="achievement-icon">
+
+                        💰
+
+                    </div>
+
+                    <h5>
+
+                        Super Saver
+
+                    </h5>
+
+                    <p>
+
+                        Saved over ₹50,000 successfully.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-3">
+
+                <div class="achievement-card">
+
+                    <div class="achievement-icon">
+
+                        🤖
+
+                    </div>
+
+                    <h5>
+
+                        AI Explorer
+
+                    </h5>
+
+                    <p>
+
+                        Used AI Budget Advisor.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-3">
+
+                <div class="achievement-card">
+
+                    <div class="achievement-icon">
+
+                        🔥
+
+                    </div>
+
+                    <h5>
+
+                        Finance Streak
+
+                    </h5>
+
+                    <p>
+
+                        Logged expenses for 30 consecutive days.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+        <!-- ========================================= -->
+    <!-- RECENT ACTIVITY & AI INSIGHTS -->
+    <!-- ========================================= -->
+
+    <div class="row mt-5">
+
+        <!-- Recent Activity -->
+
+        <div class="col-lg-7 mb-4">
+
+            <div class="profile-card">
+
+                <div class="section-title">
+
+                    <h3>
+
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+
+                        Recent Activity
+
+                    </h3>
+
+                </div>
+
+                <div class="activity-timeline mt-4">
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-icon income">
+
+                            <i class="fa-solid fa-wallet"></i>
+
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h5>
+
+                                Salary Added
+
+                            </h5>
+
+                            <p>
+
+                                Income of
+                                <strong>
+
+                                    ₹{{ "{:,.2f}".format(last_income or 0) }}
+
+                                </strong>
+                                was added successfully.
+
+                            </p>
+
+                            <small>
+
+                                Today
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-icon expense">
+
+                            <i class="fa-solid fa-credit-card"></i>
+
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h5>
+
+                                Expense Recorded
+
+                            </h5>
+
+                            <p>
+
+                                Latest expense:
+                                <strong>
+
+                                    ₹{{ "{:,.2f}".format(last_expense or 0) }}
+
+                                </strong>
+
+                            </p>
+
+                            <small>
+
+                                Yesterday
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-icon ai">
+
+                            <i class="fa-solid fa-robot"></i>
+
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h5>
+
+                                AI Recommendation
+
+                            </h5>
+
+                            <p>
+
+                                AI Budget Advisor analyzed your spending and generated recommendations.
+
+                            </p>
+
+                            <small>
+
+                                Recently
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-icon investment">
+
+                            <i class="fa-solid fa-coins"></i>
+
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h5>
+
+                                Investment Updated
+
+                            </h5>
+
+                            <p>
+
+                                Portfolio value has been updated.
+
+                            </p>
+
+                            <small>
+
+                                Last Week
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- AI Insights -->
+
+        <div class="col-lg-5 mb-4">
+
+            <div class="profile-card">
+
+                <div class="section-title">
+
+                    <h3>
+
+                        <i class="fa-solid fa-brain"></i>
+
+                        AI Insights
+
+                    </h3>
+
+                </div>
+
+                <div class="ai-insight-box mt-4">
+
+                    <div class="insight success">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>
+
+                            Your savings rate is excellent.
+
+                        </span>
+
+                    </div>
+
+                    <div class="insight warning">
+
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+
+                        <span>
+
+                            Dining expenses increased this month.
+
+                        </span>
+
+                    </div>
+
+                    <div class="insight info">
+
+                        <i class="fa-solid fa-lightbulb"></i>
+
+                        <span>
+
+                            Increase SIP investment by 10% for better long-term growth.
+
+                        </span>
+
+                    </div>
+
+                    <div class="insight primary">
+
+                        <i class="fa-solid fa-bullseye"></i>
+
+                        <span>
+
+                            You are {{ goal_percentage or 0 }}% closer to your savings goal.
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- QUICK ACTIONS -->
+    <!-- ========================================= -->
+
+    <div class="profile-card mt-4">
+
+        <div class="section-title">
+
+            <h3>
+
+                <i class="fa-solid fa-bolt"></i>
+
+                Quick Actions
+
+            </h3>
+
+        </div>
+
+        <div class="row mt-4">
+
+            <div class="col-lg-3 col-md-6 mb-3">
+
+                <a href="{{ url_for('dashboard') }}"
+                class="quick-action">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <h5>
+
+                        Dashboard
+
+                    </h5>
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-3">
+
+                <a href="{{ url_for('settings') }}"
+                class="quick-action">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <h5>
+
+                        Settings
+
+                    </h5>
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-3">
+
+                <a href="{{ url_for('budget_advisor') }}"
+                class="quick-action">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    <h5>
+
+                        AI Advisor
+
+                    </h5>
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-3">
+
+                <a href="{{ url_for('logout') }}"
+                class="quick-action logout">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <h5>
+
+                        Logout
+
+                    </h5>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+        <!-- ========================================= -->
+    <!-- FINANCIAL ANALYTICS -->
+    <!-- ========================================= -->
+
+    <div class="row mt-5">
+
+        <!-- Monthly Expense -->
+
+        <div class="col-lg-8 mb-4">
+
+            <div class="profile-card">
+
+                <div class="section-title">
+
+                    <h3>
+
+                        <i class="fa-solid fa-chart-column"></i>
+
+                        Monthly Expense Trend
+
+                    </h3>
+
+                </div>
+
+                <canvas
+                id="expenseChart"
+                height="120">
+
+                </canvas>
+
+            </div>
+
+        </div>
+
+        <!-- Category Chart -->
+
+        <div class="col-lg-4 mb-4">
+
+            <div class="profile-card">
+
+                <div class="section-title">
+
+                    <h3>
+
+                        <i class="fa-solid fa-chart-pie"></i>
+
+                        Expense Categories
+
+                    </h3>
+
+                </div>
+
+                <canvas
+                id="categoryChart"
+                height="260">
+
+                </canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- CHART JS -->
+<!-- ========================================= -->
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    // -----------------------------
+    // Profile Image Preview
+    // -----------------------------
+    const photoInput = document.getElementById("photoUpload");
+    const preview = document.getElementById("profilePreview");
+
+    if (photoInput && preview) {
+        photoInput.addEventListener("change", (e) => {
+            if (e.target.files.length > 0) {
+                preview.src = URL.createObjectURL(e.target.files[0]);
+            }
+        });
+    }
+
+    // -----------------------------
+    // Get Flask Data
+    // -----------------------------
+
+    const monthLabels = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun"
+    ];
+
+    const monthValues = [
+        12000,
+        18000,
+        15000,
+        22000,
+        16000,
+        19000
+    ];
+
+    const categoryLabels = [
+        "Food",
+        "Travel",
+        "Shopping",
+        "Bills"
+    ];
+
+    const categoryValues = [
+        4500,
+        2800,
+        3900,
+        5200
+    ];
+
+    // -----------------------------
+    // Expense Chart
+    // -----------------------------
+    const expenseCanvas = document.getElementById("expenseChart");
+
+if (expenseCanvas) {
+
+    if (window.expenseChart instanceof Chart) {
+        window.expenseChart.destroy();
+    }
+
+    window.expenseChart = new Chart(expenseCanvas, {
+        type: "line",
+        data: {
+            labels: monthLabels,
+            datasets: [{
+                label: "Expenses",
+                data: monthValues,
+                borderColor: "#3b82f6",
+                backgroundColor: "rgba(59,130,246,0.2)",
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: false,
+            maintainAspectRatio: false
+        }
+    });
+
+}
+
+    // -----------------------------
+    // Category Chart
+    // -----------------------------
+    const categoryCanvas = document.getElementById("categoryChart");
+
+    if (categoryCanvas) {
+
+        new Chart(categoryCanvas, {
+            type: "doughnut",
+
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                data: categoryValues,
+                backgroundColor: [
+                    "#3b82f6",
+                    "#10b981",
+                    "#f59e0b",
+                    "#ef4444"
+                ]
+            }]
+            },
+
+            options: {
+                responsive: true,
+                cutout: "65%"
+            }
+
+        });
+
+    }
+
+    // -----------------------------
+    // Counter Animation
+    // -----------------------------
+    document.querySelectorAll(
+        "#incomeCounter,#expenseCounter,#savingCounter"
+    ).forEach(el => {
+        el.style.opacity = "1";
+    });
+
+});
+</script>
+
+{% endblock %}

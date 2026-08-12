@@ -1,0 +1,659 @@
+/* ===================================================
+   FINANCE ANALYTICS PLATFORM
+   Analytics Dashboard CSS
+   Part 1
+===================================================*/
+
+:root{
+
+    --primary:#0d6efd;
+    --success:#198754;
+    --warning:#ffc107;
+    --danger:#dc3545;
+    --purple:#6f42c1;
+
+    --card-bg:#ffffff;
+    --text:#212529;
+    --muted:#6c757d;
+    --border:#ebebeb;
+
+}
+
+/* ==============================
+   Page
+================================*/
+
+.analytics-page{
+
+    min-height:100vh;
+
+    background:#f5f7fb;
+
+}
+
+/* ==============================
+   Header
+================================*/
+
+.analytics-title{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:#222;
+
+}
+
+.analytics-subtitle{
+
+    color:#6c757d;
+
+    margin-top:6px;
+
+    margin-bottom:0;
+
+    font-size:15px;
+
+}
+
+/* ==============================
+   Cards
+================================*/
+
+.analytics-card{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    transition:.35s;
+
+    box-shadow:
+
+        0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.analytics-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+
+0 20px 45px rgba(13,110,253,.18);
+
+}
+
+/* ==============================
+   Card Header
+================================*/
+
+.analytics-card .card-header{
+
+    background:transparent;
+
+    border-bottom:none;
+
+}
+
+.analytics-card .card-body{
+
+    padding:20px;
+
+}
+
+/* ==============================
+   Summary Cards
+================================*/
+
+.card-title-small{
+
+    color:#6c757d;
+
+    font-size:14px;
+
+    letter-spacing:.5px;
+
+    text-transform:uppercase;
+
+}
+
+/* ==============================
+   Icon Circle
+================================*/
+
+.analytics-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:28px;
+
+    box-shadow:
+
+        0 10px 18px rgba(0,0,0,.18);
+
+}
+
+/* ==============================
+   Card Colors
+================================*/
+
+.card-expense{
+
+    border-left:6px solid var(--primary);
+
+}
+
+.card-budget{
+
+    border-left:6px solid var(--success);
+
+}
+
+.card-remaining{
+
+    border-left:6px solid var(--warning);
+
+}
+
+.card-highest{
+
+    border-left:6px solid var(--danger);
+
+}
+
+/* ==============================
+   Card Values
+================================*/
+
+.analytics-card h3{
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+}
+
+.analytics-card small{
+
+    font-size:13px;
+
+}
+
+/* ==============================
+   Chart Container
+================================*/
+
+.chart-container{
+
+    position:relative;
+
+    width:100%;
+
+    height:420px;
+
+}
+
+/* ==============================
+   Chart Cards
+================================*/
+
+.chart-card{
+
+    min-height:470px;
+
+}
+
+/* ==============================
+   Table
+================================*/
+
+.table{
+
+    margin-bottom:0;
+
+}
+
+.table thead{
+
+    background:linear-gradient(90deg,#0d6efd,#3d8bfd);
+
+    color:white;
+
+}
+
+.table thead th{
+
+    border:none;
+
+    padding:16px;
+
+    font-size:14px;
+
+    letter-spacing:.5px;
+
+}
+
+.table tbody td{
+
+    padding:18px;
+
+    vertical-align:middle;
+
+    border-color:#f0f0f0;
+
+}
+
+.table tbody tr{
+
+    transition:.25s;
+
+}
+
+.table tbody tr:hover{
+
+    background:#f8fbff;
+
+}
+
+/* ==============================
+   Status Badges
+================================*/
+
+.badge{
+
+    padding:8px 18px;
+
+    border-radius:25px;
+
+    font-weight:600;
+
+}
+
+/* ==============================
+   Alerts / Insights
+================================*/
+
+.alert{
+    border-radius:15px;
+    padding:18px 20px;
+    border:none;
+    margin-bottom:18px;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+}
+
+.alert ul{
+    margin-bottom:0;
+    padding-left:20px;
+}
+
+.alert li{
+    margin-bottom:8px;
+}
+
+.alert:last-child{
+    margin-bottom:0;
+}
+
+/* ==============================
+   Progress Bar
+================================*/
+
+.progress{
+    height:14px;
+    border-radius:30px;
+    background:#e9ecef;
+    overflow:hidden;
+}
+
+.progress-bar{
+
+background:linear-gradient(
+
+90deg,
+
+#00c853,
+
+#43a047
+
+);
+
+}
+
+/* ==============================
+   Card Header Icons
+================================*/
+
+.card-header i{
+    font-size:20px;
+}
+
+/* ==============================
+   Canvas
+================================*/
+
+canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+/* ==============================
+   Chart Animation
+================================*/
+
+.chart-container{
+    animation:fadeIn .8s ease;
+}
+
+/* ==============================
+   Card Animation
+================================*/
+
+.analytics-card{
+    animation:slideUp .6s ease;
+}
+
+/* ==============================
+   Keyframes
+================================*/
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+/* ==============================
+   Dark Mode
+================================*/
+
+body.dark-mode .analytics-page{
+
+    background:#121212;
+
+}
+
+body.dark-mode .analytics-card{
+
+    background:#1f1f1f;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .card-header{
+
+    background:#1f1f1f;
+
+}
+
+body.dark-mode .analytics-title{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .analytics-subtitle{
+
+    color:#cfcfcf;
+
+}
+
+body.dark-mode .table{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .table tbody td{
+
+    border-color:#3c3c3c;
+
+}
+
+body.dark-mode .table tbody tr:hover{
+
+    background:#2a2a2a;
+
+}
+
+body.dark-mode .table thead{
+
+    background:#0d6efd;
+
+}
+
+body.dark-mode .text-muted{
+
+    color:#bbbbbb !important;
+
+}
+
+body.dark-mode .alert-primary{
+
+    background:#17304d;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .alert-success{
+
+    background:#173b29;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .alert-warning{
+
+    background:#4f3b00;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .progress{
+
+    background:#333;
+
+}
+
+/* ==============================
+   Responsive Design
+================================*/
+
+@media(max-width:1200px){
+
+    .chart-container{
+
+        height:340px;
+
+    }
+
+}
+
+@media(max-width:992px){
+
+    .analytics-title{
+
+        font-size:26px;
+
+    }
+
+    .analytics-card{
+
+        margin-bottom:20px;
+
+    }
+
+    .chart-container{
+
+        height:320px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .analytics-page{
+
+        padding:15px;
+
+    }
+
+    .analytics-title{
+
+        font-size:24px;
+
+    }
+
+    .analytics-subtitle{
+
+        font-size:14px;
+
+    }
+
+    .analytics-icon{
+
+        width:55px;
+
+        height:55px;
+
+        font-size:22px;
+
+    }
+
+    .chart-container{
+
+        height:280px;
+
+    }
+
+    .table thead th{
+
+        font-size:13px;
+
+        padding:12px;
+
+    }
+
+    .table tbody td{
+
+        padding:12px;
+
+        font-size:14px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .analytics-title{
+
+        font-size:22px;
+
+    }
+
+    .chart-container{
+
+        height:240px;
+
+    }
+
+    .analytics-card h3{
+
+        font-size:22px;
+
+    }
+
+    .analytics-icon{
+
+        width:48px;
+
+        height:48px;
+
+        font-size:18px;
+
+    }
+
+}
+
+/* ==============================
+   Scrollbar
+================================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f1f1f1;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#b8b8b8;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#888;
+
+}

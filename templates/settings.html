@@ -1,0 +1,1320 @@
+{% extends "base.html" %}
+
+{% block title %}
+Settings
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/settings.css') }}">
+
+<div class="container-fluid settings-page">
+
+<form
+    method="POST"
+    action="{{ url_for('settings') }}"
+    enctype="multipart/form-data">
+
+    <!-- ========================================= -->
+    <!-- PAGE HEADER -->
+    <!-- ========================================= -->
+
+    <div class="settings-header">
+
+        <div>
+
+            <h1>
+
+                <i class="fa-solid fa-gear"></i>
+
+                Settings
+
+            </h1>
+
+            <p>
+
+                Manage your profile, security, preferences and application settings.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+
+        <!-- ========================================= -->
+        <!-- LEFT SIDEBAR -->
+        <!-- ========================================= -->
+
+        <div class="col-lg-3">
+
+            <div class="settings-sidebar">
+
+                <div class="profile-box">
+
+                    <div class="profile-avatar">
+
+                    {% if user["profile_photo"] %}
+
+                    <img
+                    src="{{ url_for('static', filename=user['profile_photo']) }}"
+                    id="profilePreview">
+
+                    {% else %}
+
+                    <img
+                    src="{{ url_for('static', filename='images/default-user.png') }}"
+                    id="profilePreview">
+
+                    {% endif %}
+
+                    </div>
+
+                    <h4>
+
+                        {{ user["name"] }}
+
+                    </h4>
+
+                    <p>
+
+                        {{ user["email"] }}
+
+                    </p>
+
+                </div>
+
+                <hr>
+
+                <button
+                type="button"
+                class="nav-btn active"
+                data-target="profile">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Profile
+
+                </button>
+
+                <button
+                type="button"
+                class="nav-btn"
+                data-target="security">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Security
+
+                </button>
+
+                <button
+                type="button"
+                class="nav-btn"
+                data-target="appearance">
+
+                    <i class="fa-solid fa-palette"></i>
+
+                    Appearance
+
+                </button>
+
+                <button
+                type="button"
+                class="nav-btn"
+                data-target="currency">
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    Currency
+
+                </button>
+
+                <button
+                type="button"
+                class="nav-btn"
+                data-target="export">
+
+                    <i class="fa-solid fa-file-export"></i>
+
+                    Export Data
+
+                </button>
+
+                <button
+                type="button"
+                class="nav-btn"
+                data-target="ai">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    AI Preferences
+
+                </button>
+
+                <button
+                type="button"
+                class="nav-btn"
+                data-target="notification">
+
+                    <i class="fa-solid fa-bell"></i>
+
+                    Notifications
+
+                </button>
+
+                <button
+                type="button"
+                class="nav-btn"
+                data-target="about">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    About
+
+                </button>
+
+                <button
+                type="button"
+                class="nav-btn danger"
+                data-target="danger">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                    Danger Zone
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================= -->
+        <!-- RIGHT CONTENT -->
+        <!-- ========================================= -->
+
+        <div class="col-lg-9">
+
+            <!-- ========================================= -->
+            <!-- PROFILE -->
+            <!-- ========================================= -->
+
+            <section
+            class="settings-section active"
+            id="profile">
+
+                <div class="settings-card">
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <h3>
+
+                            Profile Information
+
+                        </h3>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Full Name
+
+                            </label>
+
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="name"
+                            value="{{ user['name'] or '' }}">
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Email Address
+
+                            </label>
+
+                            <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            value="{{ user['email'] or '' }}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Phone Number
+
+                            </label>
+
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="phone"
+                            value="{{ user['phone'] or '' }}">
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Occupation
+
+                            </label>
+
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="occupation"
+                            value="{{ user['occupation'] or '' }}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Monthly Income
+
+                            </label>
+
+                            <input
+                            type="number"
+                            class="form-control"
+                            name="monthly_income"
+                            value="{{ user['monthly_income'] or 0 }}">
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Date of Birth
+
+                            </label>
+
+                            <input
+                            type="date"
+                            class="form-control"
+                            name="date_of_birth"
+                            value="{{ user['date_of_birth'] or '' }}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Gender
+
+                            </label>
+
+                            <select
+                            class="form-select"
+                            name="gender">
+
+                                <option value="">Select Gender</option>
+
+                                <option value="Male"
+                                {% if user['gender']=="Male" %}selected{% endif %}>
+                                    Male
+                                </option>
+
+                                <option value="Female"
+                                {% if user['gender']=="Female" %}selected{% endif %}>
+                                    Female
+                                </option>
+
+                                <option value="Other"
+                                {% if user['gender']=="Other" %}selected{% endif %}>
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label class="form-label">
+
+                                Profile Photo
+
+                            </label>
+
+                            <input
+                            type="file"
+                            name="profile_photo"
+                            class="form-control"
+                            accept="image/*">
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Address
+
+                        </label>
+
+                        <textarea
+                        class="form-control"
+                        rows="3"
+                        name="address">{{ user['address'] or '' }}</textarea>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label">
+
+                                City
+
+                            </label>
+
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="city"
+                            value="{{ user['city'] or '' }}">
+
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label">
+
+                                State
+
+                            </label>
+
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="state"
+                            value="{{ user['state'] or '' }}">
+
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label">
+
+                                Pincode
+
+                            </label>
+
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="pincode"
+                            value="{{ user['pincode'] or '' }}">
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Country
+
+                        </label>
+
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="country"
+                        value="{{ user['country'] or 'India' }}">
+
+                    </div>
+
+                    <div class="text-end">
+
+                        <button
+                        type="submit"
+                        class="btn btn-primary">
+
+                            <i class="fa-solid fa-floppy-disk"></i>
+
+                            Save Profile
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ========================================= -->
+<!-- SECURITY -->
+<!-- ========================================= -->
+
+<section
+class="settings-section"
+id="security">
+
+    <div class="settings-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <h3>
+
+                Security & Privacy
+
+            </h3>
+
+        </div>
+
+        <hr>
+
+        <div class="setting-row">
+
+            <div>
+
+                <h5>Remember Login</h5>
+
+                <p>Keep me logged in on this device.</p>
+
+            </div>
+
+            <label class="switch">
+
+                <input
+                type="checkbox"
+                name="remember_login"
+                {% if settings["remember_login"] %}checked{% endif %}>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <div class="setting-row">
+
+            <div>
+
+                <h5>Two-Factor Authentication</h5>
+
+                <p>Enable additional login security.</p>
+
+            </div>
+
+            <label class="switch">
+
+                <input
+                type="checkbox"
+                name="two_factor"
+                {% if settings["two_factor"] %}checked{% endif %}>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <div class="setting-row">
+
+            <div>
+
+                <h5>Email Alerts</h5>
+
+                <p>Receive login and security alerts by email.</p>
+
+            </div>
+
+            <label class="switch">
+
+                <input
+                type="checkbox"
+                name="email_alert"
+                {% if settings["email_alert"] %}checked{% endif %}>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <div class="mt-4">
+
+            <button
+            type="button"
+            class="btn btn-warning">
+
+                <i class="fa-solid fa-key"></i>
+
+                Change Password
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- APPEARANCE -->
+<!-- ========================================= -->
+
+<section
+class="settings-section"
+id="appearance">
+
+    <div class="settings-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-palette"></i>
+
+            <h3>
+
+                Appearance
+
+            </h3>
+
+        </div>
+
+        <hr>
+
+        <div class="mb-4">
+
+            <label class="form-label">
+
+                Theme
+
+            </label>
+
+            <select
+            class="form-select"
+            name="theme">
+
+                <option value="light"
+                {% if settings["theme"]=="light" %}selected{% endif %}>
+
+                    🌞 Light
+
+                </option>
+
+                <option value="dark"
+                {% if settings["theme"]=="dark" %}selected{% endif %}>
+
+                    🌙 Dark
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label class="form-label">
+
+                Accent Color
+
+            </label>
+
+            <input
+            type="color"
+            class="form-control form-control-color"
+            value="#2563eb">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- CURRENCY -->
+<!-- ========================================= -->
+
+<section
+class="settings-section"
+id="currency">
+
+    <div class="settings-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
+            <h3>
+
+                Currency Settings
+
+            </h3>
+
+        </div>
+
+        <hr>
+
+        <div class="mb-4">
+
+            <label class="form-label">
+
+                Preferred Currency
+
+            </label>
+
+            <select
+            class="form-select"
+            name="currency">
+
+                <option value="INR"
+                {% if settings["currency"]=="INR" %}selected{% endif %}>
+
+                    ₹ Indian Rupee
+
+                </option>
+
+                <option value="USD"
+                {% if settings["currency"]=="USD" %}selected{% endif %}>
+
+                    $ US Dollar
+
+                </option>
+
+                <option value="EUR"
+                {% if settings["currency"]=="EUR" %}selected{% endif %}>
+
+                    € Euro
+
+                </option>
+
+                <option value="GBP"
+                {% if settings["currency"]=="GBP" %}selected{% endif %}>
+
+                    £ Pound Sterling
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label class="form-label">
+
+                AI Recommendation Level
+
+            </label>
+
+            <select
+            class="form-select"
+            name="ai_level">
+
+                <option value="Beginner"
+                {% if settings["ai_level"]=="Beginner" %}selected{% endif %}>
+
+                    Beginner
+
+                </option>
+
+                <option value="Balanced"
+                {% if settings["ai_level"]=="Balanced" %}selected{% endif %}>
+
+                    Balanced
+
+                </option>
+
+                <option value="Advanced"
+                {% if settings["ai_level"]=="Advanced" %}selected{% endif %}>
+
+                    Advanced
+
+                </option>
+
+                <option value="Expert"
+                {% if settings["ai_level"]=="Expert" %}selected{% endif %}>
+
+                    Expert
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="text-end">
+
+            <button
+            type="submit"
+            class="btn btn-success">
+
+                <i class="fa-solid fa-floppy-disk"></i>
+
+                Save Settings
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- AI PREFERENCES -->
+<!-- ========================================= -->
+
+<section
+class="settings-section"
+id="ai">
+
+    <div class="settings-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-robot"></i>
+
+            <h3>AI Preferences</h3>
+
+        </div>
+
+        <hr>
+
+        <div class="mb-4">
+
+            <label class="form-label">
+
+                AI Recommendation Level
+
+            </label>
+
+            <select
+            class="form-select"
+            name="ai_level">
+
+                <option value="Beginner"
+                {% if settings["ai_level"]=="Beginner" %}selected{% endif %}>
+                    Beginner
+                </option>
+
+                <option value="Balanced"
+                {% if settings["ai_level"]=="Balanced" %}selected{% endif %}>
+                    Balanced
+                </option>
+
+                <option value="Advanced"
+                {% if settings["ai_level"]=="Advanced" %}selected{% endif %}>
+                    Advanced
+                </option>
+
+                <option value="Expert"
+                {% if settings["ai_level"]=="Expert" %}selected{% endif %}>
+                    Expert
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="alert alert-info">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            AI Budget Advisor uses your income, expenses and spending history
+            to generate smart financial recommendations.
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- NOTIFICATIONS -->
+<!-- ========================================= -->
+
+<section
+class="settings-section"
+id="notification">
+
+    <div class="settings-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-bell"></i>
+
+            <h3>Notification Settings</h3>
+
+        </div>
+
+        <hr>
+
+        <div class="setting-row">
+
+            <div>
+
+                <h5>Enable Notifications</h5>
+
+                <p>
+                    Receive dashboard reminders and AI notifications.
+                </p>
+
+            </div>
+
+            <label class="switch">
+
+                <input
+                type="checkbox"
+                name="notifications"
+                {% if settings["notifications"] %}checked{% endif %}>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <div class="setting-row">
+
+            <div>
+
+                <h5>Email Notifications</h5>
+
+                <p>
+                    Receive important financial alerts by email.
+                </p>
+
+            </div>
+
+            <label class="switch">
+
+                <input
+                type="checkbox"
+                name="email_alert"
+                {% if settings["email_alert"] %}checked{% endif %}>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <div class="setting-row">
+
+            <div>
+
+                <h5>Budget Alerts</h5>
+
+                <p>
+                    Notify me when I exceed my monthly budget.
+                </p>
+
+            </div>
+
+            <label class="switch">
+
+                <input
+                type="checkbox"
+                checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+        <div class="setting-row">
+
+            <div>
+
+                <h5>Goal Achievement Alerts</h5>
+
+                <p>
+                    Notify me when a financial goal is completed.
+                </p>
+
+            </div>
+
+            <label class="switch">
+
+                <input
+                type="checkbox"
+                checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- EXPORT DATA -->
+<!-- ========================================= -->
+
+<section
+class="settings-section"
+id="export">
+
+    <div class="settings-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-file-export"></i>
+
+            <h3>Export Financial Data</h3>
+
+        </div>
+
+        <hr>
+
+        <p class="text-muted">
+
+            Download your financial records in different formats.
+
+        </p>
+
+        <div class="row mt-4">
+
+            <div class="col-md-4 mb-3">
+
+                <button
+                type="button"
+                class="btn btn-outline-primary w-100">
+
+                    <i class="fa-solid fa-file-csv"></i>
+
+                    Export CSV
+
+                </button>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <button
+                type="button"
+                class="btn btn-outline-success w-100">
+
+                    <i class="fa-solid fa-file-excel"></i>
+
+                    Export Excel
+
+                </button>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+
+                <button
+                type="button"
+                class="btn btn-outline-danger w-100">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    Export PDF
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="alert alert-warning mt-4">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            Export functionality can be connected to your
+            report generation module later.
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- ABOUT -->
+<!-- ========================================= -->
+
+<section
+class="settings-section"
+id="about">
+
+    <div class="settings-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <h3>
+
+                About Finance Analytics Platform
+
+            </h3>
+
+        </div>
+
+        <hr>
+
+        <table class="table table-bordered">
+
+            <tr>
+
+                <th>Application</th>
+
+                <td>Finance Analytics Platform</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Version</th>
+
+                <td>2.0</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Backend</th>
+
+                <td>Python Flask</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Database</th>
+
+                <td>SQLite</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Frontend</th>
+
+                <td>HTML5, CSS3, Bootstrap 5, JavaScript</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Current User</th>
+
+                <td>{{ user["name"] }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Email</th>
+
+                <td>{{ user["email"] }}</td>
+
+            </tr>
+
+            <tr>
+
+                <th>Occupation</th>
+
+                <td>{{ user["occupation"] or "Not Specified" }}</td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- DANGER ZONE -->
+<!-- ========================================= -->
+
+<section
+class="settings-section"
+id="danger">
+
+    <div class="settings-card border border-danger">
+
+        <div class="card-title text-danger">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            <h3>
+
+                Danger Zone
+
+            </h3>
+
+        </div>
+
+        <hr>
+
+        <p>
+
+            These actions are permanent and cannot be undone.
+
+        </p>
+
+        <div class="d-grid gap-3">
+
+            <a href="{{ url_for('reset_preferences') }}"
+            class="btn btn-outline-warning"
+            onclick="return confirm('Reset all settings to default?')">
+
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+
+                Reset Preferences
+
+            </a>
+
+            <a href="{{ url_for('delete_transactions') }}"
+            class="btn btn-outline-danger"
+            onclick="return confirm('Delete all transactions? This cannot be undone.')">
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete All Transactions
+
+            </a>
+
+            <a href="{{ url_for('delete_account') }}"
+            class="btn btn-danger"
+            onclick="return confirm('Delete your account permanently? This action cannot be undone.')">
+
+                <i class="fa-solid fa-user-xmark"></i>
+
+                Delete My Account
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- SAVE BUTTON -->
+<!-- ========================================= -->
+
+<div class="text-end mt-4 mb-5">
+
+    <button
+    type="submit"
+    class="btn btn-success btn-lg">
+
+        <i class="fa-solid fa-floppy-disk"></i>
+
+        Save All Settings
+
+    </button>
+
+</div>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+<!-- ========================================= -->
+<!-- SETTINGS JAVASCRIPT -->
+<!-- ========================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Sidebar Navigation
+    const navButtons = document.querySelectorAll(".nav-btn");
+    const sections = document.querySelectorAll(".settings-section");
+
+    navButtons.forEach(function(button){
+
+        button.addEventListener("click", function(){
+
+            navButtons.forEach(btn => btn.classList.remove("active"));
+            sections.forEach(sec => sec.classList.remove("active"));
+
+            button.classList.add("active");
+
+            document
+                .getElementById(button.dataset.target)
+                .classList.add("active");
+
+        });
+
+    });
+
+    // ==========================
+    // Profile Image Preview
+    // ==========================
+
+    const photoInput = document.querySelector('input[name="profile_photo"]');
+    const preview = document.getElementById("profilePreview");
+
+    if(photoInput && preview){
+
+        photoInput.addEventListener("change", function(){
+
+            if(this.files && this.files[0]){
+
+                preview.src = URL.createObjectURL(this.files[0]);
+
+            }
+
+        });
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

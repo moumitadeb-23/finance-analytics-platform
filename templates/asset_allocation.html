@@ -1,0 +1,852 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   MODULE 2 - ASSET ALLOCATION & RETURNS
+========================================================= */
+
+.module2-container {
+    padding: 35px;
+}
+
+.module2-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #14213d;
+    margin-bottom: 5px;
+}
+
+.module2-subtitle {
+    color: #6b7280;
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   SUMMARY CARDS
+========================================================= */
+
+.module2-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.module2-summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.module2-summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.module2-summary-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.module2-summary-label {
+    color: #64748b;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.module2-summary-value {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.value-blue {
+    color: #1265e8;
+}
+
+.value-green {
+    color: #159447;
+}
+
+.value-red {
+    color: #e63946;
+}
+
+
+/* =========================================================
+   ANALYTICS GRID
+========================================================= */
+
+.module2-analytics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 25px;
+}
+
+.module2-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.module2-panel-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #14213d;
+    margin-bottom: 5px;
+}
+
+.module2-panel-subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+.module2-chart-box {
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+
+.module2-chart-box canvas {
+    max-height: 350px;
+}
+
+
+/* =========================================================
+   ASSET SUMMARY
+========================================================= */
+
+.asset-summary-list {
+    margin-top: 15px;
+}
+
+.asset-summary-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 5px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.asset-summary-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.asset-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+.asset-summary-name {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.asset-summary-amount {
+    font-weight: 700;
+    color: #14213d;
+}
+
+.asset-summary-percent {
+    color: #1265e8;
+    font-weight: 700;
+    margin-left: 15px;
+}
+
+
+/* =========================================================
+   INVESTMENT RETURNS TABLE
+========================================================= */
+
+.module2-table-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.module2-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.module2-table thead {
+    background: #20252a;
+    color: white;
+}
+
+.module2-table th {
+    padding: 15px;
+    text-align: left;
+}
+
+.module2-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.profit-text {
+    color: #159447;
+    font-weight: 700;
+}
+
+.loss-text {
+    color: #e63946;
+    font-weight: 700;
+}
+
+.return-positive {
+    color: #159447;
+    font-weight: 700;
+}
+
+.return-negative {
+    color: #e63946;
+    font-weight: 700;
+}
+
+.performance-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-excellent {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.badge-good {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.badge-average {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.badge-loss {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode .module2-title,
+body.dark-mode .module2-panel-title {
+    color: #ffffff !important;
+}
+
+body.dark-mode .module2-subtitle,
+body.dark-mode .module2-panel-subtitle {
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .module2-summary-card,
+body.dark-mode .module2-panel,
+body.dark-mode .module2-table-panel {
+    background: #1e2a3d !important;
+    border: 1px solid #334155;
+    color: #ffffff;
+}
+
+body.dark-mode .module2-summary-label {
+    color: #cbd5e1 !important;
+}
+
+body.dark-mode .asset-summary-name,
+body.dark-mode .asset-summary-amount {
+    color: #ffffff !important;
+}
+
+body.dark-mode .asset-summary-item {
+    border-color: #475569;
+}
+
+body.dark-mode .module2-table td {
+    color: #e2e8f0;
+    border-color: #475569;
+}
+
+body.dark-mode .module2-table thead {
+    background: #0f172a;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 1000px) {
+
+    .module2-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .module2-analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    .module2-container {
+        padding: 20px;
+    }
+
+    .module2-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+
+<div class="module2-container">
+
+    <!-- =====================================================
+         PAGE HEADING
+    ====================================================== -->
+
+    <h1 class="module2-title">
+        🥧 Asset Allocation & Return Calculation
+    </h1>
+
+    <p class="module2-subtitle">
+        Analyze portfolio returns, profit/loss and asset distribution
+        across your investments.
+    </p>
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <div class="module2-summary-grid">
+
+        <div class="module2-summary-card">
+
+            <div class="module2-summary-icon">
+                💰
+            </div>
+
+            <div class="module2-summary-label">
+                Total Investment
+            </div>
+
+            <div class="module2-summary-value value-blue">
+
+                ₹{{ "{:,.2f}".format(total_investment) }}
+
+            </div>
+
+        </div>
+
+
+        <div class="module2-summary-card">
+
+            <div class="module2-summary-icon">
+                📈
+            </div>
+
+            <div class="module2-summary-label">
+                Current Portfolio Value
+            </div>
+
+            <div class="module2-summary-value value-green">
+
+                ₹{{ "{:,.2f}".format(current_value) }}
+
+            </div>
+
+        </div>
+
+
+        <div class="module2-summary-card">
+
+            <div class="module2-summary-icon">
+
+                {% if total_profit >= 0 %}
+                    💹
+                {% else %}
+                    📉
+                {% endif %}
+
+            </div>
+
+            <div class="module2-summary-label">
+                Total Profit / Loss
+            </div>
+
+            <div class="module2-summary-value
+                {% if total_profit >= 0 %}
+                    value-green
+                {% else %}
+                    value-red
+                {% endif %}
+            ">
+
+                {% if total_profit >= 0 %}
+                    +
+                {% endif %}
+
+                ₹{{ "{:,.2f}".format(total_profit) }}
+
+            </div>
+
+        </div>
+
+
+        <div class="module2-summary-card">
+
+            <div class="module2-summary-icon">
+                🎯
+            </div>
+
+            <div class="module2-summary-label">
+                Overall Return (ROI)
+            </div>
+
+            <div class="module2-summary-value
+                {% if overall_roi >= 0 %}
+                    value-green
+                {% else %}
+                    value-red
+                {% endif %}
+            ">
+
+                {% if overall_roi >= 0 %}
+                    +
+                {% endif %}
+
+                {{ overall_roi }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ASSET ALLOCATION SECTION
+    ====================================================== -->
+
+    <div class="module2-analytics-grid">
+
+
+        <!-- ASSET ALLOCATION CHART -->
+
+        <div class="module2-panel">
+
+            <h2 class="module2-panel-title">
+                🥧 Asset Allocation
+            </h2>
+
+            <p class="module2-panel-subtitle">
+                Percentage distribution of invested amount by asset type.
+            </p>
+
+            <div class="module2-chart-box">
+
+                <canvas id="assetAllocationChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- ASSET ALLOCATION SUMMARY -->
+
+        <div class="module2-panel">
+
+            <h2 class="module2-panel-title">
+                📊 Asset Allocation Summary
+            </h2>
+
+            <p class="module2-panel-subtitle">
+                Investment amount and percentage for each asset category.
+            </p>
+
+
+            <div class="asset-summary-list">
+
+                {% if asset_summary %}
+
+                    {% for asset in asset_summary %}
+
+                    <div class="asset-summary-item">
+
+                        <div class="asset-summary-left">
+
+                            <span
+                                class="asset-color"
+                                style="background: {{ chart_colors[loop.index0 % chart_colors|length] }};">
+                            </span>
+
+                            <span class="asset-summary-name">
+
+                                {{ asset.asset_type }}
+
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="asset-summary-amount">
+
+                                ₹{{ "{:,.2f}".format(asset.amount) }}
+
+                            </span>
+
+                            <span class="asset-summary-percent">
+
+                                {{ asset.percentage }}%
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <p>
+                        No investment data available.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         INVESTMENT RETURNS
+    ====================================================== -->
+
+    <div class="module2-table-panel">
+
+        <h2 class="module2-panel-title">
+            📋 Investment Return Calculation
+        </h2>
+
+        <p class="module2-panel-subtitle">
+            Profit, loss and ROI calculated dynamically for every investment.
+        </p>
+
+
+        <div style="overflow-x: auto;">
+
+            <table class="module2-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Asset</th>
+
+                        <th>Investment</th>
+
+                        <th>Invested</th>
+
+                        <th>Current Value</th>
+
+                        <th>Profit / Loss</th>
+
+                        <th>Return %</th>
+
+                        <th>Performance</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% if investment_returns %}
+
+                        {% for investment in investment_returns %}
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    {{ investment.asset_type }}
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                {{ investment.investment_name }}
+
+                            </td>
+
+
+                            <td>
+
+                                ₹{{ "{:,.2f}".format(investment.invested_amount) }}
+
+                            </td>
+
+
+                            <td>
+
+                                ₹{{ "{:,.2f}".format(investment.current_value) }}
+
+                            </td>
+
+
+                            <td class="
+                                {% if investment.profit >= 0 %}
+                                    profit-text
+                                {% else %}
+                                    loss-text
+                                {% endif %}
+                            ">
+
+                                {% if investment.profit >= 0 %}
+                                    +
+                                {% endif %}
+
+                                ₹{{ "{:,.2f}".format(investment.profit) }}
+
+                            </td>
+
+
+                            <td class="
+                                {% if investment.roi >= 0 %}
+                                    return-positive
+                                {% else %}
+                                    return-negative
+                                {% endif %}
+                            ">
+
+                                {% if investment.roi >= 0 %}
+                                    +
+                                {% endif %}
+
+                                {{ investment.roi }}%
+
+                            </td>
+
+
+                            <td>
+
+                                {% if investment.roi >= 20 %}
+
+                                    <span class="performance-badge badge-excellent">
+                                        Excellent
+                                    </span>
+
+                                {% elif investment.roi >= 10 %}
+
+                                    <span class="performance-badge badge-good">
+                                        Good
+                                    </span>
+
+                                {% elif investment.roi >= 0 %}
+
+                                    <span class="performance-badge badge-average">
+                                        Average
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="performance-badge badge-loss">
+                                        Loss
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <tr>
+
+                            <td colspan="7"
+                                style="text-align: center;">
+
+                                No investments found.
+
+                            </td>
+
+                        </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CHART.JS
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const assetChartData = JSON.parse(
+        '{{ asset_chart_data | tojson | safe }}'
+    );
+
+    const chartCanvas =
+        document.getElementById("assetAllocationChart");
+
+    if (!chartCanvas) {
+        return;
+    }
+
+    if (
+        !assetChartData.labels ||
+        assetChartData.labels.length === 0
+    ) {
+        return;
+    }
+
+
+    new Chart(chartCanvas, {
+
+        type: "doughnut",
+
+        data: {
+
+            labels: assetChartData.labels,
+
+            datasets: [{
+
+                data: assetChartData.values,
+
+                backgroundColor: assetChartData.colors,
+
+                borderWidth: 2,
+
+                borderColor: "#ffffff"
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            cutout: "60%",
+
+            plugins: {
+
+                legend: {
+
+                    position: "bottom",
+
+                    labels: {
+
+                        padding: 20,
+
+                        usePointStyle: true
+
+                    }
+
+                },
+
+                tooltip: {
+
+                    callbacks: {
+
+                        label: function(context) {
+
+                            const value = context.raw;
+
+                            const total =
+                                context.dataset.data.reduce(
+                                    (a, b) => a + b,
+                                    0
+                                );
+
+                            const percentage =
+                                total > 0
+                                ? ((value / total) * 100).toFixed(2)
+                                : 0;
+
+                            return (
+                                context.label +
+                                ": ₹" +
+                                Number(value).toLocaleString("en-IN") +
+                                " (" +
+                                percentage +
+                                "%)"
+                            );
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+});
+
+</script>
+
+
+{% endblock %}

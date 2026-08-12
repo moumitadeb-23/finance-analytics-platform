@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}
+Financial Calendar
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="{{ url_for('static', filename='css/financial_calendar.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="calendar-wrapper">
+
+    <!-- Header -->
+
+    <div class="calendar-banner">
+
+        <div class="calendar-title">
+
+            <div class="calendar-icon">
+
+                📅
+
+            </div>
+
+            <div>
+
+                <h1>Smart Financial Calendar</h1>
+
+                <p>
+                    Automatically tracks income, expenses,
+                    investments, goals and reminders.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="calendar-badge">
+
+            AI Powered
+
+        </div>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="calendar-stats">
+
+        <div class="stat-card income">
+
+            <h4>Income</h4>
+
+            <span>🟢 Auto Updated</span>
+
+        </div>
+
+        <div class="stat-card expense">
+
+            <h4>Expenses</h4>
+
+            <span>🔴 Auto Updated</span>
+
+        </div>
+
+        <div class="stat-card investment">
+
+            <h4>Investments</h4>
+
+            <span>🔵 Auto Updated</span>
+
+        </div>
+
+        <div class="stat-card goals">
+
+            <h4>Goals</h4>
+
+            <span>🟣 Auto Updated</span>
+
+        </div>
+
+    </div>
+
+    <!-- Calendar -->
+
+    <div class="calendar-card">
+<div class="summary-grid">
+
+    <div class="summary-card income">
+        <h4>Total Income</h4>
+        <h2 id="sumIncome">₹0</h2>
+    </div>
+
+    <div class="summary-card expense">
+        <h4>Total Expense</h4>
+        <h2 id="sumExpense">₹0</h2>
+    </div>
+
+    <div class="summary-card savings">
+        <h4>Savings</h4>
+        <h2 id="sumSavings">₹0</h2>
+    </div>
+
+    <div class="summary-card investment">
+        <h4>Investments</h4>
+        <h2 id="sumInvestment">₹0</h2>
+    </div>
+
+    <div class="summary-card goals">
+        <h4>Goals</h4>
+        <h2 id="sumGoals">0</h2>
+    </div>
+
+</div>
+
+<div class="budget-progress">
+
+    <div class="budget-head">
+
+        <span>Monthly Budget Usage</span>
+
+        <span id="budgetText">0%</span>
+
+    </div>
+
+    <div class="progress">
+
+        <div id="budgetBar"></div>
+
+    </div>
+
+</div>
+        <div id="calendar"></div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script
+src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script
+src="{{ url_for('static', filename='js/financial_calendar.js') }}">
+</script>
+
+{% endblock %}

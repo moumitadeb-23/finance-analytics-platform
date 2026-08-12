@@ -1,0 +1,736 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Financial Goal Tracker
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div>
+
+<h2 class="fw-bold">
+
+🎯 Financial Goal Tracker
+
+</h2>
+
+<p class="text-muted">
+
+Track your savings goal with AI-powered recommendations.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-lg-3">
+
+<div class="card shadow border-0 rounded-4">
+
+<div class="card-body text-center">
+
+<div style="font-size:50px;">
+
+🎯
+
+</div>
+
+<h6 class="text-muted">
+
+Goal Amount
+
+</h6>
+
+<h2 class="text-primary">
+
+₹{{ "{:,.2f}".format(goal_amount) }}
+
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="card shadow border-0 rounded-4">
+
+<div class="card-body text-center">
+
+<div style="font-size:50px;">
+
+💰
+
+</div>
+
+<h6 class="text-muted">
+
+Current Savings
+
+</h6>
+
+<h2 class="text-success">
+
+₹{{ "{:,.2f}".format(savings) }}
+
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="card shadow border-0 rounded-4">
+
+<div class="card-body text-center">
+
+<div style="font-size:50px;">
+
+📊
+
+</div>
+
+<h6 class="text-muted">
+
+Progress
+
+</h6>
+
+<h2 class="text-warning">
+
+{{ progress }}%
+
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="card shadow border-0 rounded-4">
+
+<div class="card-body text-center">
+
+<div style="font-size:50px;">
+
+📅
+
+</div>
+
+<h6 class="text-muted">
+
+Target Date
+
+</h6>
+
+<h5>
+
+{{ target_date }}
+
+</h5>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="card shadow border-0 rounded-4 mb-4">
+
+<div class="card-header bg-primary text-white">
+
+🎯 Set Your Financial Goal
+
+</div>
+
+<div class="card-body">
+
+<form method="POST">
+
+<div class="row">
+
+<div class="col-md-5">
+
+<label>
+
+Goal Amount
+
+</label>
+
+<input
+
+type="number"
+
+class="form-control"
+
+name="goal"
+
+required>
+
+</div>
+
+<div class="col-md-5">
+
+<label>
+
+Target Date
+
+</label>
+
+<input
+
+type="date"
+
+class="form-control"
+
+name="target"
+
+required>
+
+</div>
+
+<div class="col-md-2 d-grid">
+
+<label>&nbsp;</label>
+
+<button
+
+class="btn btn-success">
+
+Save Goal
+
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- Goal Progress -->
+<!-- ========================================= -->
+
+<div class="card shadow border-0 rounded-4 mb-4">
+
+    <div class="card-header bg-success text-white">
+
+        📈 Goal Progress
+
+    </div>
+
+    <div class="card-body">
+
+        <h5>
+
+            Savings Progress
+
+        </h5>
+
+        <div class="progress mb-3" style="height:30px;">
+
+            <div
+
+                class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+
+                role="progressbar"
+
+                style="width: {{ progress }}%;"
+
+                aria-valuenow="{{ progress }}"
+
+                aria-valuemin="0"
+
+                aria-valuemax="100">
+
+                {{ progress }}%
+
+            </div>
+
+        </div>
+
+        {% if progress >= 100 %}
+
+        <div class="alert alert-success">
+
+            <h4>
+
+                🎉 Congratulations!
+
+            </h4>
+
+            <p class="mb-0">
+
+                You have successfully achieved your financial goal.
+
+            </p>
+
+        </div>
+
+        {% elif progress >= 75 %}
+
+        <div class="alert alert-primary">
+
+            <h5>
+
+                🌟 Excellent Progress
+
+            </h5>
+
+            <p class="mb-0">
+
+                You're very close to reaching your savings goal.
+
+            </p>
+
+        </div>
+
+        {% elif progress >= 50 %}
+
+        <div class="alert alert-warning">
+
+            <h5>
+
+                👍 Good Progress
+
+            </h5>
+
+            <p class="mb-0">
+
+                Keep saving consistently to reach your target.
+
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-danger">
+
+            <h5>
+
+                💰 Keep Going
+
+            </h5>
+
+            <p class="mb-0">
+
+                Continue saving regularly. Every small contribution matters.
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- AI Goal Analysis -->
+<!-- ========================================= -->
+
+<div class="card shadow border-0 rounded-4 mb-4">
+
+    <div class="card-header bg-dark text-white">
+
+        🤖 AI Goal Analysis
+
+    </div>
+
+    <div class="card-body">
+
+        <ul class="list-group">
+
+            {% if progress >= 100 %}
+
+            <li class="list-group-item">
+
+                🏆 Goal achieved successfully.
+
+            </li>
+
+            <li class="list-group-item">
+
+                💡 Consider setting a higher savings goal.
+
+            </li>
+
+            <li class="list-group-item">
+
+                📈 Start investing your surplus savings.
+
+            </li>
+
+            {% elif progress >= 70 %}
+
+            <li class="list-group-item">
+
+                🌟 Excellent progress toward your goal.
+
+            </li>
+
+            <li class="list-group-item">
+
+                💰 Continue your current savings habit.
+
+            </li>
+
+            <li class="list-group-item">
+
+                🎯 You are likely to achieve your goal soon.
+
+            </li>
+
+            {% elif progress >= 40 %}
+
+            <li class="list-group-item">
+
+                👍 Good progress.
+
+            </li>
+
+            <li class="list-group-item">
+
+                💡 Reduce unnecessary expenses.
+
+            </li>
+
+            <li class="list-group-item">
+
+                📊 Increase monthly savings slightly.
+
+            </li>
+
+            {% else %}
+
+            <li class="list-group-item">
+
+                ⚠ Your goal progress is currently low.
+
+            </li>
+
+            <li class="list-group-item">
+
+                💳 Avoid impulse purchases.
+
+            </li>
+
+            <li class="list-group-item">
+
+                🏦 Create a monthly savings plan.
+
+            </li>
+
+            {% endif %}
+
+        </ul>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- Achievement Badge -->
+<!-- ========================================= -->
+
+<div class="card shadow border-0 rounded-4 mb-5">
+
+    <div class="card-header bg-warning">
+
+        🏅 Achievement Badge
+
+    </div>
+
+    <div class="card-body text-center">
+
+        {% if progress >= 100 %}
+
+            <h1>🥇</h1>
+
+            <h4 class="text-success">
+
+                Financial Champion
+
+            </h4>
+
+        {% elif progress >= 75 %}
+
+            <h1>🥈</h1>
+
+            <h4 class="text-primary">
+
+                Super Saver
+
+            </h4>
+
+        {% elif progress >= 50 %}
+
+            <h1>🥉</h1>
+
+            <h4 class="text-warning">
+
+                Smart Saver
+
+            </h4>
+
+        {% else %}
+
+            <h1>🎯</h1>
+
+            <h4 class="text-danger">
+
+                Savings Beginner
+
+            </h4>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- Goal Analytics -->
+<!-- ========================================= -->
+
+<div class="row mb-4">
+
+    <!-- Savings Forecast -->
+
+    <div class="col-lg-6">
+
+        <div class="card shadow border-0 rounded-4">
+
+            <div class="card-header bg-info text-white">
+
+                💰 Savings Forecast
+
+            </div>
+
+            <div class="card-body">
+
+                {% set yearly = savings * 12 %}
+
+                <h2 class="text-success">
+
+                    ₹{{ "{:,.2f}".format(yearly) }}
+
+                </h2>
+
+                <p class="text-muted">
+
+                    Estimated savings after one year if you maintain your current financial habits.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Goal Status -->
+
+    <div class="col-lg-6">
+
+        <div class="card shadow border-0 rounded-4">
+
+            <div class="card-header bg-secondary text-white">
+
+                📊 Goal Status
+
+            </div>
+
+            <div class="card-body">
+
+                {% if progress >= 100 %}
+
+                    <h3 class="text-success">
+
+                        Goal Completed 🎉
+
+                    </h3>
+
+                {% elif progress >= 75 %}
+
+                    <h3 class="text-primary">
+
+                        Almost There 🚀
+
+                    </h3>
+
+                {% elif progress >= 40 %}
+
+                    <h3 class="text-warning">
+
+                        On Track 👍
+
+                    </h3>
+
+                {% else %}
+
+                    <h3 class="text-danger">
+
+                        Needs More Savings
+
+                    </h3>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- Goal Progress Chart -->
+<!-- ========================================= -->
+
+<div class="card shadow border-0 rounded-4 mb-5">
+
+    <div class="card-header bg-primary text-white">
+
+        📈 Goal Progress Chart
+
+    </div>
+
+    <div class="card-body">
+
+        <div style="height:350px;">
+
+            <canvas id="goalChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+// ==========================================
+// Read Jinja values into JavaScript
+// ==========================================
+
+const goalAmount = Number("{{ goal_amount }}");
+const currentSavings = Number("{{ savings }}");
+
+// ==========================================
+// Goal Progress Chart
+// ==========================================
+
+const goalChartCanvas = document.getElementById("goalChart");
+
+if(goalChartCanvas){
+
+    new Chart(goalChartCanvas,{
+
+        type:"bar",
+
+        data:{
+
+            labels:[
+
+                "Goal Amount",
+
+                "Current Savings"
+
+            ],
+
+            datasets:[{
+
+                label:"Savings Progress",
+
+                data:[
+
+                    goalAmount,
+
+                    currentSavings
+
+                ],
+
+                backgroundColor:[
+
+                    "#2563eb",
+
+                    "#22c55e"
+
+                ],
+
+                borderRadius:8
+
+            }]
+
+        },
+
+        options:{
+
+            responsive:true,
+
+            maintainAspectRatio:false,
+
+            plugins:{
+
+                legend:{
+
+                    display:false
+
+                }
+
+            },
+
+            scales:{
+
+                y:{
+
+                    beginAtZero:true
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+</script>
+
+{% endblock %}

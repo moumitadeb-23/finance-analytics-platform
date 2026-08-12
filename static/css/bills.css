@@ -1,0 +1,1267 @@
+/* =====================================================
+   GOOGLE FONT
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* =====================================================
+   ROOT VARIABLES
+===================================================== */
+
+:root{
+
+    --primary:#4f46e5;
+    --primary-light:#6366f1;
+
+    --success:#10b981;
+    --warning:#f59e0b;
+    --danger:#ef4444;
+
+    --background:#f4f7fc;
+    --card:#ffffff;
+
+    --text:#1e293b;
+    --text-light:#64748b;
+
+    --border:#e5e7eb;
+
+    --radius:18px;
+
+    --shadow:0 10px 25px rgba(0,0,0,.08);
+
+    --transition:.3s ease;
+
+}
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.bills-dashboard{
+
+    font-family:'Poppins',sans-serif;
+
+    background:var(--background);
+
+    min-height:100vh;
+
+    padding:30px;
+
+}
+
+/* =====================================================
+   PAGE HEADER
+===================================================== */
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.page-header h1{
+
+    margin:0;
+
+    font-size:34px;
+
+    color:var(--text);
+
+    font-weight:700;
+
+}
+
+.page-header h1 i{
+
+    color:var(--primary);
+
+    margin-right:10px;
+
+}
+
+.page-header p{
+
+    margin-top:8px;
+
+    color:var(--text-light);
+
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card{
+
+    background:var(--card);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    margin-bottom:30px;
+
+    box-shadow:var(--shadow);
+
+}
+
+/* =====================================================
+   CARD HEADER
+===================================================== */
+
+.card-header{
+
+    margin-bottom:25px;
+
+}
+
+.card-header h2{
+
+    margin:0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:24px;
+
+    color:var(--text);
+
+}
+
+.card-header i{
+
+    color:var(--primary);
+
+}
+
+/* =====================================================
+   FORM GRID
+===================================================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:20px;
+
+    margin-bottom:20px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+    color:var(--text);
+
+}
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+.form-group input,
+
+.form-group select,
+
+.form-group textarea{
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:14px 16px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:var(--transition);
+
+    background:#fff;
+
+}
+
+.form-group input:focus,
+
+.form-group select:focus,
+
+.form-group textarea:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(79,70,229,.12);
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-height:110px;
+
+}
+
+/* =====================================================
+   SAVE BUTTON
+===================================================== */
+
+.btn-primary{
+
+    margin-top:20px;
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    padding:14px 28px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-light);
+
+    transform:translateY(-2px);
+
+}
+
+/* =====================================================
+   SEARCH BOX
+===================================================== */
+
+.search-box{
+
+    margin-bottom:25px;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+    padding:15px 18px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:var(--transition);
+
+}
+
+.search-box input:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(79,70,229,.12);
+
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-responsive{
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#f8fafc;
+
+}
+
+thead th{
+
+    padding:18px;
+
+    text-align:left;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:var(--text);
+
+    border-bottom:2px solid var(--border);
+
+}
+
+tbody td{
+
+    padding:18px;
+
+    border-bottom:1px solid var(--border);
+
+    color:var(--text-light);
+
+    vertical-align:middle;
+
+}
+
+tbody tr{
+
+    transition:var(--transition);
+
+}
+
+tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+/* =====================================================
+   STATUS BADGES
+===================================================== */
+
+.badge{
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.badge.paid{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.badge.pending{
+
+    background:#fef3c7;
+
+    color:#b45309;
+
+}
+
+/* =====================================================
+   ACTION BUTTONS
+===================================================== */
+
+.btn-success,
+
+.btn-warning,
+
+.btn-danger{
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    margin:3px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.btn-success{
+
+    background:#10b981;
+
+    color:#fff;
+
+}
+
+.btn-success:hover{
+
+    background:#059669;
+
+}
+
+.btn-warning{
+
+    background:#f59e0b;
+
+    color:#fff;
+
+}
+
+.btn-warning:hover{
+
+    background:#d97706;
+
+}
+
+.btn-danger{
+
+    background:#ef4444;
+
+    color:#fff;
+
+}
+
+.btn-danger:hover{
+
+    background:#dc2626;
+
+}
+
+.btn-success:hover,
+.btn-warning:hover,
+.btn-danger:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+
+}
+
+/* =====================================================
+   EMPTY TABLE
+===================================================== */
+
+table tbody tr td[colspan]{
+
+    text-align:center;
+
+    color:var(--text-light);
+
+    padding:35px;
+
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.table-responsive::-webkit-scrollbar{
+
+    height:8px;
+
+}
+
+.table-responsive::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+
+    border-radius:10px;
+
+}
+
+.table-responsive::-webkit-scrollbar-track{
+
+    background:#f1f5f9;
+
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:992px){
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
+    }
+
+    .page-header h1{
+
+        font-size:28px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .bills-dashboard{
+
+        padding:18px;
+
+    }
+
+    .card{
+
+        padding:20px;
+
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    table{
+
+        min-width:900px;
+
+    }
+
+    .btn-success,
+
+    .btn-warning,
+
+    .btn-danger{
+
+        display:block;
+
+        width:100%;
+
+        margin-bottom:8px;
+
+        text-align:center;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .page-header h1{
+
+        font-size:24px;
+
+    }
+
+    .card-header h2{
+
+        font-size:20px;
+
+    }
+
+    .btn-primary{
+
+        width:100%;
+
+    }
+
+}
+
+.alert{
+    padding:12px 18px;
+    margin:15px 0;
+    border-radius:8px;
+    font-weight:500;
+}
+
+.alert-success{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.alert-danger{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.alert-warning{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+/*====================================================
+DARK MODE
+PART 1
+====================================================*/
+
+body.dark-mode{
+
+    --background:#111827;
+    --card:#1f2937;
+
+    --text:#f9fafb;
+    --text-light:#cbd5e1;
+
+    --border:#374151;
+
+    background:#111827;
+
+    color:#f9fafb;
+
+}
+
+body.dark-mode .bills-dashboard{
+
+    background:#111827;
+
+}
+
+body.dark-mode .page-header h1{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .page-header p{
+
+    color:#d1d5db;
+
+}
+
+body.dark-mode .card{
+
+    background:#1f2937;
+
+    border:1px solid #374151;
+
+    box-shadow:none;
+
+}
+
+body.dark-mode .card-header{
+
+    background:transparent;
+
+}
+
+body.dark-mode .card-header h2{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .card-header i{
+
+    color:#60a5fa;
+
+}
+
+/*====================================================
+DARK MODE
+PART 2
+FORMS & INPUTS
+====================================================*/
+
+body.dark-mode .form-group label{
+
+    color:#f9fafb;
+
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group select,
+body.dark-mode .form-group textarea{
+
+    background:#374151;
+
+    color:#ffffff;
+
+    border:1px solid #4b5563;
+
+}
+
+body.dark-mode .form-group input::placeholder,
+body.dark-mode .form-group textarea::placeholder{
+
+    color:#9ca3af;
+
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group select:focus,
+body.dark-mode .form-group textarea:focus{
+
+    background:#374151;
+
+    color:#ffffff;
+
+    border-color:#60a5fa;
+
+    box-shadow:0 0 0 3px rgba(96,165,250,.20);
+
+}
+
+body.dark-mode .search-box input{
+
+    background:#374151;
+
+    color:#ffffff;
+
+    border:1px solid #4b5563;
+
+}
+
+body.dark-mode .search-box input::placeholder{
+
+    color:#9ca3af;
+
+}
+
+body.dark-mode .search-box input:focus{
+
+    border-color:#60a5fa;
+
+    box-shadow:0 0 0 3px rgba(96,165,250,.20);
+
+}
+
+body.dark-mode input[type="date"]{
+
+    background:#374151;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator{
+
+    filter:invert(1);
+
+}
+
+body.dark-mode select option{
+
+    background:#374151;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode textarea{
+
+    background:#374151;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode textarea::placeholder{
+
+    color:#9ca3af;
+
+}
+
+body.dark-mode .btn-primary{
+
+    background:#4f46e5;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .btn-primary:hover{
+
+    background:#6366f1;
+
+}
+
+/*====================================================
+DARK MODE
+PART 3
+TABLE
+====================================================*/
+
+body.dark-mode table{
+
+    background:#1f2937;
+
+}
+
+body.dark-mode thead{
+
+    background:#273449;
+
+}
+
+body.dark-mode thead th{
+
+    color:#ffffff;
+
+    border-bottom:1px solid #374151;
+
+}
+
+body.dark-mode tbody tr{
+
+    background:#1f2937;
+
+    transition:.3s;
+
+}
+
+body.dark-mode tbody tr:hover{
+
+    background:#2b3648;
+
+}
+
+body.dark-mode tbody td{
+
+    color:#f3f4f6;
+
+    border-bottom:1px solid #374151;
+
+}
+
+body.dark-mode tbody td strong{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode table tbody tr td[colspan]{
+
+    color:#d1d5db;
+
+}
+
+
+/*====================================================
+STATUS BADGES
+====================================================*/
+
+body.dark-mode .badge.paid{
+
+    background:#14532d;
+
+    color:#bbf7d0;
+
+}
+
+body.dark-mode .badge.pending{
+
+    background:#78350f;
+
+    color:#fde68a;
+
+}
+
+body.dark-mode .badge.overdue{
+
+    background:#7f1d1d;
+
+    color:#fecaca;
+
+}
+
+
+/*====================================================
+ACTION BUTTONS
+====================================================*/
+
+body.dark-mode .btn-success{
+
+    background:#059669;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .btn-success:hover{
+
+    background:#10b981;
+
+}
+
+body.dark-mode .btn-warning{
+
+    background:#d97706;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .btn-warning:hover{
+
+    background:#f59e0b;
+
+}
+
+body.dark-mode .btn-danger{
+
+    background:#dc2626;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .btn-danger:hover{
+
+    background:#ef4444;
+
+}
+
+
+/*====================================================
+TABLE SCROLLBAR
+====================================================*/
+
+body.dark-mode .table-responsive::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+
+body.dark-mode .table-responsive::-webkit-scrollbar-thumb{
+
+    background:#4b5563;
+
+}
+
+body.dark-mode .table-responsive::-webkit-scrollbar-thumb:hover{
+
+    background:#6b7280;
+
+}
+
+/*====================================================
+DARK MODE
+PART 4
+ALERTS
+POLISH
+RESPONSIVE
+====================================================*/
+
+/*==========================
+ALERTS
+==========================*/
+
+body.dark-mode .alert{
+
+    border:none;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .alert-success{
+
+    background:#14532d;
+
+    color:#bbf7d0;
+
+}
+
+body.dark-mode .alert-danger{
+
+    background:#7f1d1d;
+
+    color:#fecaca;
+
+}
+
+body.dark-mode .alert-warning{
+
+    background:#78350f;
+
+    color:#fde68a;
+
+}
+
+
+/*==========================
+BUTTON SHADOWS
+==========================*/
+
+body.dark-mode .btn-primary,
+body.dark-mode .btn-success,
+body.dark-mode .btn-warning,
+body.dark-mode .btn-danger{
+
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+
+}
+
+body.dark-mode .btn-primary:hover,
+body.dark-mode .btn-success:hover,
+body.dark-mode .btn-warning:hover,
+body.dark-mode .btn-danger:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+/*==========================
+CARD HOVER
+==========================*/
+
+body.dark-mode .card{
+
+    transition:.30s ease;
+
+}
+
+body.dark-mode .card:hover{
+
+    border-color:#4f46e5;
+
+    box-shadow:0 12px 28px rgba(0,0,0,.45);
+
+}
+
+
+/*==========================
+PAGE TITLE
+==========================*/
+
+body.dark-mode .page-header h1{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .page-header h1 i{
+
+    color:#60a5fa;
+
+}
+
+body.dark-mode .page-header p{
+
+    color:#cbd5e1;
+
+}
+
+
+/*==========================
+ICONS
+==========================*/
+
+body.dark-mode i{
+
+    color:inherit;
+
+}
+
+
+/*==========================
+LINKS
+==========================*/
+
+body.dark-mode a{
+
+    color:#93c5fd;
+
+}
+
+body.dark-mode a:hover{
+
+    color:#bfdbfe;
+
+}
+
+
+/*==========================
+TEXT SELECTION
+==========================*/
+
+body.dark-mode ::selection{
+
+    background:#4f46e5;
+
+    color:#ffffff;
+
+}
+
+
+/*==========================
+SCROLLBAR
+==========================*/
+
+body.dark-mode::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+body.dark-mode::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+
+body.dark-mode::-webkit-scrollbar-thumb{
+
+    background:#4b5563;
+
+    border-radius:20px;
+
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover{
+
+    background:#6b7280;
+
+}
+
+
+/*==========================
+SMOOTH TRANSITIONS
+==========================*/
+
+body.dark-mode *{
+
+    transition:
+        background-color .25s ease,
+        color .25s ease,
+        border-color .25s ease;
+
+}
+
+
+/*==========================
+MOBILE
+==========================*/
+
+@media(max-width:768px){
+
+    body.dark-mode .card{
+
+        padding:18px;
+
+    }
+
+    body.dark-mode .page-header{
+
+        margin-bottom:20px;
+
+    }
+
+    body.dark-mode .btn-primary{
+
+        width:100%;
+
+    }
+
+}
+
+
+/*==========================
+FINAL TEXT FIX
+==========================*/
+
+body.dark-mode{
+
+    color:#f9fafb;
+
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode p{
+
+    color:#d1d5db;
+
+}
+
+body.dark-mode label{
+
+    color:#f3f4f6;
+
+}
+
+body.dark-mode small{
+
+    color:#9ca3af;
+
+}
+
+body.dark-mode strong{
+
+    color:#ffffff;
+
+}
+
+/*=========================================
+PAID ROW CONTRAST FIX
+=========================================*/
+
+body.dark-mode tbody tr{
+
+    background:#1f2937 !important;
+
+}
+
+body.dark-mode tbody tr:hover{
+
+    background:#2b3648 !important;
+
+}
+
+body.dark-mode tbody td{
+
+    color:#f9fafb !important;
+
+}
+
+body.dark-mode tbody td strong{
+
+    color:#ffffff !important;
+
+}

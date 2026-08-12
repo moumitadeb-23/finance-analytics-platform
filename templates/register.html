@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Create Account | Finance Analytics Platform</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/register.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT PANEL -->
+
+<div class="left-panel">
+
+<div class="brand">
+
+<div class="logo">
+
+💰
+
+</div>
+
+<h1>Finance Analytics Platform For Financial Reporting And Budget Tracking</h1>
+
+<p class="tagline">
+
+Track • Save • Grow
+
+</p>
+
+</div>
+
+<h2>
+
+Join Finance Analytics Platform
+
+</h2>
+
+<p>
+
+Manage your income, expenses, budgets and savings using intelligent AI-powered financial analytics.
+
+</p>
+
+<div class="features">
+
+<div class="feature">
+
+<i class="fa-solid fa-lock"></i>
+
+<span>Bank-Level Security</span>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>Financial Dashboard</span>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-wallet"></i>
+
+<span>Budget Planning</span>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-brain"></i>
+
+<span>AI Financial Insights</span>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-piggy-bank"></i>
+
+<span>Savings Analysis</span>
+
+</div>
+
+<div class="feature">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+<span>Fraud Detection</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT PANEL -->
+
+<div class="right-panel">
+
+<form
+id="registerForm"
+action="/register"
+method="POST"
+autocomplete="off">
+
+<h2>
+
+Create Account
+
+</h2>
+
+{% if error %}
+
+<div class="alert-error">
+
+{{ error }}
+
+</div>
+
+{% endif %}
+
+<!-- Full Name -->
+
+<div class="input-box">
+
+<i class="fa-solid fa-user"></i>
+
+<input
+type="text"
+id="name"
+name="name"
+placeholder="Full Name"
+maxlength="50"
+autocomplete="name"
+required>
+
+</div>
+
+<small id="nameMsg"></small>
+
+<!-- Email -->
+
+<div class="input-box">
+
+<i class="fa-solid fa-envelope"></i>
+
+<input
+type="email"
+id="email"
+name="email"
+placeholder="Email Address"
+autocomplete="email"
+required>
+
+</div>
+
+<small id="emailMsg"></small>
+
+<!-- Occupation -->
+
+<div class="input-box">
+
+<i class="fa-solid fa-briefcase"></i>
+
+<input
+type="text"
+id="occupation"
+name="occupation"
+placeholder="Occupation (Student / Employee / Business)"
+autocomplete="organization-title"
+required>
+
+</div>
+
+<!-- Password -->
+
+<div class="input-box password-box">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+type="password"
+id="password"
+name="password"
+placeholder="Create Password"
+minlength="8"
+maxlength="32"
+autocomplete="new-password"
+required>
+
+<i
+class="fa-solid fa-eye toggle-password"
+data-target="password"></i>
+
+</div>
+
+<div class="strength">
+
+<div id="strengthBar"></div>
+
+</div>
+
+<small id="passwordMsg"></small>
+
+<!-- Confirm Password -->
+
+<div class="input-box password-box">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+type="password"
+id="confirm_password"
+name="confirm_password"
+placeholder="Confirm Password"
+minlength="8"
+maxlength="32"
+autocomplete="new-password"
+required>
+
+<i
+class="fa-solid fa-eye toggle-password"
+data-target="confirm_password"></i>
+
+</div>
+
+<small id="confirmMsg"></small>
+
+<!-- Terms -->
+
+<label class="terms">
+
+<input
+type="checkbox"
+id="terms"
+required>
+
+<span>
+
+I agree to the
+
+<a href="#">
+
+Terms & Conditions
+
+</a>
+
+</span>
+
+</label>
+
+<!-- Register Button -->
+
+<button
+type="submit">
+
+<i class="fa-solid fa-user-plus"></i>
+
+&nbsp;
+
+Create Account
+
+</button>
+
+<p class="login-link">
+
+Already have an account?
+
+<a
+href="/login"
+class="page-transition">
+
+Login
+
+</a>
+
+</p>
+
+</form>
+
+</div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
+
+</body>
+
+</html>

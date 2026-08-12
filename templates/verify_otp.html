@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Verify OTP | Finance Analytics Platform</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/login.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="bg-shape shape1"></div>
+<div class="bg-shape shape2"></div>
+<div class="bg-shape shape3"></div>
+
+<div class="login-container">
+
+    <!-- LEFT -->
+
+    <div class="left">
+
+        <div class="brand">
+
+            <h1>🔐</h1>
+
+            <h2>OTP Verification</h2>
+
+            <p>Finance Analytics Platform</p>
+
+        </div>
+
+        <h3>Almost Done!</h3>
+
+        <p>
+
+            We've sent a secure 6-digit OTP to your registered email.
+
+            Enter it below to verify your identity.
+
+        </p>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="right glass-panel">
+
+        <form method="POST">
+
+            <h2>Verify OTP</h2>
+
+            <p style="margin-bottom:25px;color:#666;text-align:center;">
+
+                Enter the 6-digit verification code
+
+            </p>
+
+            {% if error %}
+
+            <div class="alert-error">
+
+                {{ error }}
+
+            </div>
+
+            {% endif %}
+
+            <div class="input-box">
+
+                <input
+                type="text"
+                name="otp"
+                maxlength="6"
+                required>
+
+                <label>🔑 OTP Code</label>
+
+            </div>
+
+            <button type="submit">
+
+                Verify OTP
+
+            </button>
+
+            <p class="register-link">
+
+                <a href="{{ url_for('resend_otp') }}">
+
+                    Resend OTP
+
+                </a>
+
+            </p>
+
+            <p class="register-link">
+
+                <a href="{{ url_for('forgot_password') }}">
+
+                    ← Back
+
+                </a>
+
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+</body>
+
+</html>

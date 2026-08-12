@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block title %}AI Financial Insights{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/ai_insights.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="ai-page">
+
+    <!-- ==============================
+         HERO
+    ============================== -->
+
+    <section class="hero">
+
+        <div class="hero-left">
+
+            <div class="hero-icon">
+
+                <i class="fas fa-brain"></i>
+
+            </div>
+
+            <div>
+
+                <h1>AI Financial Insights</h1>
+
+                <p>
+
+                    Personalized recommendations generated from your financial behaviour.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="health-circle">
+
+                <h2>{{ health_score }}</h2>
+
+                <span>Health Score</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ==============================
+         KPI CARDS
+    ============================== -->
+
+    <section class="summary-grid">
+
+        <div class="summary-card">
+
+            <i class="fas fa-wallet"></i>
+
+            <div>
+
+                <h3>₹{{ "{:,.2f}".format(total_income) }}</h3>
+
+                <span>Total Income</span>
+
+            </div>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fas fa-credit-card"></i>
+
+            <div>
+
+                <h3>₹{{ "{:,.2f}".format(total_expense) }}</h3>
+
+                <span>Total Expense</span>
+
+            </div>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fas fa-piggy-bank"></i>
+
+            <div>
+
+                <h3>₹{{ "{:,.2f}".format(savings) }}</h3>
+
+                <span>Savings</span>
+
+            </div>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fas fa-chart-line"></i>
+
+            <div>
+
+                <h3>₹{{ "{:,.2f}".format(investment) }}</h3>
+
+                <span>Investments</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ==============================
+         MAIN GRID
+    ============================== -->
+
+    <div class="dashboard-grid">
+
+        <!-- LEFT SIDE -->
+
+        <div class="left-panel">
+
+            <!-- AI RECOMMENDATIONS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h3>
+
+                        <i class="fas fa-robot"></i>
+
+                        AI Recommendations
+
+                    </h3>
+
+                </div>
+
+                <div class="recommendation-list">
+
+                    {% for card in ai_cards %}
+
+<div class="recommendation-card {{ card.type }}">
+
+    <div class="recommendation-icon">
+
+        {% if card.type=="success" %}
+
+        <i class="fas fa-check-circle"></i>
+
+        {% elif card.type=="warning" %}
+
+        <i class="fas fa-exclamation-triangle"></i>
+
+        {% elif card.type=="danger" %}
+
+        <i class="fas fa-times-circle"></i>
+
+        {% else %}
+
+        <i class="fas fa-lightbulb"></i>
+
+        {% endif %}
+
+    </div>
+
+    <div>
+
+        <h4>{{ card.title }}</h4>
+
+        <p>{{ card.message }}</p>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+                </div>
+
+            </div>
+
+            <!-- FINANCIAL HEALTH -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h3>
+
+                        <i class="fas fa-heartbeat"></i>
+
+                        Financial Health
+
+                    </h3>
+
+                </div>
+
+                <div class="health-info">
+
+                    <div class="health-item">
+
+                        <span>Budget Utilization</span>
+
+                        <strong>{{ budget_usage }}%</strong>
+
+                    </div>
+
+                    <div class="health-item">
+
+                        <span>Goal Progress</span>
+
+                        <strong>{{ goal_progress }}%</strong>
+
+                    </div>
+
+                    <div class="health-item">
+
+                        <span>Savings</span>
+
+                        <strong>₹{{ "{:,.2f}".format(savings) }}</strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="right-panel">
+
+                        <!-- BUDGET -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h3>
+
+                        <i class="fas fa-chart-pie"></i>
+
+                        Budget Overview
+
+                    </h3>
+
+                </div>
+
+                <canvas id="budgetChart"></canvas>
+
+            </div>
+
+            <!-- INCOME VS EXPENSE -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h3>
+
+                        <i class="fas fa-chart-bar"></i>
+
+                        Income vs Expense
+
+                    </h3>
+
+                </div>
+
+                <canvas id="incomeExpenseChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script id="finance-data" type="application/json">
+{
+    "income": {{ total_income|tojson }},
+    "expense": {{ total_expense|tojson }},
+    "budget": {{ budget|tojson }},
+    "budgetUsage": {{ budget_usage|tojson }},
+    "investment": {{ investment|tojson }},
+    "healthScore": {{ health_score|tojson }},
+    "monthlyData": {{ monthly_data|tojson }},
+    "categoryData": {{ category_expenses|tojson }}
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static',
+filename='js/ai_insights.js') }}"></script>
+
+{% endblock %}
+

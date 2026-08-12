@@ -1,0 +1,1990 @@
+/*==================================================
+FINANCE ANALYTICS PLATFORM
+SETTINGS PAGE CSS
+PART 1
+==================================================*/
+
+/*=============================
+GOOGLE FONT
+=============================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/*=============================
+ROOT VARIABLES
+=============================*/
+
+:root{
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+
+    --success:#10b981;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+    --info:#06b6d4;
+
+    /* ---------- LIGHT MODE COLORS ---------- */
+
+    --dark:#f5f7fb;
+
+    --card:#ffffff;
+
+    --card2:#f8fafc;
+
+    --border:#dbe4ee;
+
+    --text:#1e293b;
+
+    --muted:#64748b;
+
+    --radius:18px;
+
+    --transition:.35s ease;
+
+    --shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+/*=============================
+RESET
+=============================*/
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:"Poppins",sans-serif;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    background:var(--dark);
+
+    color:var(--text);
+
+    transition:.3s;
+
+}
+
+/*=============================
+PAGE
+=============================*/
+
+.settings-page{
+
+    min-height:100vh;
+
+    padding:30px;
+
+}
+
+/*=============================
+HEADER
+=============================*/
+
+.settings-header{
+
+    margin-bottom:35px;
+
+}
+
+.settings-header h1{
+
+    color:var(--text);
+
+}
+
+.settings-header p{
+
+    color:var(--muted);
+
+}
+
+/*=============================
+GRID
+=============================*/
+
+.row{
+
+    margin-left:0;
+
+    margin-right:0;
+
+}
+
+.col-lg-3,
+.col-lg-9{
+
+    padding-left:10px;
+
+    padding-right:10px;
+
+}
+
+/*=============================
+SECTION
+=============================*/
+
+.settings-section{
+
+    display:none;
+
+    animation:fade .35s ease;
+
+}
+
+.settings-section.active{
+
+    display:block;
+
+}
+
+/*=============================
+ANIMATION
+=============================*/
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=============================
+LINKS
+=============================*/
+
+a{
+
+    text-decoration:none;
+
+}
+
+a:hover{
+
+    text-decoration:none;
+
+}
+
+/*=============================
+HR
+=============================*/
+
+hr{
+
+    border-color:var(--border);
+
+}
+
+/*=============================
+TEXT
+=============================*/
+
+.text-muted{
+
+    color:var(--muted)!important;
+
+}
+
+/*==================================================
+SETTINGS CSS
+PART 2
+SIDEBAR • PROFILE • NAVIGATION
+==================================================*/
+
+/*=============================
+SIDEBAR
+=============================*/
+
+.settings-sidebar{
+
+    background:var(--card);
+
+    border-radius:var(--radius);
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+    position:sticky;
+
+    top:25px;
+
+    overflow:hidden;
+
+}
+
+/*=============================
+PROFILE BOX
+=============================*/
+
+.profile-box{
+
+    text-align:center;
+
+    padding-bottom:20px;
+
+}
+
+.profile-avatar{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        #7c3aed
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    font-size:38px;
+
+    margin-bottom:15px;
+
+    box-shadow:
+        0 12px 25px rgba(37,99,235,.35);
+
+    transition:var(--transition);
+
+}
+
+.profile-avatar:hover{
+
+    transform:scale(1.08);
+
+}
+
+.profile-box h4{
+
+    color:var(--text);
+
+}
+
+.profile-box p{
+
+    color:var(--muted);
+
+    font-size:14px;
+
+    word-break:break-word;
+
+}
+
+/*=============================
+SIDEBAR DIVIDER
+=============================*/
+
+.settings-sidebar hr{
+
+    margin:22px 0;
+
+    border-color:var(--border);
+
+}
+
+/*=============================
+NAVIGATION BUTTONS
+=============================*/
+
+.nav-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    color:#dbe4ef;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:500;
+
+    margin-bottom:8px;
+
+    transition:var(--transition);
+
+}
+
+.nav-btn i{
+
+    width:22px;
+
+    text-align:center;
+
+    font-size:16px;
+
+}
+
+/*=============================
+HOVER
+=============================*/
+
+.nav-btn:hover{
+
+    background:#334155;
+
+    color:white;
+
+    transform:translateX(4px);
+
+}
+
+/*=============================
+ACTIVE BUTTON
+=============================*/
+
+.nav-btn.active{
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        #4f46e5
+    );
+
+    color:white;
+
+    box-shadow:
+        0 8px 18px rgba(37,99,235,.35);
+
+}
+
+/*=============================
+DANGER BUTTON
+=============================*/
+
+.nav-btn.danger{
+
+    color:#f87171;
+
+}
+
+.nav-btn.danger:hover{
+
+    background:#7f1d1d;
+
+    color:white;
+
+}
+
+/*=============================
+PROFILE IMAGE (Future Support)
+=============================*/
+
+.profile-image{
+
+    width:95px;
+
+    height:95px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:4px solid rgba(255,255,255,.15);
+
+    box-shadow:var(--shadow);
+
+}
+
+/*=============================
+PROFILE INFO
+=============================*/
+
+.profile-info{
+
+    margin-top:15px;
+
+}
+
+.profile-info small{
+
+    color:var(--muted);
+
+    display:block;
+
+    margin-top:4px;
+
+}
+
+/*=============================
+BADGES
+=============================*/
+
+.profile-badge{
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    padding:5px 12px;
+
+    border-radius:30px;
+
+    background:rgba(37,99,235,.15);
+
+    color:#93c5fd;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+/*=============================
+CUSTOM SCROLLBAR
+=============================*/
+
+.settings-sidebar::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.settings-sidebar::-webkit-scrollbar-thumb{
+
+    background:#475569;
+
+    border-radius:20px;
+
+}
+
+.settings-sidebar::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+/*==================================================
+SETTINGS CSS
+PART 3
+CARDS • FORMS • INPUTS
+==================================================*/
+
+/*=============================
+SETTINGS CARD
+=============================*/
+
+.settings-card{
+
+    background:var(--card);
+
+    border-radius:var(--radius);
+
+    padding:30px;
+
+    margin-bottom:25px;
+
+    box-shadow:var(--shadow);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    transition:var(--transition);
+
+}
+
+.settings-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.45);
+
+}
+
+/*=============================
+CARD TITLE
+=============================*/
+
+.card-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+}
+
+.card-title i{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:12px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        #4f46e5
+    );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    font-size:20px;
+
+}
+
+.card-title h3{
+
+    color:var(--text);
+
+}
+
+/*=============================
+LABELS
+=============================*/
+
+.form-label{
+
+    color:var(--text);
+
+}
+
+/*=============================
+INPUTS
+=============================*/
+
+.form-control,
+
+.form-select{
+
+    background:#334155;
+
+    color:white;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    min-height:50px;
+
+    padding:12px 16px;
+
+    transition:var(--transition);
+
+}
+
+/*=============================
+FOCUS
+=============================*/
+
+.form-control:focus,
+
+.form-select:focus{
+
+    background:#334155;
+
+    color:white;
+
+    border-color:var(--primary);
+
+    box-shadow:
+
+        0 0 0 4px
+
+        rgba(37,99,235,.18);
+
+}
+
+/*=============================
+PLACEHOLDER
+=============================*/
+
+.form-control::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/*=============================
+DISABLED
+=============================*/
+
+.form-control:disabled,
+
+.form-select:disabled{
+
+    background:#475569;
+
+    color:#cbd5e1;
+
+}
+
+/*=============================
+SELECT
+=============================*/
+
+.form-select{
+
+    cursor:pointer;
+
+}
+
+/*=============================
+TEXTAREA
+=============================*/
+
+textarea.form-control{
+
+    min-height:130px;
+
+    resize:vertical;
+
+}
+
+/*=============================
+NUMBER INPUT
+=============================*/
+
+input[type=number]{
+
+    appearance:textfield;
+
+}
+
+input[type=number]::-webkit-inner-spin-button,
+
+input[type=number]::-webkit-outer-spin-button{
+
+    appearance:none;
+
+    margin:0;
+
+}
+
+/*=============================
+DATE INPUT
+=============================*/
+
+input[type=date]{
+
+    color:white;
+
+}
+
+input[type=date]::-webkit-calendar-picker-indicator{
+
+    filter:invert(1);
+
+    cursor:pointer;
+
+}
+
+/*=============================
+FILE INPUT
+=============================*/
+
+input[type=file]{
+
+    background:#334155;
+
+    color:white;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:8px;
+
+}
+
+input[type=file]::file-selector-button{
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:10px 16px;
+
+    margin-right:15px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+input[type=file]::file-selector-button:hover{
+
+    background:var(--primary-dark);
+
+}
+
+/*=============================
+FORM GROUP SPACING
+=============================*/
+
+.mb-3{
+
+    margin-bottom:20px !important;
+
+}
+
+.mb-4{
+
+    margin-bottom:30px !important;
+
+}
+
+/*=============================
+INPUT ICON SUPPORT
+=============================*/
+
+.input-group{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.input-group-text{
+
+    background:#334155;
+
+    color:white;
+
+    border:1px solid var(--border);
+
+}
+
+/*=============================
+HELP TEXT
+=============================*/
+
+.form-text{
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+    margin-top:6px;
+
+}
+
+/*==================================================
+SETTINGS CSS
+PART 4
+SWITCHES • BUTTONS • TABLES • ALERTS
+==================================================*/
+
+/*=============================
+SETTING ROW
+=============================*/
+
+.setting-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:20px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.setting-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.setting-row h5{
+
+    color:#ffffff;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    margin-bottom:6px;
+
+}
+
+.setting-row p{
+
+    color:#94a3b8;
+
+    font-size:14px;
+
+    margin:0;
+
+}
+
+/*=============================
+TOGGLE SWITCH
+=============================*/
+
+.switch{
+
+    position:relative;
+
+    display:inline-block;
+
+    width:58px;
+
+    height:30px;
+
+}
+
+.switch input{
+
+    opacity:0;
+
+    width:0;
+
+    height:0;
+
+}
+
+.slider{
+
+    position:absolute;
+
+    cursor:pointer;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    background:#64748b;
+
+    transition:.35s;
+
+    border-radius:50px;
+
+}
+
+.slider:before{
+
+    position:absolute;
+
+    content:"";
+
+    width:24px;
+
+    height:24px;
+
+    left:3px;
+
+    bottom:3px;
+
+    background:white;
+
+    transition:.35s;
+
+    border-radius:50%;
+
+}
+
+.switch input:checked + .slider{
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        #4f46e5
+    );
+
+}
+
+.switch input:checked + .slider:before{
+
+    transform:translateX(28px);
+
+}
+
+/*=============================
+BUTTONS
+=============================*/
+
+.btn{
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    padding:12px 22px;
+
+}
+
+.btn i{
+
+    margin-right:8px;
+
+}
+
+/*=============================
+PRIMARY
+=============================*/
+
+.btn-primary{
+
+    background:var(--primary);
+
+    border:none;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-dark);
+
+    transform:translateY(-2px);
+
+}
+
+/*=============================
+SUCCESS
+=============================*/
+
+.btn-success{
+
+    background:var(--success);
+
+    border:none;
+
+}
+
+.btn-success:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/*=============================
+WARNING
+=============================*/
+
+.btn-warning{
+
+    background:var(--warning);
+
+    border:none;
+
+    color:white;
+
+}
+
+/*=============================
+DANGER
+=============================*/
+
+.btn-danger{
+
+    background:var(--danger);
+
+    border:none;
+
+}
+
+.btn-danger:hover{
+
+    background:#dc2626;
+
+}
+
+/*=============================
+OUTLINE BUTTONS
+=============================*/
+
+.btn-outline-primary{
+
+    border:2px solid var(--primary);
+
+    color:var(--primary);
+
+}
+
+.btn-outline-primary:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.btn-outline-success{
+
+    border:2px solid var(--success);
+
+    color:var(--success);
+
+}
+
+.btn-outline-success:hover{
+
+    background:var(--success);
+
+    color:white;
+
+}
+
+.btn-outline-danger{
+
+    border:2px solid var(--danger);
+
+    color:var(--danger);
+
+}
+
+.btn-outline-danger:hover{
+
+    background:var(--danger);
+
+    color:white;
+
+}
+
+/*=============================
+TABLE
+=============================*/
+
+.table{
+
+    width:100%;
+
+    color:white;
+
+    border-collapse:collapse;
+
+}
+
+.table th{
+
+    background:#334155;
+
+    color:white;
+
+    padding:14px;
+
+    font-weight:600;
+
+}
+
+.table td{
+
+    background:#1e293b;
+
+    color:#e2e8f0;
+
+    padding:14px;
+
+}
+
+.table th,
+
+.table td{
+
+    border:1px solid #475569;
+
+}
+
+.table tr:hover td{
+
+    background:#283548;
+
+}
+
+/*=============================
+ALERTS
+=============================*/
+
+.alert{
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    margin-top:20px;
+
+    color:white;
+
+    font-weight:500;
+
+}
+
+.alert-info{
+
+    background:#0891b2;
+
+}
+
+.alert-success{
+
+    background:#059669;
+
+}
+
+.alert-warning{
+
+    background:#d97706;
+
+}
+
+.alert-danger{
+
+    background:#dc2626;
+
+}
+
+/*=============================
+BADGES
+=============================*/
+
+.badge{
+
+    border-radius:20px;
+
+    padding:8px 14px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.badge-success{
+
+    background:#059669;
+
+}
+
+.badge-danger{
+
+    background:#dc2626;
+
+}
+
+.badge-warning{
+
+    background:#d97706;
+
+}
+
+.badge-primary{
+
+    background:#2563eb;
+
+}
+
+/*=============================
+ABOUT TABLE
+=============================*/
+
+.table-bordered{
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+}
+
+/*=============================
+DANGER ZONE
+=============================*/
+
+.border-danger{
+
+    border:2px solid rgba(239,68,68,.4)!important;
+
+}
+
+.text-danger{
+
+    color:#ef4444!important;
+
+}
+
+/*=============================
+SAVE BUTTON
+=============================*/
+
+.btn-lg{
+
+    padding:14px 34px;
+
+    font-size:16px;
+
+    border-radius:14px;
+
+}
+
+/*==================================================
+SETTINGS CSS
+PART 5
+RESPONSIVE • DARK MODE • ANIMATIONS
+==================================================*/
+
+/*=============================
+GLASS EFFECT
+=============================*/
+
+.settings-card,
+.settings-sidebar{
+
+    backdrop-filter:blur(14px);
+
+    -webkit-backdrop-filter:blur(14px);
+
+}
+
+/*=============================
+HOVER ANIMATIONS
+=============================*/
+
+.settings-card{
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+}
+
+.settings-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 25px 45px rgba(0,0,0,.45);
+
+}
+
+.profile-avatar{
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+}
+
+.profile-avatar:hover{
+
+    transform:rotate(6deg) scale(1.08);
+
+}
+
+/*=============================
+FORM TRANSITIONS
+=============================*/
+
+.form-control,
+.form-select{
+
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        transform .2s ease;
+
+}
+
+.form-control:hover,
+.form-select:hover{
+
+    border-color:#64748b;
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    transform:scale(1.01);
+
+}
+
+/*=============================
+BUTTON ANIMATIONS
+=============================*/
+
+.btn{
+
+    transition:
+        all .3s ease;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.btn:active{
+
+    transform:scale(.98);
+
+}
+
+/*=============================
+SCROLLBAR
+=============================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0f172a;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#475569;
+
+    border-radius:30px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#64748b;
+
+}
+
+/*=============================
+SELECTION
+=============================*/
+
+::selection{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+/*=============================
+INPUT AUTOFILL FIX
+=============================*/
+
+input:-webkit-autofill,
+
+input:-webkit-autofill:hover,
+
+input:-webkit-autofill:focus{
+
+    -webkit-text-fill-color:white;
+
+    transition:
+        background-color 9999s ease-in-out 0s;
+
+}
+
+/*=============================
+MOBILE
+=============================*/
+
+@media(max-width:992px){
+
+.settings-sidebar{
+
+    position:relative;
+
+    top:0;
+
+    margin-bottom:25px;
+
+}
+
+.card-title{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+.setting-row{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+.switch{
+
+    margin-top:10px;
+
+}
+
+}
+
+/*=============================
+TABLET
+=============================*/
+
+@media(max-width:768px){
+
+.settings-page{
+
+    padding:15px;
+
+}
+
+.settings-header h1{
+
+    font-size:28px;
+
+}
+
+.settings-header p{
+
+    font-size:14px;
+
+}
+
+.settings-card{
+
+    padding:20px;
+
+}
+
+.btn-lg{
+
+    width:100%;
+
+}
+
+.table{
+
+    display:block;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+
+}
+
+}
+
+/*=============================
+MOBILE SMALL
+=============================*/
+
+@media(max-width:576px){
+
+.profile-avatar{
+
+    width:70px;
+
+    height:70px;
+
+    font-size:28px;
+
+}
+
+.profile-box h4{
+
+    font-size:18px;
+
+}
+
+.nav-btn{
+
+    font-size:14px;
+
+    padding:12px;
+
+}
+
+.card-title h3{
+
+    font-size:19px;
+
+}
+
+.form-control,
+
+.form-select{
+
+    min-height:45px;
+
+    font-size:14px;
+
+}
+
+}
+
+/*=============================
+LARGE DESKTOP
+=============================*/
+
+@media(min-width:1400px){
+
+.settings-page{
+
+    max-width:1500px;
+
+    margin:auto;
+
+}
+
+}
+
+/*=============================
+PRINT
+=============================*/
+
+@media print{
+
+.settings-sidebar,
+
+.btn,
+
+.switch{
+
+    display:none;
+
+}
+
+.settings-section{
+
+    display:block !important;
+
+}
+
+body{
+
+    background:white;
+
+    color:black;
+
+}
+
+.settings-card{
+
+    box-shadow:none;
+
+    border:1px solid #ccc;
+
+}
+
+}
+
+/*=============================
+DARK MODE FIXES
+=============================*/
+
+body.dark-mode{
+
+    background:#0f172a;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .settings-card{
+
+    background:#1e293b;
+
+}
+
+body.dark-mode .settings-sidebar{
+
+    background:#1e293b;
+
+}
+
+body.dark-mode .table td{
+
+    background:#1e293b;
+
+}
+
+body.dark-mode .table th{
+
+    background:#334155;
+
+}
+
+body.dark-mode .form-control,
+
+body.dark-mode .form-select,
+
+body.dark-mode textarea{
+
+    background:#334155;
+
+    color:white;
+
+    border-color:#475569;
+
+}
+
+
+/*====================================================
+COMPLETE DARK MODE
+====================================================*/
+
+body.dark-mode{
+
+    --dark:#0f172a;
+
+    --card:#1e293b;
+
+    --card2:#334155;
+
+    --border:#475569;
+
+    --text:#ffffff;
+
+    --muted:#94a3b8;
+
+    background:var(--dark);
+
+    color:var(--text);
+
+}
+
+body.dark-mode .settings-page{
+
+    background:var(--dark);
+
+}
+
+body.dark-mode .settings-card{
+
+    background:var(--card);
+
+}
+
+body.dark-mode .settings-sidebar{
+
+    background:var(--card);
+
+}
+
+body.dark-mode .settings-header h1{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .settings-header p{
+
+    color:#94a3b8;
+
+}
+
+body.dark-mode .card-title h3{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .profile-box h4{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .profile-box p{
+
+    color:#94a3b8;
+
+}
+
+body.dark-mode .nav-btn{
+
+    color:#dbe4ef;
+
+}
+
+body.dark-mode .nav-btn:hover{
+
+    background:#334155;
+
+}
+
+body.dark-mode .form-label{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .form-control,
+
+body.dark-mode .form-select,
+
+body.dark-mode textarea{
+
+    background:#334155;
+
+    color:#ffffff;
+
+    border-color:#475569;
+
+}
+
+body.dark-mode .form-control::placeholder{
+
+    color:#94a3b8;
+
+}
+
+body.dark-mode .table th{
+
+    background:#334155;
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .table td{
+
+    background:#1e293b;
+
+    color:#e2e8f0;
+
+}
+
+
+/*====================================================
+LIGHT MODE FIX
+ADD THIS AT THE VERY END OF THE CSS
+====================================================*/
+
+body:not(.dark-mode){
+
+    background:#eef3f9;
+    color:#1e293b;
+
+}
+
+/* Header */
+
+body:not(.dark-mode) .settings-header h1{
+
+    color:#1e293b !important;
+
+}
+
+body:not(.dark-mode) .settings-header p{
+
+    color:#64748b !important;
+
+}
+
+/* Cards */
+
+body:not(.dark-mode) .settings-card,
+body:not(.dark-mode) .settings-sidebar{
+
+    background:#ffffff !important;
+
+    color:#1e293b !important;
+
+}
+
+/* Card Titles */
+
+body:not(.dark-mode) .card-title h3{
+
+    color:#1e293b !important;
+
+}
+
+/* Profile */
+
+body:not(.dark-mode) .profile-box h4{
+
+    color:#1e293b !important;
+
+}
+
+body:not(.dark-mode) .profile-box p{
+
+    color:#64748b !important;
+
+}
+
+/* Sidebar */
+
+body:not(.dark-mode) .nav-btn{
+
+    color:#334155 !important;
+
+}
+
+body:not(.dark-mode) .nav-btn:hover{
+
+    background:#eef4ff;
+
+    color:#2563eb !important;
+
+}
+
+body:not(.dark-mode) .nav-btn.active{
+
+    color:#ffffff !important;
+
+}
+
+/* Labels */
+
+body:not(.dark-mode) .form-label{
+
+    color:#334155 !important;
+
+}
+
+/* Inputs */
+
+body:not(.dark-mode) .form-control,
+body:not(.dark-mode) .form-select,
+body:not(.dark-mode) textarea{
+
+    background:#ffffff;
+
+    color:#1e293b;
+
+    border:1px solid #dbe4ee;
+
+}
+
+body:not(.dark-mode) .form-control::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/* File input */
+
+body:not(.dark-mode) input[type=file]{
+
+    color:#1e293b;
+
+}
+
+/* Help Text */
+
+body:not(.dark-mode) .form-text{
+
+    color:#64748b;
+
+}
+
+/* Settings Rows */
+
+body:not(.dark-mode) .setting-row h5{
+
+    color:#1e293b;
+
+}
+
+body:not(.dark-mode) .setting-row p{
+
+    color:#64748b;
+
+}
+
+/* Tables */
+
+body:not(.dark-mode) .table th{
+
+    background:#f8fafc;
+
+    color:#1e293b;
+
+}
+
+body:not(.dark-mode) .table td{
+
+    background:#ffffff;
+
+    color:#334155;
+
+}
+
+/* Alerts */
+
+body:not(.dark-mode) .alert{
+
+    color:#ffffff;
+
+}
+
+/*=============================
+END
+=============================*/

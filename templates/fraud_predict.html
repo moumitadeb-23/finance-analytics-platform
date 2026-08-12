@@ -1,0 +1,415 @@
+{% extends "base.html" %}
+
+{% block title %}AI Fraud Prediction{% endblock %}
+
+{% block content %}
+
+<div class="fraud-container">
+
+    <!-- ========================================= -->
+    <!-- PAGE HEADER -->
+    <!-- ========================================= -->
+
+    <div class="fraud-header">
+
+        <div>
+
+            <h1>
+                🛡️ AI Fraud Prediction System
+            </h1>
+
+            <p>
+                Detect fraudulent transactions using Machine Learning and AI.
+            </p>
+
+        </div>
+
+        <div class="header-badge">
+
+            AI Powered
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- STATISTICS -->
+    <!-- ========================================= -->
+
+    <div class="fraud-stats">
+
+        <div class="stat-card">
+
+            <h4>Total Models</h4>
+
+            <h2>1</h2>
+
+            <span>Random Forest</span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h4>Dataset</h4>
+
+            <h2>1.29M</h2>
+
+            <span>Transactions</span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h4>Prediction</h4>
+
+            <h2>Real-Time</h2>
+
+            <span>Instant Analysis</span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h4>Accuracy</h4>
+
+            <h2>99%</h2>
+
+            <span>Machine Learning</span>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- MAIN GRID -->
+    <!-- ========================================= -->
+
+    <div class="fraud-grid">
+
+        <!-- ===================================== -->
+        <!-- SINGLE TRANSACTION -->
+        <!-- ===================================== -->
+
+        <div class="fraud-card">
+
+            <div class="card-title">
+
+                💳 Transaction Details
+
+            </div>
+
+            <form
+                action="{{ url_for('fraud_predict') }}"
+                method="POST"
+            >
+
+                <div class="two-column">
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Merchant
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="merchant"
+                            placeholder="Merchant Name"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Category
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="category"
+                            placeholder="shopping"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="two-column">
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Amount (₹)
+
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="amount"
+                            placeholder="Enter Amount"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Gender
+
+                        </label>
+
+                        <select name="gender">
+
+                            <option>M</option>
+
+                            <option>F</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="two-column">
+
+                    <div class="input-group">
+
+                        <label>
+
+                            City
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="city"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>
+
+                            State
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="state"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label>
+
+                        Job
+
+                    </label>
+
+                    <input
+                        type="text"
+                        name="job"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    class="predict-btn"
+                    type="submit"
+                >
+
+                    🔍 Predict Transaction
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- ===================================== -->
+        <!-- AI INFORMATION -->
+        <!-- ===================================== -->
+
+        <div class="info-card">
+
+            <div class="info-title">
+
+                🤖 AI Information
+
+            </div>
+
+            <ul>
+
+                <li>🌲 Random Forest Classifier</li>
+
+                <li>📊 Trained on 1.29 Million Transactions</li>
+
+                <li>⚡ Real-Time Fraud Detection</li>
+
+                <li>🧠 Machine Learning Prediction</li>
+
+                <li>📈 Risk Assessment</li>
+
+                <li>🛡️ Secure Financial Monitoring</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- DATASET UPLOAD -->
+    <!-- ========================================= -->
+
+    <div class="upload-section">
+
+        <div class="upload-card">
+
+            <h2>
+
+                📂 Analyze Dataset
+
+            </h2>
+
+            <p>
+
+                Upload a CSV dataset to automatically detect fraudulent transactions.
+
+            </p>
+
+            <form
+
+                action="{{ url_for('analyze_dataset') }}"
+
+                method="POST"
+
+                enctype="multipart/form-data"
+
+            >
+
+                <input
+
+                    type="file"
+
+                    name="dataset"
+
+                    accept=".csv"
+
+                    required
+
+                >
+
+                <button type="submit">
+
+                    🚀 Upload & Analyze Dataset
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- ===================================== -->
+        <!-- RECENT DATASETS -->
+        <!-- ===================================== -->
+
+        <div class="recent-card">
+
+            <h2>
+
+                📁 Recent Dataset Analysis
+
+            </h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Dataset</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% if history %}
+
+                        {% for item in history %}
+
+                        <tr>
+
+                            <td>
+
+                                {{ item.filename }}
+
+                            </td>
+
+                            <td>
+
+                                {{ item.fraud_transactions }} Fraud
+
+                            </td>
+
+                            <td>
+
+                                {{ item.uploaded_at }}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <tr>
+
+                            <td colspan="3">
+
+                                No dataset uploaded yet.
+
+                            </td>
+
+                        </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

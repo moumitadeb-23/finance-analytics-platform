@@ -1,0 +1,3603 @@
+/* ==========================================================
+  FINANCE ANALYTICS PLATFORM
+   Premium Dashboard CSS
+   Part 1
+========================================================== */
+
+/* ==========================
+   RESET
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ==========================
+   BODY
+========================== */
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#eef3f9;
+
+    color:#1f2937;
+
+    overflow-x:hidden;
+
+}
+
+/* ==========================
+   LINKS
+========================== */
+
+a{
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+/* ==========================
+   LIST
+========================== */
+
+ul{
+
+    list-style:none;
+
+}
+
+/* ==========================
+   WRAPPER
+========================== */
+
+.wrapper{
+
+    display:flex;
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+/* ==========================
+   OVERLAY
+========================== */
+
+.overlay{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:998;
+
+}
+
+.overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+/* ==========================
+   MAIN CONTENT
+========================== */
+
+.main-content{
+
+    width:100%;
+
+    margin-left:280px;
+
+    min-height:100vh;
+
+    transition:.35s ease;
+
+    background:#eef3f9;
+
+}
+
+.main-content.expanded{
+
+    margin-left:0;
+
+}
+
+/* ==========================
+   PAGE CONTENT
+========================== */
+
+.page-content{
+
+    padding:30px;
+
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#eef3f9;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#c7d2fe;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#4f46e5;
+
+}
+
+/* Firefox */
+
+*{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:#4f46e5 #eef3f9;
+
+}
+
+/* ==========================
+   CONTAINERS
+========================== */
+
+.container-fluid{
+
+    padding-left:0;
+
+    padding-right:0;
+
+}
+
+/* ==========================
+   COMMON CARDS
+========================== */
+
+.card{
+
+    border:none;
+
+    border-radius:18px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.12);
+
+}
+
+.card-header{
+
+    border-radius:18px 18px 0 0 !important;
+
+    font-weight:600;
+
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+.btn{
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================
+   TABLE
+========================== */
+
+.table{
+
+    margin-bottom:0;
+
+}
+
+.table th{
+
+    font-weight:600;
+
+    vertical-align:middle;
+
+}
+
+.table td{
+
+    vertical-align:middle;
+
+}
+
+/* ==========================
+   FORM
+========================== */
+
+.form-control,
+.form-select{
+
+    border-radius:12px;
+
+    border:1px solid #dbe4ff;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:#4f46e5;
+
+    box-shadow:0 0 0 .2rem rgba(79,70,229,.15);
+
+}
+
+/* ==========================
+   IMAGE
+========================== */
+
+img{
+
+    max-width:100%;
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:992px){
+
+.main-content{
+
+    margin-left:0;
+
+}
+
+.page-content{
+
+    padding:20px;
+
+}
+
+}
+
+/* ==========================================================
+   Finance Analytics Platform SIDEBAR
+   Part 2
+========================================================== */
+
+/* ==========================
+   SIDEBAR
+========================== */
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:280px;
+
+    height:100vh;
+
+    background:linear-gradient(180deg,#243B8F,#1A2D6B);
+
+    color:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+    transition:.35s ease;
+
+    z-index:999;
+
+    box-shadow:5px 0 25px rgba(0,0,0,.18);
+
+}
+
+/* Collapse */
+
+.sidebar.collapsed{
+
+    transform:translateX(-280px);
+
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.sidebar-header{
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+
+}
+
+.sidebar-header h3{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.sidebar-header small{
+
+    color:#d9e4ff;
+
+    font-size:14px;
+
+}
+
+/* ==========================
+   MENU
+========================== */
+
+.sidebar-menu{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:20px 12px;
+
+}
+
+/* Scrollbar */
+
+.sidebar-menu::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb{
+
+    background:rgba(255,255,255,.4);
+
+    border-radius:20px;
+
+}
+
+/* ==========================
+   LINKS
+========================== */
+
+.sidebar a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:15px 18px;
+
+    margin-bottom:10px;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    transition:.25s;
+
+}
+
+/* Icon */
+
+.sidebar a i{
+
+    width:26px;
+
+    text-align:center;
+
+    font-size:18px;
+
+}
+
+/* Hover */
+
+.sidebar a:hover{
+
+    background:white;
+
+    color:#243B8F;
+
+    transform:translateX(6px);
+
+}
+
+/* Active */
+
+.sidebar a.active{
+
+    background:white;
+
+    color:#243B8F;
+
+    font-weight:600;
+
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+.sidebar-footer{
+
+    padding:18px;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+}
+
+.sidebar-footer a{
+
+    margin-bottom:0;
+
+}
+
+/* ==========================
+   MAIN CONTENT
+========================== */
+
+.main-content{
+
+    margin-left:280px;
+
+    transition:.35s ease;
+
+    min-height:100vh;
+
+}
+
+.main-content.expanded{
+
+    margin-left:0;
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    transform:translateX(-280px);
+
+}
+
+.sidebar.mobile-open{
+
+    transform:translateX(0);
+
+}
+
+.main-content{
+
+    margin-left:0;
+
+}
+
+}
+
+/* ==========================
+   SMOOTH ANIMATION
+========================== */
+
+.sidebar,
+.main-content{
+
+    transition:all .35s ease;
+
+}
+
+/* ==========================================================
+   Finance Analytics Platform TOP NAVBAR
+   Part 3
+========================================================== */
+
+/* ==========================
+   TOP NAVBAR
+========================== */
+
+.top-navbar{
+
+    height:75px;
+
+    background:#f4f7fc;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 30px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:500;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+/* ==========================
+   LEFT
+========================== */
+
+.navbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+/* ==========================
+   HAMBURGER
+========================== */
+
+.menu-btn{
+
+    width:50px;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#243B8F;
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.30s;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.menu-btn:hover{
+
+    background:#182C72;
+
+    transform:rotate(90deg);
+
+}
+
+/* ==========================
+   TITLE
+========================== */
+
+.navbar-title h4{
+
+    margin:0;
+
+    color:#243B8F;
+
+    font-weight:700;
+
+    font-size:24px;
+
+}
+
+.navbar-title small{
+
+    color:#6b7280;
+
+    font-size:13px;
+
+}
+
+/* ==========================
+   RIGHT
+========================== */
+
+.navbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+}
+
+/* ==========================
+   NOTIFICATION BUTTON
+========================== */
+
+.notification-btn{
+
+    position:relative;
+
+    width:50px;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#243B8F;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+
+    transition:.30s;
+
+}
+
+.notification-btn:hover{
+
+    background:#eef4ff;
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================
+   NOTIFICATION BADGE
+========================== */
+
+.notification-badge{
+
+    position:absolute;
+
+    top:-5px;
+
+    right:-5px;
+
+    min-width:20px;
+
+    height:20px;
+
+    padding:2px 6px;
+
+    border-radius:50px;
+
+    background:#ef4444;
+
+    color:white;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    animation:pulse 1.8s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.18);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ==========================
+   DATE BOX
+========================== */
+
+.date-box{
+
+    text-align:right;
+
+}
+
+.date-box small{
+
+    color:#6b7280;
+
+    font-size:13px;
+
+}
+
+.date-box h6{
+
+    margin:0;
+
+    color:#243B8F;
+
+    font-weight:600;
+
+    font-size:15px;
+
+}
+
+/* ==========================
+   DROPDOWN
+========================== */
+
+.dropdown-menu{
+
+    width:340px;
+
+    border:none;
+
+    border-radius:16px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+    overflow:hidden;
+
+}
+
+.dropdown-item{
+
+    padding:14px 18px;
+
+    transition:.25s;
+
+}
+
+.dropdown-item:hover{
+
+    background:#eef4ff;
+
+}
+
+/* ==========================
+   PAGE CONTENT
+========================== */
+
+.page-content{
+
+    padding:30px;
+
+    min-height:calc(100vh - 75px);
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:992px){
+
+.top-navbar{
+
+    padding:15px;
+
+}
+
+.navbar-title h4{
+
+    font-size:19px;
+
+}
+
+.navbar-title small{
+
+    display:none;
+
+}
+
+.navbar-right{
+
+    gap:12px;
+
+}
+
+.notification-btn{
+
+    width:45px;
+
+    height:45px;
+
+}
+
+.menu-btn{
+
+    width:45px;
+
+    height:45px;
+
+}
+
+.date-box{
+
+    display:none;
+
+}
+
+.dropdown-menu{
+
+    width:280px;
+
+}
+
+.page-content{
+
+    padding:18px;
+
+}
+
+}
+
+/* ==========================================================
+   Finance Analytics Platform FINAL POLISH
+   Part 4
+========================================================== */
+
+/* ==========================
+   DASHBOARD CARDS
+========================== */
+
+.card{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+.card-header{
+
+    font-weight:600;
+
+    border:none;
+
+    padding:16px 22px;
+
+}
+
+.card-body{
+
+    padding:22px;
+
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+.btn{
+
+    border-radius:12px;
+
+    transition:.30s;
+
+    font-weight:500;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.btn-primary{
+
+    background:#243B8F;
+
+    border:none;
+
+}
+
+.btn-primary:hover{
+
+    background:#1a2d6b;
+
+}
+
+.btn-success{
+
+    border:none;
+
+}
+
+.btn-danger{
+
+    border:none;
+
+}
+
+.btn-warning{
+
+    border:none;
+
+}
+
+.btn-info{
+
+    border:none;
+
+}
+
+/* ==========================
+   TABLES
+========================== */
+
+.table{
+
+    margin-bottom:0;
+
+    vertical-align:middle;
+
+}
+
+.table thead{
+
+    background:#243B8F;
+
+    color:white;
+
+}
+
+.table thead th{
+
+    border:none;
+
+    padding:15px;
+
+}
+
+.table td{
+
+    padding:14px;
+
+    vertical-align:middle;
+
+}
+
+.table tbody tr{
+
+    transition:.25s;
+
+}
+
+.table tbody tr:hover{
+
+    background:#eef4ff;
+
+}
+
+/* ==========================
+   FORMS
+========================== */
+
+.form-control,
+
+.form-select{
+
+    border-radius:12px;
+
+    border:1px solid #d7def2;
+
+    min-height:48px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.form-control:focus,
+
+.form-select:focus{
+
+    border-color:#243B8F;
+
+    box-shadow:0 0 0 .15rem rgba(36,59,143,.18);
+
+}
+
+textarea.form-control{
+
+    min-height:120px;
+
+}
+
+/* ==========================
+   BADGES
+========================== */
+
+.badge{
+
+    border-radius:30px;
+
+    padding:8px 12px;
+
+    font-size:12px;
+
+}
+
+/* ==========================
+   ALERTS
+========================== */
+
+.alert{
+
+    border:none;
+
+    border-radius:15px;
+
+}
+
+/* ==========================
+   PROGRESS BAR
+========================== */
+
+.progress{
+
+    height:12px;
+
+    border-radius:30px;
+
+}
+
+.progress-bar{
+
+    border-radius:30px;
+
+}
+
+/* ==========================
+   DASHBOARD STATS
+========================== */
+
+.stat-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    transition:.30s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+/* ==========================
+   ICON CIRCLE
+========================== */
+
+.icon-circle{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:24px;
+
+}
+
+/* ==========================
+   PAGE TITLES
+========================== */
+
+.page-title{
+
+    font-weight:700;
+
+    color:#243B8F;
+
+}
+
+.page-subtitle{
+
+    color:#6b7280;
+
+}
+
+/* ==========================
+   FADE ANIMATION
+========================== */
+
+.page-content{
+
+    animation:fadePage .45s ease;
+
+}
+
+@keyframes fadePage{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================
+   HOVER EFFECTS
+========================== */
+
+a{
+
+    transition:.30s;
+
+}
+
+img{
+
+    transition:.30s;
+
+}
+
+img:hover{
+
+    transform:scale(1.02);
+
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+footer{
+
+    color:#6b7280;
+
+    font-size:14px;
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+.page-content{
+
+    padding:15px;
+
+}
+
+.card-body{
+
+    padding:18px;
+
+}
+
+.table{
+
+    font-size:14px;
+
+}
+
+.btn{
+
+    font-size:14px;
+
+}
+
+}
+
+
+/* =====================================================
+   GLOBAL DARK MODE
+===================================================== */
+
+body.dark-mode{
+    background:#111827 !important;
+    color:#f8fafc !important;
+}
+
+/* Main Content */
+
+body.dark-mode .main-content,
+body.dark-mode .page-content{
+    background:#111827 !important;
+    color:#f8fafc !important;
+}
+
+/* Navbar */
+
+body.dark-mode .top-navbar{
+    background:#1e293b !important;
+    color:white !important;
+}
+
+/* Sidebar */
+
+body.dark-mode .sidebar{
+    background:#0f172a !important;
+}
+
+body.dark-mode .sidebar a{
+    color:white !important;
+}
+
+body.dark-mode .sidebar h3,
+body.dark-mode .sidebar small{
+    color:white !important;
+}
+
+/* Cards */
+
+body.dark-mode .card{
+    background:#1e293b !important;
+    color:white !important;
+    border:none !important;
+}
+
+body.dark-mode .card-body{
+    color:white !important;
+}
+
+body.dark-mode .card-title{
+    color:white !important;
+}
+
+body.dark-mode .card-text{
+    color:#e5e7eb !important;
+}
+
+/* Headings */
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6{
+    color:white !important;
+}
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode label,
+body.dark-mode small,
+body.dark-mode strong{
+    color:#f1f5f9 !important;
+}
+
+/* Tables */
+
+body.dark-mode table{
+    background:#1e293b !important;
+    color:white !important;
+}
+
+body.dark-mode th{
+    background:#0f172a !important;
+    color:white !important;
+}
+
+body.dark-mode td{
+    color:white !important;
+}
+
+body.dark-mode tr{
+    border-color:#334155 !important;
+}
+
+/* Bootstrap Table */
+
+body.dark-mode .table{
+    color:white !important;
+}
+
+body.dark-mode .table-striped>tbody>tr:nth-of-type(odd){
+    background:#243244 !important;
+}
+
+/* Forms */
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select{
+
+    background:#374151 !important;
+    color:white !important;
+    border:1px solid #4b5563 !important;
+
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder{
+
+    color:#cbd5e1 !important;
+
+}
+
+body.dark-mode .form-control{
+
+    background:#374151 !important;
+    color:white !important;
+
+}
+
+body.dark-mode .form-select{
+
+    background:#374151 !important;
+    color:white !important;
+
+}
+
+/* Dropdown */
+
+body.dark-mode .dropdown-menu{
+
+    background:#1f2937 !important;
+    color:white !important;
+
+}
+
+body.dark-mode .dropdown-item{
+
+    color:white !important;
+
+}
+
+body.dark-mode .dropdown-item:hover{
+
+    background:#334155 !important;
+
+}
+
+/* Alerts */
+
+body.dark-mode .alert{
+
+    color:white !important;
+
+}
+
+/* Badges */
+
+body.dark-mode .badge{
+
+    color:white !important;
+
+}
+
+/* List Group */
+
+body.dark-mode .list-group-item{
+
+    background:#1e293b !important;
+    color:white !important;
+    border-color:#334155 !important;
+
+}
+
+/* Modal */
+
+body.dark-mode .modal-content{
+
+    background:#1e293b !important;
+    color:white !important;
+
+}
+
+/* Buttons */
+
+body.dark-mode .btn-light{
+
+    background:#334155 !important;
+    color:white !important;
+    border:none;
+
+}
+
+/* Progress */
+
+body.dark-mode .progress{
+
+    background:#374151 !important;
+
+}
+
+/* Horizontal Line */
+
+body.dark-mode hr{
+
+    border-color:#475569 !important;
+
+}
+
+/* Links */
+
+body.dark-mode a{
+
+    color:#93c5fd !important;
+
+}
+
+/* Smooth Animation */
+
+body,
+.card,
+.sidebar,
+.top-navbar,
+input,
+textarea,
+select{
+
+    transition:.35s;
+
+}
+
+/* ===========================================
+   DARK MODE FIX - PART 1
+=========================================== */
+
+/* Main backgrounds */
+
+body.dark-mode,
+body.dark-mode .wrapper,
+body.dark-mode .main-content,
+body.dark-mode .page-content{
+
+    background:#111827 !important;
+    color:#f8fafc !important;
+
+}
+
+/* All cards */
+
+body.dark-mode .card,
+body.dark-mode .stat-card{
+
+    background:#1e293b !important;
+
+    color:#ffffff !important;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.45);
+
+}
+
+/* Card body */
+
+body.dark-mode .card-body{
+
+    background:#1e293b !important;
+
+    color:white !important;
+
+}
+
+/* Card header */
+
+body.dark-mode .card-header{
+
+    color:white !important;
+
+}
+
+/* ===========================================
+   DARK MODE FIX - PART 2
+=========================================== */
+
+/* ===================================
+   TEXT COLORS
+=================================== */
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6{
+
+    color:#ffffff !important;
+
+}
+
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode label,
+body.dark-mode small,
+body.dark-mode strong,
+body.dark-mode li{
+
+    color:#e5e7eb !important;
+
+}
+
+/* Dashboard Titles */
+
+body.dark-mode .page-title,
+body.dark-mode .page-subtitle,
+body.dark-mode .navbar-title h4,
+body.dark-mode .navbar-title small{
+
+    color:#ffffff !important;
+
+}
+
+/* ===================================
+   TABLES
+=================================== */
+
+body.dark-mode table{
+
+    background:#1e293b !important;
+
+    color:#ffffff !important;
+
+}
+
+body.dark-mode .table{
+
+    color:#ffffff !important;
+
+}
+
+body.dark-mode .table td{
+
+    color:#ffffff !important;
+
+    background:#1e293b !important;
+
+}
+
+body.dark-mode .table th{
+
+    background:#0f172a !important;
+
+    color:#ffffff !important;
+
+}
+
+body.dark-mode .table-hover tbody tr:hover{
+
+    background:#334155 !important;
+
+}
+
+/* ===================================
+   FORMS
+=================================== */
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select,
+body.dark-mode .form-control,
+body.dark-mode .form-select{
+
+    background:#374151 !important;
+
+    color:#ffffff !important;
+
+    border:1px solid #4b5563 !important;
+
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder{
+
+    color:#cbd5e1 !important;
+
+}
+
+/* Labels */
+
+body.dark-mode .form-label{
+
+    color:#ffffff !important;
+
+}
+
+/* ===================================
+   DROPDOWN
+=================================== */
+
+body.dark-mode .dropdown-menu{
+
+    background:#1f2937 !important;
+
+}
+
+body.dark-mode .dropdown-item{
+
+    color:#ffffff !important;
+
+}
+
+body.dark-mode .dropdown-item:hover{
+
+    background:#334155 !important;
+
+}
+
+/* ===================================
+   LINKS
+=================================== */
+
+body.dark-mode a{
+
+    color:#93c5fd !important;
+
+}
+
+body.dark-mode a:hover{
+
+    color:#bfdbfe !important;
+
+}
+
+/* ===========================================
+   DARK MODE FIX - PART 3
+=========================================== */
+
+/* ===================================
+   ALERTS
+=================================== */
+
+body.dark-mode .alert{
+
+    border:none !important;
+
+    color:white !important;
+
+}
+
+body.dark-mode .alert-success{
+
+    background:#14532d !important;
+
+}
+
+body.dark-mode .alert-danger{
+
+    background:#7f1d1d !important;
+
+}
+
+body.dark-mode .alert-warning{
+
+    background:#78350f !important;
+
+}
+
+body.dark-mode .alert-info{
+
+    background:#164e63 !important;
+
+}
+
+/* ===================================
+   BUTTONS
+=================================== */
+
+body.dark-mode .btn{
+
+    color:white !important;
+
+}
+
+body.dark-mode .btn-light{
+
+    background:#334155 !important;
+
+    color:white !important;
+
+    border:none !important;
+
+}
+
+body.dark-mode .btn-outline-primary{
+
+    color:#93c5fd !important;
+
+    border-color:#3b82f6 !important;
+
+}
+
+body.dark-mode .btn-outline-primary:hover{
+
+    background:#2563eb !important;
+
+    color:white !important;
+
+}
+
+/* ===================================
+   BADGES
+=================================== */
+
+body.dark-mode .badge{
+
+    color:white !important;
+
+}
+
+/* ===================================
+   PROGRESS BAR
+=================================== */
+
+body.dark-mode .progress{
+
+    background:#374151 !important;
+
+}
+
+body.dark-mode .progress-bar{
+
+    color:white !important;
+
+}
+
+/* ===================================
+   MODAL
+=================================== */
+
+body.dark-mode .modal-content{
+
+    background:#1f2937 !important;
+
+    color:white !important;
+
+}
+
+body.dark-mode .modal-header{
+
+    border-color:#334155 !important;
+
+}
+
+body.dark-mode .modal-footer{
+
+    border-color:#334155 !important;
+
+}
+
+/* ===================================
+   LIST GROUP
+=================================== */
+
+body.dark-mode .list-group-item{
+
+    background:#1f2937 !important;
+
+    color:white !important;
+
+    border-color:#374151 !important;
+
+}
+
+/* ===================================
+   ACCORDION
+=================================== */
+
+body.dark-mode .accordion-item{
+
+    background:#1f2937 !important;
+
+    color:white !important;
+
+}
+
+body.dark-mode .accordion-button{
+
+    background:#1f2937 !important;
+
+    color:white !important;
+
+}
+
+body.dark-mode .accordion-button:not(.collapsed){
+
+    background:#334155 !important;
+
+    color:white !important;
+
+}
+
+/* ===================================
+   NAV TABS
+=================================== */
+
+body.dark-mode .nav-tabs{
+
+    border-color:#374151 !important;
+
+}
+
+body.dark-mode .nav-tabs .nav-link{
+
+    color:#e5e7eb !important;
+
+}
+
+body.dark-mode .nav-tabs .nav-link.active{
+
+    background:#334155 !important;
+
+    color:white !important;
+
+}
+
+/* ===================================
+   AI DASHBOARD TABLES
+=================================== */
+
+body.dark-mode canvas{
+
+    background:transparent !important;
+
+}
+
+/* ===================================
+   NOTIFICATION CARDS
+=================================== */
+
+body.dark-mode .notification-card{
+
+    background:#1f2937 !important;
+
+    color:white !important;
+
+}
+
+/* ===================================
+   AI ANALYTICS BOXES
+=================================== */
+
+body.dark-mode .ai-card,
+body.dark-mode .analytics-card,
+body.dark-mode .prediction-card{
+
+    background:#1f2937 !important;
+
+    color:white !important;
+
+}
+
+/* ===========================================
+   DARK MODE FIX - PART 4
+   Premium Finish
+=========================================== */
+
+/* ===============================
+   Smooth Transition
+=============================== */
+
+*,
+*::before,
+*::after{
+
+    transition:
+        background-color .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+
+}
+
+/* ===============================
+   Sidebar
+=============================== */
+
+body.dark-mode .sidebar{
+
+    background:linear-gradient(180deg,#0f172a,#1e293b) !important;
+
+}
+
+body.dark-mode .sidebar a:hover{
+
+    background:#2563eb !important;
+
+    color:white !important;
+
+}
+
+/* ===============================
+   Navbar
+=============================== */
+
+body.dark-mode .top-navbar{
+
+    border-bottom:1px solid #334155;
+
+}
+
+/* ===============================
+   Cards Hover
+=============================== */
+
+.card{
+
+    transition:.30s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 14px 35px rgba(0,0,0,.18);
+
+}
+
+body.dark-mode .card:hover{
+
+    box-shadow:0 14px 35px rgba(0,0,0,.55);
+
+}
+
+/* ===============================
+   Scrollbar
+=============================== */
+
+body.dark-mode::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+body.dark-mode::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+
+body.dark-mode::-webkit-scrollbar-thumb{
+
+    background:#475569;
+
+    border-radius:10px;
+
+}
+
+body.dark-mode::-webkit-scrollbar-thumb:hover{
+
+    background:#64748b;
+
+}
+
+/* ===============================
+   Sidebar Scrollbar
+=============================== */
+
+body.dark-mode .sidebar::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+body.dark-mode .sidebar::-webkit-scrollbar-thumb{
+
+    background:#64748b;
+
+}
+
+/* ===============================
+   Notification Badge
+=============================== */
+
+body.dark-mode .notification-badge{
+
+    border:2px solid #111827;
+
+}
+
+/* ===============================
+   Chart Container
+=============================== */
+
+body.dark-mode canvas{
+
+    border-radius:10px;
+
+}
+
+/* ===============================
+   Date Box
+=============================== */
+
+body.dark-mode .date-box{
+
+    color:white;
+
+}
+
+/* ===============================
+   Footer
+=============================== */
+
+body.dark-mode footer{
+
+    background:#0f172a;
+
+    color:white;
+
+}
+
+/* ===============================
+   AI Insight Cards
+=============================== */
+
+body.dark-mode .alert{
+
+    border-left:5px solid #60a5fa;
+
+}
+
+/* ===============================
+   Success Cards
+=============================== */
+
+body.dark-mode .bg-success{
+
+    background:#166534 !important;
+
+}
+
+/* ===============================
+   Danger Cards
+=============================== */
+
+body.dark-mode .bg-danger{
+
+    background:#991b1b !important;
+
+}
+
+/* ===============================
+   Warning Cards
+=============================== */
+
+body.dark-mode .bg-warning{
+
+    background:#a16207 !important;
+
+    color:white !important;
+
+}
+
+/* ===============================
+   Info Cards
+=============================== */
+
+body.dark-mode .bg-info{
+
+    background:#155e75 !important;
+
+}
+
+/* ===============================
+   Primary Cards
+=============================== */
+
+body.dark-mode .bg-primary{
+
+    background:#1d4ed8 !important;
+
+}
+
+/* ===============================
+   Text Utilities
+=============================== */
+
+body.dark-mode .text-muted{
+
+    color:#cbd5e1 !important;
+
+}
+
+body.dark-mode .text-dark{
+
+    color:white !important;
+
+}
+
+body.dark-mode .text-black{
+
+    color:white !important;
+
+}
+
+/* ===============================
+   Icons
+=============================== */
+
+body.dark-mode i{
+
+    color:inherit;
+
+}
+
+/* ===============================
+   Final Polish
+=============================== */
+
+body.dark-mode{
+
+    background:#111827;
+
+    color:#f8fafc;
+
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.site-footer{
+
+    width:100%;
+
+    background:#152238;
+
+    color:white;
+
+    text-align:center;
+
+    padding:18px;
+
+    margin-top:40px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    letter-spacing:.3px;
+
+    border-top:2px solid rgba(255,255,255,.08);
+
+}
+
+body.light{
+
+background:#f4f7fb;
+
+color:#1f2937;
+
+}
+
+body.dark{
+
+background:#121212;
+
+color:#ffffff;
+
+}
+
+body.dark .card{
+
+background:#1f2937;
+
+color:white;
+
+}
+
+body.dark .sidebar{
+
+background:#111827;
+
+}
+
+body.dark .navbar{
+
+background:#1f2937;
+
+}
+
+body.dark table{
+
+color:white;
+
+}
+
+body.dark input,
+
+body.dark select,
+
+body.dark textarea{
+
+background:#374151;
+
+color:white;
+
+border:1px solid #4b5563;
+
+}
+
+body.dark .form-control{
+
+background:#374151;
+
+color:white;
+
+}
+
+body.dark .table{
+
+color:white;
+
+}
+
+body.blue{
+
+background:#eef6ff;
+
+}
+
+body.blue .sidebar{
+
+background:#1e40af;
+
+}
+
+body.blue .navbar{
+
+background:#2563eb;
+
+}
+
+body.blue .card{
+
+background:white;
+
+}
+
+body.purple{
+
+background:#f5efff;
+
+}
+
+body.purple .sidebar{
+
+background:#6d28d9;
+
+}
+
+body.purple .navbar{
+
+background:#7c3aed;
+
+}
+
+body.purple .card{
+
+background:white;
+
+}
+
+/* =========================================================
+   SMART FINANCIAL INSIGHT CARDS
+========================================================= */
+
+.smart-insight-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+
+/* CARD */
+
+.finance-insight-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e8edf5;
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.finance-insight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.13);
+}
+
+
+/* TITLE */
+
+.insight-card-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #203b8f;
+    letter-spacing: 0.5px;
+    margin-bottom: 22px;
+}
+
+.insight-title-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+}
+
+.goal-icon {
+    background: #e8f8ef;
+}
+
+.risk-icon {
+    background: #eeeaff;
+}
+
+
+/* =========================================================
+   GOAL SUMMARY
+========================================================= */
+
+.goal-summary-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.goal-statistics {
+    flex: 1;
+}
+
+.goal-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    font-size: 14px;
+    color: #475569;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.goal-stat-row:last-child {
+    border-bottom: none;
+}
+
+.goal-stat-row strong {
+    font-size: 18px;
+    color: #172554;
+}
+
+.on-track-number {
+    color: #159447 !important;
+}
+
+.behind-number {
+    color: #e63946 !important;
+}
+
+
+/* GOAL CIRCLE */
+
+.goal-circle-section {
+    text-align: center;
+    min-width: 145px;
+}
+
+.goal-progress-circle {
+    --goal-progress: 0;
+
+    width: 105px;
+    height: 105px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        conic-gradient(
+            #169447 calc(var(--goal-progress) * 1%),
+            #e8edf2 0
+        );
+
+    position: relative;
+}
+
+.goal-progress-circle::before {
+    content: "";
+
+    position: absolute;
+
+    width: 78px;
+    height: 78px;
+
+    background: white;
+
+    border-radius: 50%;
+}
+
+.goal-circle-inner {
+    position: relative;
+    z-index: 2;
+}
+
+.goal-circle-inner strong {
+    font-size: 25px;
+    color: #172554;
+}
+
+.goal-circle-section span {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+
+/* GOAL MESSAGE */
+
+.goal-insight-message {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #1e40af;
+    font-size: 13px;
+}
+
+.goal-good {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.goal-medium {
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.goal-warning {
+    background: #fff7ed;
+    color: #9a3412;
+}
+
+
+/* =========================================================
+   RISK ANALYSIS
+========================================================= */
+
+.risk-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 130px;
+}
+
+.risk-level-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.risk-label {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.risk-level-text {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+
+/* RISK COLORS */
+
+.risk-low {
+    color: #16a34a;
+}
+
+.risk-moderate {
+    color: #f59e0b;
+}
+
+.risk-high {
+    color: #dc2626;
+}
+
+
+/* =========================================================
+   RISK GAUGE
+========================================================= */
+
+.risk-gauge {
+    width: 160px;
+    height: 80px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 160px 160px 0 0;
+
+    background:
+        conic-gradient(
+            from 270deg at 50% 100%,
+            #22c55e 0deg 60deg,
+            #facc15 60deg 120deg,
+            #ef4444 120deg 180deg,
+            transparent 180deg
+        );
+}
+
+.gauge-cover {
+    position: absolute;
+
+    width: 105px;
+    height: 53px;
+
+    background: white;
+
+    left: 27px;
+    bottom: 0;
+
+    border-radius: 105px 105px 0 0;
+}
+
+.gauge-needle {
+    position: absolute;
+
+    width: 62px;
+    height: 4px;
+
+    background: #172554;
+
+    left: 80px;
+    bottom: 0;
+
+    transform-origin: left center;
+
+    border-radius: 4px;
+
+    z-index: 5;
+}
+
+
+/* NEEDLE POSITIONS */
+
+.gauge-needle.risk-low {
+    transform: rotate(205deg);
+}
+
+.gauge-needle.risk-moderate {
+    transform: rotate(230deg);
+}
+
+.gauge-needle.risk-high {
+    transform: rotate(260deg);
+}
+
+.gauge-center {
+    position: absolute;
+
+    width: 14px;
+    height: 14px;
+
+    background: #172554;
+
+    border-radius: 50%;
+
+    left: 73px;
+    bottom: -1px;
+
+    z-index: 6;
+}
+
+
+/* =========================================================
+   DIVERSIFICATION
+========================================================= */
+
+.diversification-section {
+    margin-top: 8px;
+}
+
+.diversification-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+    color: #475569;
+}
+
+.diversification-header strong {
+    font-size: 18px;
+    color: #172554;
+}
+
+.diversification-progress {
+    height: 9px;
+
+    background: #e5e7eb;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.diversification-progress-fill {
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #16a34a
+        );
+
+    border-radius: 10px;
+
+    transition: width 0.8s ease;
+}
+
+.risk-insight {
+    margin-top: 16px;
+
+    padding: 11px 13px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+}
+
+.risk-good {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.risk-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.risk-warning {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .smart-insight-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 520px) {
+
+    .goal-summary-content {
+        flex-direction: column;
+    }
+
+    .risk-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+}
+
+/* =========================================================
+   DASHBOARD MODULE 4 CARDS - DARK MODE FIX
+   Goal Summary + Risk Analysis
+========================================================= */
+
+body.dark-mode .goal-summary-card,
+body.dark-mode .risk-analysis-card {
+    background: #1e2a3d !important;
+    border: 1px solid #334155 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+}
+
+
+/* =========================================================
+   CARD HEADINGS
+========================================================= */
+
+body.dark-mode .goal-summary-card h3,
+body.dark-mode .risk-analysis-card h3,
+body.dark-mode .goal-summary-card h4,
+body.dark-mode .risk-analysis-card h4 {
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   NORMAL TEXT
+========================================================= */
+
+body.dark-mode .goal-summary-card p,
+body.dark-mode .risk-analysis-card p,
+body.dark-mode .goal-summary-card span,
+body.dark-mode .risk-analysis-card span {
+    color: #dbe4f0 !important;
+}
+
+
+/* =========================================================
+   SUMMARY LABELS
+========================================================= */
+
+body.dark-mode .goal-summary-card .summary-label,
+body.dark-mode .risk-analysis-card .summary-label {
+    color: #aebed3 !important;
+}
+
+
+/* =========================================================
+   SUMMARY VALUES
+========================================================= */
+
+body.dark-mode .goal-summary-card .summary-value,
+body.dark-mode .risk-analysis-card .summary-value {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+
+/* =========================================================
+   DIVIDER LINES
+========================================================= */
+
+body.dark-mode .goal-summary-card hr,
+body.dark-mode .risk-analysis-card hr {
+    border-color: #40506a !important;
+    opacity: 1 !important;
+}
+
+
+/* =========================================================
+   PROGRESS BAR BACKGROUND
+========================================================= */
+
+body.dark-mode .goal-summary-card .progress,
+body.dark-mode .risk-analysis-card .progress {
+    background: #334155 !important;
+}
+
+
+/* =========================================================
+   GOAL SUMMARY CIRCLE
+========================================================= */
+
+body.dark-mode .goal-progress-circle {
+    background: conic-gradient(
+        #16a34a var(--progress),
+        #334155 0
+    ) !important;
+}
+
+body.dark-mode .goal-progress-circle::before {
+    background: #1e2a3d !important;
+}
+
+
+/* =========================================================
+   GOAL PROGRESS VALUE
+========================================================= */
+
+body.dark-mode .goal-progress-value {
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   GOAL PROGRESS LABEL
+========================================================= */
+
+body.dark-mode .goal-progress-label {
+    color: #aebed3 !important;
+}
+
+
+/* =========================================================
+   GOAL TIP BOX
+========================================================= */
+
+body.dark-mode .goal-tip {
+    background: #3b3020 !important;
+    color: #fcd34d !important;
+    border: 1px solid #66512b !important;
+}
+
+
+/* =========================================================
+   RISK LEVEL
+========================================================= */
+
+body.dark-mode .risk-level,
+body.dark-mode .risk-level-value {
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   DIVERSIFICATION SCORE
+========================================================= */
+
+body.dark-mode .diversification-score,
+body.dark-mode .risk-score {
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   RISK WARNING BOX
+========================================================= */
+
+body.dark-mode .risk-warning {
+    background: #45252a !important;
+    color: #fca5a5 !important;
+    border: 1px solid #71343c !important;
+}
+
+
+/* =========================================================
+   FORCE BOOTSTRAP CARD DARK MODE
+   ONLY INSIDE DASHBOARD MODULE 4 CARDS
+========================================================= */
+
+body.dark-mode .goal-summary-card.card,
+body.dark-mode .risk-analysis-card.card {
+    background-color: #1e2a3d !important;
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   CARD HOVER EFFECT
+========================================================= */
+
+body.dark-mode .goal-summary-card:hover,
+body.dark-mode .risk-analysis-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+/*=========================================
+Dashboard Floating AI Button
+=========================================*/
+
+.dashboard-ai-btn{
+
+    position: fixed;
+
+    bottom: 30px;
+
+    right: 30px;
+
+    width: 68px;
+
+    height: 68px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(135deg,#4f46e5,#2563eb);
+
+    color: #fff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 28px;
+
+    text-decoration: none;
+
+    box-shadow: 0 10px 25px rgba(37,99,235,.45);
+
+    z-index: 9999;
+
+    transition: .3s;
+
+    animation: aiFloat 2.5s ease-in-out infinite;
+
+}
+
+.dashboard-ai-btn:hover{
+
+    transform: scale(1.1);
+
+    color:#fff;
+
+    box-shadow: 0 15px 35px rgba(37,99,235,.65);
+
+}
+
+@keyframes aiFloat{
+
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+    100%{transform:translateY(0);}
+
+}
+
+/* Dark Mode */
+
+body.dark-mode .dashboard-ai-btn{
+
+    background: linear-gradient(135deg,#6366f1,#2563eb);
+
+}
+
+
+.chart-container{
+
+    width:320px;
+
+    height:320px;
+
+    margin:auto;
+
+    position:relative;
+
+}
+
+.chart-container canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+
+}
+
+.feedback-section{
+
+margin-top:50px;
+
+background:#1f2937;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+color:white;
+
+}
+
+.feedback-section h2{
+
+margin-bottom:10px;
+
+font-size:30px;
+
+}
+
+.feedback-section p{
+
+color:#cbd5e1;
+
+margin-bottom:25px;
+
+}
+
+.feedback-section label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-weight:600;
+
+}
+
+.feedback-section input,
+
+.feedback-section textarea,
+
+.feedback-section select{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#111827;
+
+color:white;
+
+margin-bottom:20px;
+
+outline:none;
+
+}
+
+.feedback-section input:focus,
+
+.feedback-section textarea:focus,
+
+.feedback-section select:focus{
+
+border:2px solid #3b82f6;
+
+}
+
+.feedback-section button{
+
+background:linear-gradient(90deg,#2563eb,#4f46e5);
+
+padding:14px 35px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:17px;
+
+font-weight:600;
+
+color:white;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.feedback-section button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 8px 20px rgba(37,99,235,.4);
+
+}
+
+/* ===========================================
+   PREMIUM LIGHT MODE
+=========================================== */
+
+body.light-mode{
+
+    background:#f4f7fc;
+
+    color:#1e293b;
+
+}
+
+/* Main Content */
+
+body.light-mode .main-content{
+
+    background:#f4f7fc;
+
+}
+
+/* Dashboard Cards */
+
+body.light-mode .dashboard-card,
+body.light-mode .summary-card,
+body.light-mode .card,
+body.light-mode .dashboard-widget{
+
+    background:#f4f7fc;
+
+    color:#1e293b;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+/* Tables */
+
+body.light-mode table{
+
+    background:#f4f7fc;
+
+}
+
+body.light-mode th{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+body.light-mode td{
+
+    color:#374151;
+
+    border-color:#e5e7eb;
+
+}
+
+/* Headings */
+
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4{
+
+    color:#1e293b;
+
+}
+
+/* Paragraph */
+
+body.light-mode p{
+
+    color:#475569;
+
+}
+
+/* Sidebar */
+
+body.light-mode .sidebar{
+
+    background:#f4f7fc;
+
+    border-right:1px solid #dbeafe;
+
+}
+
+body.light-mode .sidebar a{
+
+    color:#334155;
+
+}
+
+body.light-mode .sidebar a:hover{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+/* Navbar */
+
+body.light-mode .topbar,
+body.light-mode .navbar{
+
+    background:white;
+
+    color:#1e293b;
+
+    border-bottom:1px solid #dbeafe;
+
+}
+
+/* Inputs */
+
+body.light-mode input,
+body.light-mode textarea,
+body.light-mode select{
+
+    background:white;
+
+    color:#1e293b;
+
+    border:1px solid #cbd5e1;
+
+}
+
+/* Progress */
+
+body.light-mode .progress{
+
+    background:#e2e8f0;
+
+}
+
+/* Chart Card */
+
+body.light-mode .chart-card{
+
+    background:white;
+
+}
+
+/* Notifications */
+
+body.light-mode .notification{
+
+    background:#f4f7fc;
+
+    color:#1e293b;
+
+}
+
+/* AI Cards */
+
+body.light-mode .ai-card{
+
+    background:white;
+
+}
+
+/* Financial Score */
+
+body.light-mode .financial-score{
+
+    background:white;
+
+}
+
+/* Recent Transactions */
+
+body.light-mode .recent-transactions{
+
+    background:white;
+
+}
+
+/* Quick Actions */
+
+body.light-mode .quick-actions{
+
+    background:white;
+
+}
+
+/* ==========================================
+   DASHBOARD WELCOME SECTION FIX
+========================================== */
+
+body.light-mode .container-fluid h2{
+    color:#1e293b !important;
+}
+
+body.light-mode .container-fluid p.text-muted{
+    color:#64748b !important;
+}
+
+body.light-mode .container-fluid{
+    background:transparent !important;
+}
+
+.dashboard-welcome{
+    margin-bottom:30px;
+}
+
+.dashboard-welcome h2{
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.dashboard-welcome p{
+    font-size:16px;
+}
+
+/* Light Mode */
+
+body.light-mode .dashboard-welcome h2{
+    color:#1e293b !important;
+}
+
+body.light-mode .dashboard-welcome p{
+    color:#64748b !important;
+}
+
+/* Dark Mode */
+
+body.dark-mode .dashboard-welcome h2{
+    color:#ffffff !important;
+}
+
+body.dark-mode .dashboard-welcome p{
+    color:#cbd5e1 !important;
+}
+
+/* ==========================================================
+   REPORT PAGE FIX
+========================================================== */
+
+.ai-summary-card{
+    background:#1e293b !important;
+    color:#ffffff !important;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
+    margin-bottom:25px;
+}
+
+.ai-summary-card h3,
+.ai-summary-card h4,
+.ai-summary-card h5,
+.ai-summary-card h6{
+    color:#60a5fa !important;
+}
+
+.ai-summary-card p,
+.ai-summary-card li,
+.ai-summary-card span,
+.ai-summary-card strong,
+.ai-summary-card small{
+    color:#e5e7eb !important;
+}
+
+.ai-summary-card ul{
+    padding-left:20px;
+}
+
+.report-kpi-card{
+    background:#1f2937 !important;
+    color:#ffffff !important;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.report-kpi-card:hover{
+    transform:translateY(-5px);
+}
+
+.report-kpi-card h2{
+    color:#ffffff !important;
+    font-weight:700;
+}
+
+.report-kpi-card h5{
+    color:#94a3b8 !important;
+}
+
+.report-kpi-card small{
+    color:#cbd5e1 !important;
+}
+
+/* ==========================================================
+   TRANSACTION COUNT BADGE
+========================================================== */
+
+.transaction-badge{
+
+    display:inline-block;
+
+    padding:10px 18px;
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    border-radius:50px;
+
+    letter-spacing:.4px;
+
+    box-shadow:0 6px 18px rgba(37,99,235,.35);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    transition:.3s;
+
+}
+
+.transaction-badge:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(37,99,235,.45);
+
+}
+
+/* ==========================================
+   REPORT QUICK SUMMARY
+========================================== */
+
+.report-summary-box{
+
+    background:#1f2937;
+    border:1px solid #334155;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+}
+
+.report-summary-box .row{
+
+    align-items:center;
+
+}
+
+.report-summary-box .col-md-2{
+
+    text-align:center;
+
+    border-right:1px solid rgba(255,255,255,.08);
+
+}
+
+.report-summary-box .col-md-2:last-child{
+
+    border-right:none;
+
+}
+
+.report-summary-box strong{
+
+    color:#60a5fa;
+    display:block;
+    margin-bottom:8px;
+    font-size:15px;
+    font-weight:700;
+
+}
+
+.report-summary-box{
+
+    color:#ffffff;
+    font-size:18px;
+    font-weight:600;
+
+}
+
+.report-summary-box:hover{
+
+    transform:translateY(-2px);
+    transition:.3s ease;
+
+}

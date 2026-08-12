@@ -1,0 +1,1059 @@
+{% extends "base.html" %}
+
+{% block title %}
+AI Analytics
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- ================================= -->
+    <!-- PAGE HEADER -->
+    <!-- ================================= -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+                🤖 AI Fraud Analytics Dashboard
+            </h2>
+
+            <p class="text-muted mb-0">
+                AI-powered fraud detection and financial intelligence.
+            </p>
+
+        </div>
+
+        <span class="badge bg-success fs-6 px-3 py-2">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Live Analytics
+
+        </span>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- SUMMARY CARDS -->
+    <!-- ================================= -->
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <small class="text-muted">
+
+                        Total Transactions
+
+                    </small>
+
+                    <h2 class="fw-bold text-primary mt-2">
+
+                        {{ "{:,}".format(total_transactions) }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <small class="text-muted">
+
+                        Fraud Transactions
+
+                    </small>
+
+                    <h2 class="fw-bold text-danger mt-2">
+
+                        {{ "{:,}".format(fraud_transactions) }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <small class="text-muted">
+
+                        Genuine Transactions
+
+                    </small>
+
+                    <h2 class="fw-bold text-success mt-2">
+
+                        {{ "{:,}".format(genuine_transactions) }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <small class="text-muted">
+
+                        Fraud Rate
+
+                    </small>
+
+                    <h2 class="fw-bold text-warning mt-2">
+
+                        {{ fraud_percentage }}%
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================= -->
+    <!-- TRANSACTION STATS + AI INSIGHT -->
+    <!-- ================================= -->
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-primary text-white">
+
+                    💳 Transaction Statistics
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table">
+
+                        <tr>
+
+                            <th>Average Amount</th>
+
+                            <td>₹{{ average_amount }}</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>Highest Amount</th>
+
+                            <td>₹{{ highest_amount }}</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>Lowest Amount</th>
+
+                            <td>₹{{ lowest_amount }}</td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-success text-white">
+
+                    🤖 AI Insight
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if fraud_percentage < 1 %}
+
+                    <div class="alert alert-success">
+
+                        ✅ Excellent! Fraud level is extremely low.
+
+                    </div>
+
+                    {% elif fraud_percentage < 5 %}
+
+                    <div class="alert alert-warning">
+
+                        ⚠ Moderate fraud detected.
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="alert alert-danger">
+
+                        🚨 High fraud detected.
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- ================================= -->
+<!-- FINANCIAL HEALTH + NOTIFICATIONS -->
+<!-- ================================= -->
+
+<div class="row g-4 mb-4">
+
+    <!-- Financial Health -->
+
+    <div class="col-lg-4">
+
+        <div class="card border-0 shadow rounded-4 h-100">
+
+            <div class="card-header bg-success text-white fw-bold">
+
+                ❤️ Financial Health Score
+
+            </div>
+
+            <div class="card-body text-center">
+
+                {% if savings > 50000 %}
+
+                    {% set score = 100 %}
+
+                {% elif savings > 30000 %}
+
+                    {% set score = 90 %}
+
+                {% elif savings > 15000 %}
+
+                    {% set score = 75 %}
+
+                {% elif savings > 5000 %}
+
+                    {% set score = 60 %}
+
+                {% else %}
+
+                    {% set score = 40 %}
+
+                {% endif %}
+
+                <h1 class="display-1 fw-bold text-success">
+
+                    {{ score }}
+
+                </h1>
+
+                <h3>/100</h3>
+
+                <span class="badge bg-success px-4 py-2 fs-6">
+
+                    {% if score >= 90 %}
+                        Excellent
+                    {% elif score >= 70 %}
+                        Good
+                    {% elif score >= 50 %}
+                        Average
+                    {% else %}
+                        Poor
+                    {% endif %}
+
+                </span>
+
+                <hr>
+
+                <p class="text-muted">
+
+                    Your financial health is calculated using your
+                    savings, expenses and spending behaviour.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Smart Notifications -->
+
+    <div class="col-lg-4">
+
+        <div class="card border-0 shadow rounded-4 h-100">
+
+            <div class="card-header bg-warning fw-bold">
+
+                🔔 Smart Notifications
+
+            </div>
+
+            <div class="card-body">
+
+                {% if smart_notifications %}
+
+                    {% for n in smart_notifications %}
+
+                        <div class="alert alert-light border-start border-5 border-warning mb-3">
+
+                            <strong>
+
+                                {{ n.title }}
+
+                            </strong>
+
+                            <br>
+
+                            <small>
+
+                                {{ n.message }}
+
+                            </small>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="text-center py-4">
+
+                        <h1>
+
+                            🔔
+
+                        </h1>
+
+                        <p class="text-muted">
+
+                            No smart notifications available.
+
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- AI Prediction -->
+
+    <div class="col-lg-4">
+
+        <div class="card border-0 shadow rounded-4 h-100">
+
+            <div class="card-header bg-primary text-white fw-bold">
+
+                🤖 AI Prediction
+
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-borderless">
+
+                    <tr>
+
+                        <td>Income</td>
+
+                        <td class="fw-bold text-end">
+
+                            ₹{{ "{:,.0f}".format(income) }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Expense</td>
+
+                        <td class="fw-bold text-end text-danger">
+
+                            ₹{{ "{:,.0f}".format(expense) }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Savings</td>
+
+                        <td class="fw-bold text-end text-success">
+
+                            ₹{{ "{:,.0f}".format(savings) }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Saving Rate</td>
+
+                        <td class="fw-bold text-end">
+
+                            {% if income > 0 %}
+
+                                {{ "%.1f"|format((savings/income)*100) }}%
+
+                            {% else %}
+
+                                0%
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <hr>
+
+                {% if savings > 50000 %}
+
+                    <div class="alert alert-success mb-0">
+
+                        💰 Excellent saving trend.
+
+                    </div>
+
+                {% elif savings > 10000 %}
+
+                    <div class="alert alert-warning mb-0">
+
+                        📈 Savings are good but can improve.
+
+                    </div>
+
+                {% else %}
+
+                    <div class="alert alert-danger mb-0">
+
+                        🚨 High spending detected.
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- TOP FRAUD CATEGORIES -->
+<!-- ================================= -->
+
+<div class="card border-0 shadow rounded-4 mb-4">
+
+    <div class="card-header bg-dark text-white fw-bold">
+
+        🛒 Top Fraud Categories
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Category</th>
+
+                        <th>Fraud Cases</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for i in range(categories|length) %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ loop.index }}
+
+                        </td>
+
+                        <td>
+
+                            {{ categories[i] }}
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-danger">
+
+                                {{ category_counts[i] }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- TOP FRAUD STATES -->
+<!-- ================================= -->
+
+<div class="card border-0 shadow rounded-4 mb-4">
+
+    <div class="card-header bg-info text-white fw-bold">
+
+        🌍 Top Fraud States
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>State</th>
+
+                        <th>Fraud Cases</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for i in range(states|length) %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ loop.index }}
+
+                        </td>
+
+                        <td>
+
+                            {{ states[i] }}
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-primary">
+
+                                {{ state_counts[i] }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- AI SUMMARY -->
+<!-- ================================= -->
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-3">
+
+        <div class="card border-0 shadow rounded-4 text-center">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+
+                    Highest Fraud State
+
+                </h6>
+
+                <h3 class="text-danger fw-bold">
+
+                    {{ highest_state }}
+
+                </h3>
+
+                <small>
+
+                    {{ highest_state_count }} Cases
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card border-0 shadow rounded-4 text-center">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+
+                    Highest Fraud Category
+
+                </h6>
+
+                <h3 class="text-primary fw-bold">
+
+                    {{ highest_category }}
+
+                </h3>
+
+                <small>
+
+                    {{ highest_category_count }} Cases
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card border-0 shadow rounded-4 text-center">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+
+                    Fraud Rate
+
+                </h6>
+
+                <h2 class="text-warning fw-bold">
+
+                    {{ fraud_percentage }}%
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card border-0 shadow rounded-4 text-center">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+
+                    AI Risk Level
+
+                </h6>
+
+                {% if fraud_percentage < 1 %}
+
+                    <h2 class="text-success">
+
+                        LOW
+
+                    </h2>
+
+                {% elif fraud_percentage < 5 %}
+
+                    <h2 class="text-warning">
+
+                        MEDIUM
+
+                    </h2>
+
+                {% else %}
+
+                    <h2 class="text-danger">
+
+                        HIGH
+
+                    </h2>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- CHARTS -->
+<!-- ================================= -->
+
+<div class="row g-4">
+
+    <!-- Fraud vs Genuine -->
+
+    <div class="col-lg-6">
+
+        <div class="card border-0 shadow rounded-4">
+
+            <div class="card-header bg-danger text-white fw-bold">
+
+                📊 Fraud vs Genuine
+
+            </div>
+
+            <div class="card-body">
+
+                <div style="height:350px;">
+
+                    <canvas id="fraudPie"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Category Chart -->
+
+    <div class="col-lg-6">
+
+        <div class="card border-0 shadow rounded-4">
+
+            <div class="card-header bg-primary text-white fw-bold">
+
+                🛒 Fraud Categories
+
+            </div>
+
+            <div class="card-body">
+
+                <div style="height:350px;">
+
+                    <canvas id="categoryChart"></canvas>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="card border-0 shadow rounded-4">
+
+    <div class="card-header bg-success text-white fw-bold">
+
+        🌍 Fraud By State
+
+    </div>
+
+    <div class="card-body">
+
+        <div style="height:420px;">
+
+            <canvas id="stateChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+// ===============================
+// Dashboard Data
+// ===============================
+
+const fraud = Number("{{ fraud_transactions }}");
+const genuine = Number("{{ genuine_transactions }}");
+
+const categories = {{ categories|tojson|safe }};
+const categoryCounts = {{ category_counts|tojson|safe }};
+
+const states = {{ states|tojson|safe }};
+const stateCounts = {{ state_counts|tojson|safe }};
+
+
+// ===============================
+// Common Settings
+// ===============================
+
+Chart.defaults.font.family = "Poppins";
+Chart.defaults.font.size = 13;
+
+
+// ===============================
+// Doughnut Chart
+// ===============================
+
+new Chart(document.getElementById("fraudPie"),{
+
+    type:"doughnut",
+
+    data:{
+
+        labels:["Fraud","Genuine"],
+
+        datasets:[{
+
+            data:[fraud,genuine],
+
+            backgroundColor:[
+
+                "#dc3545",
+
+                "#198754"
+
+            ],
+
+            borderWidth:2
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        plugins:{
+
+            legend:{
+
+                position:"bottom"
+
+            }
+
+        }
+
+    }
+
+});
+
+
+// ===============================
+// Category Chart
+// ===============================
+
+new Chart(document.getElementById("categoryChart"),{
+
+    type:"bar",
+
+    data:{
+
+        labels:categories,
+
+        datasets:[{
+
+            label:"Fraud Cases",
+
+            data:categoryCounts,
+
+            backgroundColor:"#2563eb",
+
+            borderRadius:8
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        plugins:{
+
+            legend:{
+
+                display:false
+
+            }
+
+        },
+
+        scales:{
+
+            y:{
+
+                beginAtZero:true
+
+            }
+
+        }
+
+    }
+
+});
+
+
+// ===============================
+// State Chart
+// ===============================
+
+new Chart(document.getElementById("stateChart"),{
+
+    type:"bar",
+
+    data:{
+
+        labels:states,
+
+        datasets:[{
+
+            label:"Fraud Cases",
+
+            data:stateCounts,
+
+            backgroundColor:"#16a34a",
+
+            borderRadius:8
+
+        }]
+
+    },
+
+    options:{
+
+        responsive:true,
+
+        maintainAspectRatio:false,
+
+        plugins:{
+
+            legend:{
+
+                display:false
+
+            }
+
+        },
+
+        scales:{
+
+            y:{
+
+                beginAtZero:true
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

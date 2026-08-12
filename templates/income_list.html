@@ -1,0 +1,315 @@
+{% extends "base.html" %}
+
+{% block title %}
+Income Management
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Header -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+
+                💰 Income Management
+
+            </h2>
+
+            <p class="text-muted">
+
+                Manage all your income transactions.
+
+            </p>
+
+        </div>
+
+        <a href="/income" class="btn btn-success btn-lg">
+
+            ➕ Add New Income
+
+        </a>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="row mb-4">
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Records</h6>
+
+                    <h2 class="text-primary">
+
+                        {{ incomes|length }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Income</h6>
+
+                    <h2 class="text-success">
+
+                        ₹{{ "{:,.0f}".format(incomes|sum(attribute=3)) if incomes else 0 }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Highest Income</h6>
+
+                    <h2 class="text-warning">
+
+                        {% if incomes %}
+
+                        ₹{{ "{:,.0f}".format(incomes|max(attribute=3)|attr("__getitem__")(3)) }}
+
+                        {% else %}
+
+                        ₹0
+
+                        {% endif %}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Average Income</h6>
+
+                    <h2 class="text-info">
+
+                        {% if incomes %}
+
+                        ₹{{ "{:,.0f}".format((incomes|sum(attribute=3))/(incomes|length)) }}
+
+                        {% else %}
+
+                        ₹0
+
+                        {% endif %}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="card shadow border-0 mb-3">
+
+        <div class="card-body">
+
+            <input
+
+                type="text"
+
+                id="searchIncome"
+
+                class="form-control"
+
+                placeholder="🔍 Search Income Source..."
+
+            >
+
+        </div>
+
+    </div>
+
+    <!-- Table -->
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-success text-white">
+
+            <h5 class="mb-0">
+
+                📋 Income Records
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle" id="incomeTable">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Source</th>
+
+                            <th>Amount</th>
+
+                            <th>Date</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% if incomes %}
+
+                    {% for income in incomes %}
+
+                        <tr>
+
+                            <td>{{ income[0] }}</td>
+
+                            <td>
+
+                                <span class="badge bg-success">
+
+                                    {{ income[2] }}
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                ₹{{ "{:,.0f}".format(income[3]) }}
+
+                            </td>
+
+                            <td>
+
+                                {{ income[4] }}
+
+                            </td>
+
+                            <td>
+
+                                <a
+
+                                    href="/edit_income/{{ income[0] }}"
+
+                                    class="btn btn-sm btn-primary">
+
+                                    ✏ Edit
+
+                                </a>
+
+                                <a
+
+                                    href="/delete_income/{{ income[0] }}"
+
+                                    class="btn btn-sm btn-danger"
+
+                                    onclick="return confirm('Delete this income?');">
+
+                                    🗑 Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    {% else %}
+
+                        <tr>
+
+                            <td colspan="5" class="text-center text-muted">
+
+                                No Income Records Found.
+
+                            </td>
+
+                        </tr>
+
+                    {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+const search = document.getElementById("searchIncome");
+
+search.addEventListener("keyup", function(){
+
+const filter = this.value.toLowerCase();
+
+const rows = document.querySelectorAll("#incomeTable tbody tr");
+
+rows.forEach(row=>{
+
+const text = row.innerText.toLowerCase();
+
+row.style.display = text.includes(filter) ? "" : "none";
+
+});
+
+});
+
+</script>
+
+{% endblock %}

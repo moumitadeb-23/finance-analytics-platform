@@ -1,0 +1,1822 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- Welcome Section -->
+
+    <div class="dashboard-welcome">
+
+    <h2>
+        Welcome, {{ name }} 👋
+    </h2>
+
+    <p>
+        Here's your financial overview.
+    </p>
+
+</div>
+    <!-- Summary Cards -->
+
+    <div class="row g-4">
+
+        <!-- Income -->
+
+        <div class="col-lg-2 col-md-4">
+
+            <div class="card border-0 shadow-lg h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 mb-2">
+                        💰
+                    </div>
+
+                    <h6 class="text-muted">
+                        Total Income
+                    </h6>
+
+                    <h3 class="text-success fw-bold">
+                        ₹{{ "{:,.0f}".format(total_income) }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Expense -->
+
+        <div class="col-lg-2 col-md-4">
+
+            <div class="card border-0 shadow-lg h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 mb-2">
+                        💸
+                    </div>
+
+                    <h6 class="text-muted">
+                        Total Expense
+                    </h6>
+
+                    <h3 class="text-danger fw-bold">
+                        ₹{{ "{:,.0f}".format(total_expense) }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Savings -->
+
+        <div class="col-lg-2 col-md-4">
+
+            <div class="card border-0 shadow-lg h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 mb-2">
+                        🏦
+                    </div>
+
+                    <h6 class="text-muted">
+                        Savings
+                    </h6>
+
+                    <h3 class="text-primary fw-bold">
+                        ₹{{ "{:,.0f}".format(savings) }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Budget -->
+
+        <div class="col-lg-2 col-md-4">
+
+            <div class="card border-0 shadow-lg h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 mb-2">
+                        📅
+                    </div>
+
+                    <h6 class="text-muted">
+                        Monthly Budget
+                    </h6>
+
+                    <h3 class="text-info fw-bold">
+                        ₹{{ "{:,.0f}".format(monthly_budget) }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Remaining -->
+
+        <div class="col-lg-2 col-md-4">
+
+            <div class="card border-0 shadow-lg h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 mb-2">
+                        💳
+                    </div>
+
+                    <h6 class="text-muted">
+                        Remaining
+                    </h6>
+
+                    <h3 class="text-success fw-bold">
+                        ₹{{ "{:,.0f}".format(remaining_budget) }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Budget Used -->
+
+        <div class="col-lg-2 col-md-4">
+
+            <div class="card border-0 shadow-lg h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-5 mb-2">
+                        📊
+                    </div>
+
+                    <h6 class="text-muted">
+                        Budget Used
+                    </h6>
+
+                    <h3 class="text-warning fw-bold">
+                        {{ budget_used }}%
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Budget Progress -->
+
+    <div class="card border-0 shadow-lg mt-4">
+
+        <div class="card-header bg-dark text-white">
+
+            📊 Budget Progress
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="progress" style="height:25px; border-radius:12px; overflow:hidden;">
+
+            <div
+                class="progress-bar
+                {% if budget_used >= 100 %}
+                    bg-danger
+                {% elif budget_used >= 80 %}
+                    bg-warning
+                {% else %}
+                    bg-success
+                {% endif %}"
+
+                role="progressbar"
+
+                style="width: {{ budget_used }}%;"
+
+                aria-valuenow="{{ budget_used }}"
+
+                aria-valuemin="0"
+
+                aria-valuemax="100">
+
+                {{ budget_used }}%
+
+            </div>
+
+        </div>
+
+            {% if budget_used >= 100 %}
+
+            <div class="alert alert-danger mt-3">
+
+                🚨 Budget exceeded! Reduce your expenses immediately.
+
+            </div>
+
+            {% elif budget_used >= 80 %}
+
+            <div class="alert alert-warning mt-3">
+
+                ⚠️ You have already used {{ budget_used }}% of your monthly budget.
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-success mt-3">
+
+                ✅ Excellent! Your spending is under control.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+    <!-- =========================================================
+     SMART FINANCIAL INSIGHTS
+========================================================= -->
+
+<div class="smart-insight-grid">
+
+    <!-- ================= GOAL SUMMARY ================= -->
+
+    <div class="finance-insight-card goal-summary-card">
+
+        <div class="insight-card-title">
+
+            <span class="insight-title-icon goal-icon">
+                🎯
+            </span>
+
+            <span>GOAL SUMMARY</span>
+
+        </div>
+
+
+        <div class="goal-summary-content">
+
+
+            <!-- Goal Statistics -->
+
+            <div class="goal-statistics">
+
+                <div class="goal-stat-row">
+
+                    <span>Total Goals</span>
+
+                    <strong>
+                        {{ total_goals }}
+                    </strong>
+
+                </div>
+
+
+                <div class="goal-stat-row">
+
+                    <span>Goals On Track</span>
+
+                    <strong class="on-track-number">
+                        {{ goals_on_track }}
+                    </strong>
+
+                </div>
+
+
+                <div class="goal-stat-row">
+
+                    <span>Goals Behind</span>
+
+                    <strong class="behind-number">
+                        {{ goals_behind }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Circular Progress -->
+
+            <div class="goal-circle-section">
+
+                <div
+                    class="goal-progress-circle"
+                    style="--goal-progress: {{ overall_goal_progress }};">
+
+                    <div class="goal-circle-inner">
+
+                        <strong>
+                            {{ overall_goal_progress }}%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <span>
+                    Overall Goal<br>
+                    Progress
+                </span>
+
+            </div>
+
+        </div>
+
+
+        {% if total_goals == 0 %}
+
+        <div class="goal-insight-message">
+
+            🎯 Create your first financial goal to begin
+            tracking progress.
+
+        </div>
+
+        {% elif overall_goal_progress >= 75 %}
+
+        <div class="goal-insight-message goal-good">
+
+            🚀 Excellent! You are very close to achieving
+            your financial goals.
+
+        </div>
+
+        {% elif overall_goal_progress >= 40 %}
+
+        <div class="goal-insight-message goal-medium">
+
+            📈 Good progress! Continue saving consistently.
+
+        </div>
+
+        {% else %}
+
+        <div class="goal-insight-message goal-warning">
+
+            💡 Increase your savings contribution to improve
+            goal progress.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- ================= RISK ANALYSIS ================= -->
+
+    <div class="finance-insight-card risk-analysis-card">
+
+        <div class="insight-card-title">
+
+            <span class="insight-title-icon risk-icon">
+                🛡️
+            </span>
+
+            <span>RISK ANALYSIS</span>
+
+        </div>
+
+
+        <div class="risk-content">
+
+
+            <!-- Risk Level -->
+
+            <div class="risk-level-section">
+
+                <span class="risk-label">
+                    Risk Level
+                </span>
+
+                <strong class="risk-level-text {{ risk_class }}">
+
+                    {{ portfolio_risk_level }}
+
+                </strong>
+
+            </div>
+
+
+            <!-- Risk Gauge -->
+
+            <div class="risk-gauge-section">
+
+                <div class="risk-gauge">
+
+                    <div class="gauge-cover"></div>
+
+                    <div class="gauge-needle {{ risk_class }}"></div>
+
+                    <div class="gauge-center"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Diversification -->
+
+        <div class="diversification-section">
+
+            <div class="diversification-header">
+
+                <span>
+                    Diversification Score
+                </span>
+
+                <strong>
+                    {{ diversification_score }} / 100
+                </strong>
+
+            </div>
+
+
+            <div class="diversification-progress">
+
+                <div
+                    class="diversification-progress-fill"
+                    style="width: {{ diversification_score }}%;">
+
+                </div>
+
+            </div>
+
+
+            {% if diversification_score >= 70 %}
+
+            <div class="risk-insight risk-good">
+
+                ✅ Well diversified portfolio
+
+            </div>
+
+            {% elif diversification_score >= 40 %}
+
+            <div class="risk-insight risk-medium">
+
+                ⚠️ Moderate diversification. Consider adding
+                more asset categories.
+
+            </div>
+
+            {% else %}
+
+            <div class="risk-insight risk-warning">
+
+                🚨 Portfolio concentration is high.
+                Diversification is recommended.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+    <!-- Recent Transactions + Quick Actions -->
+
+<div class="row">
+
+    <!-- Recent Transactions -->
+
+    <div class="col-lg-8">
+
+        <div class="card shadow-lg border-0">
+
+            <div class="card-header bg-primary text-white">
+
+                <h5 class="mb-0">
+
+                    📋 Recent Transactions
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead class="table-light">
+
+                            <tr>
+
+                                <th>Type</th>
+
+                                <th>Title</th>
+
+                                <th>Amount</th>
+
+                                <th>Date</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {% if transactions %}
+
+                            {% for row in transactions %}
+
+                            <tr>
+
+                                {% if row[3]=="Income" %}
+
+                                <td>
+
+                                    <span class="badge bg-success">
+
+                                        Income
+
+                                    </span>
+
+                                </td>
+
+                                {% else %}
+
+                                <td>
+
+                                    <span class="badge bg-danger">
+
+                                        Expense
+
+                                    </span>
+
+                                </td>
+
+                                {% endif %}
+
+                                <td>
+
+                                    {{ row[0] }}
+
+                                </td>
+
+                                <td>
+
+                                    ₹{{ "{:,.0f}".format(row[1]) }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ row[2] }}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <tr>
+
+                                <td colspan="4" class="text-center text-muted">
+
+                                    No transactions available.
+
+                                </td>
+
+                            </tr>
+
+                        {% endif %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="col-lg-4">
+
+        <div class="card shadow-lg border-0">
+
+            <div class="card-header bg-success text-white">
+
+                <h5 class="mb-0">
+
+                    ⚡ Quick Actions
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="d-grid gap-3">
+
+                    <a href="/income" class="btn btn-success btn-lg">
+
+                        ➕ Add Income
+
+                    </a>
+
+                    <a href="/expense" class="btn btn-danger btn-lg">
+
+                        ➖ Add Expense
+
+                    </a>
+
+                    <a href="/budget" class="btn btn-info btn-lg text-white">
+
+                        💰 Budget Planner
+
+                    </a>
+
+                    <a href="/income_list" class="btn btn-primary btn-lg">
+
+                        📄 View Income
+
+                    </a>
+
+                    <a href="/expense_list" class="btn btn-warning btn-lg">
+
+                        📄 View Expense
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<!-- AI Insight -->
+
+<div class="card shadow-lg border-0">
+
+    <div class="card-header bg-info text-white">
+
+        <h5 class="mb-0">
+
+            🤖 Smart AI Financial Insight
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if total_income == 0 %}
+
+        <div class="alert alert-warning">
+
+            💡 Add your income first to receive personalized financial insights.
+
+        </div>
+
+        {% elif budget_used >= 100 %}
+
+        <div class="alert alert-danger">
+
+            🚨 Your expenses have exceeded your monthly budget.
+            Consider reducing non-essential spending.
+
+        </div>
+
+        {% elif budget_used >= 80 %}
+
+        <div class="alert alert-warning">
+
+            ⚠️ You have already spent {{ budget_used }}% of your monthly budget.
+            Spend carefully for the rest of the month.
+
+        </div>
+
+        {% elif savings > (total_income*0.30) %}
+
+        <div class="alert alert-success">
+
+            🎉 Excellent financial discipline!
+            You are saving more than 30% of your income.
+
+        </div>
+
+        {% elif savings > 0 %}
+
+        <div class="alert alert-primary">
+
+            👍 Good job!
+            You're saving money every month.
+            Keep maintaining this habit.
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-danger">
+
+            📉 Your expenses are greater than your income.
+            Try reducing unnecessary expenses.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="card shadow border-0 mt-4">
+
+    <div class="card-header bg-dark text-white">
+
+        🤖 AI Spending Analysis
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-borderless">
+
+            <tr>
+
+                <td><strong>Highest Expense</strong></td>
+
+                <td>{{ highest_category }}</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Amount</strong></td>
+
+                <td>₹{{ "{:,.0f}".format(highest_amount) }}</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Savings Rate</strong></td>
+
+                <td>{{ savings_rate }}%</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Financial Status</strong></td>
+
+                <td>
+
+                    <span class="badge bg-success">
+
+                        {{ financial_status }}
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+        <div class="alert alert-info mb-0">
+
+            {{ ai_message }}
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<hr class="my-4">
+
+<div class="row">
+
+    <!-- Financial Health -->
+
+    <div class="col-lg-4">
+
+        <div class="card shadow border-0">
+
+            <div class="card-header bg-success text-white">
+
+                ❤️ Financial Health Score
+
+            </div>
+
+            <div class="card-body text-center">
+
+                <div class="display-2 fw-bold text-{{ health_color }}">
+
+                    {{ health_score }}
+
+                </div>
+
+                <h4>
+
+                    /100
+
+                </h4>
+
+                <span class="badge bg-{{ health_color }} fs-6">
+
+                    {{ health_grade }}
+
+                </span>
+
+                <hr>
+
+                <p class="text-muted">
+
+                    Your financial health is calculated based on your
+                    savings rate, budget usage and spending habits.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Notifications -->
+
+    <div class="col-lg-4">
+
+        <div class="card shadow border-0">
+
+            <div class="card-header bg-warning">
+
+                🔔 Smart Notifications
+
+            </div>
+
+            <div class="card-body">
+
+{% if latest_notifications %}
+
+    {% for n in latest_notifications %}
+
+    <div class="alert alert-info mb-2">
+
+        <strong>{{ n["title"] }}</strong>
+
+        <br>
+
+        {{ n["message"] }}
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+<div class="alert alert-secondary">
+
+No Smart Notifications Available
+
+</div>
+
+{% endif %}
+
+</div>
+
+        </div>
+
+    </div>
+
+    <!-- Prediction -->
+
+    <div class="col-lg-4">
+
+        <div class="card shadow border-0">
+
+            <div class="card-header bg-primary text-white">
+
+                🔮 AI Prediction
+
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-borderless">
+
+                    <tr>
+
+                        <td>Income</td>
+
+                        <td>
+
+                            ₹{{ "{:,.0f}".format(predicted_income) }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Expense</td>
+
+                        <td>
+
+                            ₹{{ "{:,.0f}".format(predicted_expense) }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Savings</td>
+
+                        <td>
+
+                            ₹{{ "{:,.0f}".format(predicted_savings) }}
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Saving Rate</td>
+
+                        <td>
+
+                            {{ predicted_saving_rate }}%
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="card shadow border-0 mt-4">
+
+    <div class="card-header bg-primary text-white">
+
+        📅 Monthly Financial Report
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row text-center">
+
+            <div class="col-md-3">
+
+                <h6>Income</h6>
+
+                <h3 class="text-success">
+
+                    ₹{{ "{:,.0f}".format(monthly_income) }}
+
+                </h3>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h6>Expense</h6>
+
+                <h3 class="text-danger">
+
+                    ₹{{ "{:,.0f}".format(monthly_expense) }}
+
+                </h3>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h6>Savings</h6>
+
+                <h3 class="text-primary">
+
+                    ₹{{ "{:,.0f}".format(monthly_savings) }}
+
+                </h3>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h6>Saving Rate</h6>
+
+                <h3 class="text-warning">
+
+                    {{ monthly_saving_rate }}%
+
+                </h3>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        {% if monthly_income == 0 %}
+
+        <div class="alert alert-warning">
+
+            No income recorded for this month.
+
+        </div>
+
+        {% elif monthly_saving_rate >= 50 %}
+
+        <div class="alert alert-success">
+
+            🏆 Excellent! You saved {{ monthly_saving_rate }}% of your income this month.
+
+        </div>
+
+        {% elif monthly_saving_rate >= 20 %}
+
+        <div class="alert alert-info">
+
+            👍 Good progress. Try to increase your savings further.
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-danger">
+
+            ⚠️ Your savings rate is low this month. Review your spending.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<br>
+
+
+<!-- Financial Analytics -->
+
+<div class="row">
+
+    <!-- Line Chart -->
+
+    <div class="col-lg-8">
+
+        <div class="card shadow-lg border-0">
+
+            <div class="card-header bg-primary text-white">
+
+                <h5 class="mb-0">
+
+                    📈 Financial Overview
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <canvas id="lineChart" height="120"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Expense Pie -->
+
+    <div class="col-lg-4">
+
+        <div class="card shadow-lg border-0">
+
+            <div class="card-header bg-success text-white">
+
+                <h5 class="mb-0">
+
+                    🥧 Expense Categories
+
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <canvas id="pieChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<!-- Financial Summary -->
+
+<div class="row">
+
+    <div class="col-md-4">
+
+        <div class="card shadow border-0">
+
+            <div class="card-body text-center">
+
+                <h5>
+
+                    💵 Income Ratio
+
+                </h5>
+
+                <h2 class="text-success">
+
+                    {% if total_income>0 %}
+
+                    100%
+
+                    {% else %}
+
+                    0%
+
+                    {% endif %}
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow border-0">
+
+            <div class="card-body text-center">
+
+                <h5>
+
+                    💸 Expense Ratio
+
+                </h5>
+
+                <h2 class="text-danger">
+
+                    {% if total_income>0 %}
+
+                    {{ ((total_expense/total_income)*100)|round(1) }}%
+
+                    {% else %}
+
+                    0%
+
+                    {% endif %}
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow border-0">
+
+            <div class="card-body text-center">
+
+                <h5>
+
+                    💎 Saving Ratio
+
+                </h5>
+
+                <h2 class="text-primary">
+
+                    {% if total_income>0 %}
+
+                    {{ ((savings/total_income)*100)|round(1) }}%
+
+                    {% else %}
+
+                    0%
+
+                    {% endif %}
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<!-- Financial Health -->
+
+<div class="card shadow-lg border-0">
+
+    <div class="card-header bg-dark text-white">
+
+        <h5 class="mb-0">
+
+            ❤️ Financial Health
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if savings > total_income*0.30 %}
+
+        <h3 class="text-success">
+
+            ⭐⭐⭐⭐⭐ Excellent
+
+        </h3>
+
+        <p>
+
+            Your financial health is outstanding.
+            Keep saving consistently.
+
+        </p>
+
+        {% elif savings > total_income*0.15 %}
+
+        <h3 class="text-primary">
+
+            ⭐⭐⭐⭐ Good
+
+        </h3>
+
+        <p>
+
+            Your finances are healthy.
+            Continue controlling unnecessary expenses.
+
+        </p>
+
+        {% elif savings > 0 %}
+
+        <h3 class="text-warning">
+
+            ⭐⭐⭐ Average
+
+        </h3>
+
+        <p>
+
+            Your savings are positive,
+            but there is room for improvement.
+
+        </p>
+
+        {% else %}
+
+        <h3 class="text-danger">
+
+            ⭐ Poor
+
+        </h3>
+
+        <p>
+
+            Expenses are too high.
+            Focus on budgeting and reducing unnecessary spending.
+
+        </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<br>
+
+<hr class="my-5">
+
+<div class="card shadow border-0">
+
+    <div class="card-header bg-dark text-white">
+
+        📈 Last 6 Months Financial Trend
+
+    </div>
+
+    <div class="card-body">
+
+        <canvas id="trendChart" height="100"></canvas>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="card shadow border-0">
+
+    <div class="card-header bg-success text-white">
+
+        🤖 AI Trend Analysis
+
+    </div>
+
+    <div class="card-body">
+
+        {% if saving_trend[-1] > saving_trend[-2] %}
+
+        <div class="alert alert-success">
+
+            🎉 Your savings increased compared to last month.
+
+        </div>
+
+        {% elif saving_trend[-1] < saving_trend[-2] %}
+
+        <div class="alert alert-warning">
+
+            📉 Your savings decreased compared to last month.
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-info">
+
+            📊 Your savings remained unchanged.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<!--==========================================
+USER FEEDBACK
+========================================== -->
+
+<div class="feedback-section">
+
+    <h2>⭐ Share Your Feedback</h2>
+
+    <p>
+        Help us improve Finance Analytics Platform.
+    </p>
+
+    <form action="{{ url_for('submit_feedback') }}" method="POST">
+
+        <div class="form-group">
+
+            <label>Overall Rating</label>
+
+            <select name="rating" required>
+
+                <option value="">Choose Rating</option>
+
+                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+
+                <option value="4">⭐⭐⭐⭐ Good</option>
+
+                <option value="3">⭐⭐⭐ Average</option>
+
+                <option value="2">⭐⭐ Poor</option>
+
+                <option value="1">⭐ Very Poor</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Experience</label>
+
+            <select name="experience">
+
+                <option>Excellent</option>
+
+                <option>Good</option>
+
+                <option>Average</option>
+
+                <option>Poor</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Email (Optional)</label>
+
+            <input
+
+                type="email"
+
+                name="email"
+
+                placeholder="example@gmail.com"
+
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Your Feedback</label>
+
+            <textarea
+
+                rows="5"
+
+                name="feedback"
+
+                placeholder="Tell us what you liked or what can be improved..."
+
+                required
+
+            ></textarea>
+
+        </div>
+
+        <button type="submit">
+
+            🚀 Submit Feedback
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+// =======================
+// Today's Date
+// =======================
+
+const today = new Date();
+
+const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+};
+
+const dateElement = document.getElementById("todayDate");
+
+if(dateElement){
+
+    dateElement.innerHTML = today.toLocaleDateString(
+        'en-IN',
+        options
+    );
+
+}
+
+
+// =======================
+// Financial Values
+// =======================
+
+const income = Number('{{ total_income }}');
+const expense = Number('{{ total_expense }}');
+const savings = Number('{{ savings }}');
+
+const categories = JSON.parse('{{ categories|tojson|safe }}');
+const categoryAmounts = JSON.parse('{{ category_amounts|tojson|safe }}');
+
+
+// =======================
+// Line Chart
+// =======================
+
+const lineCanvas = document.getElementById("lineChart");
+
+if(lineCanvas){
+
+new Chart(lineCanvas,{
+
+type:"line",
+
+data:{
+
+labels:["Income","Expense","Savings"],
+
+datasets:[{
+
+label:"Amount",
+
+data:[income,expense,savings],
+
+borderColor:"#2563eb",
+
+backgroundColor:"rgba(37,99,235,.15)",
+
+fill:true,
+
+tension:.4,
+
+pointRadius:6,
+
+pointHoverRadius:8,
+
+borderWidth:3
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+display:false
+
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true
+
+}
+
+}
+
+}
+
+});
+
+}
+
+
+
+// =======================
+// Pie Chart
+// =======================
+
+const pieCanvas=document.getElementById("pieChart");
+
+if(pieCanvas && categories.length>0){
+
+new Chart(pieCanvas,{
+
+type:"pie",
+
+data:{
+
+labels:categories,
+
+datasets:[{
+
+data:categoryAmounts,
+
+backgroundColor:[
+
+"#2563eb",
+
+"#10b981",
+
+"#ef4444",
+
+"#f59e0b",
+
+"#8b5cf6",
+
+"#06b6d4",
+
+"#ec4899",
+
+"#14b8a6",
+
+"#84cc16",
+
+"#f97316"
+
+],
+
+hoverOffset:15
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+position:"bottom"
+
+}
+
+}
+
+}
+
+});
+
+}
+
+</script>
+
+<script>
+
+const months = JSON.parse('{{ months|tojson|safe }}');
+const incomeTrend = JSON.parse('{{ income_trend|tojson|safe }}');
+const expenseTrend = JSON.parse('{{ expense_trend|tojson|safe }}');
+const savingTrend = JSON.parse('{{ saving_trend|tojson|safe }}');
+
+new Chart(document.getElementById("trendChart"),{
+
+    type:"line",
+
+    data:{
+
+        labels:months,
+
+        datasets:[
+
+        {
+
+            label:"Income",
+
+            data:incomeTrend,
+
+            borderColor:"#16a34a",
+
+            backgroundColor:"rgba(22,163,74,.1)",
+
+            tension:.4
+
+        },
+
+        {
+
+            label:"Expense",
+
+            data:expenseTrend,
+
+            borderColor:"#dc2626",
+
+            backgroundColor:"rgba(220,38,38,.1)",
+
+            tension:.4
+
+        },
+
+        {
+
+            label:"Savings",
+
+            data:savingTrend,
+
+            borderColor:"#2563eb",
+
+            backgroundColor:"rgba(37,99,235,.1)",
+
+            tension:.4
+
+        }
+
+        ]
+
+    },
+
+    options:{
+
+        responsive:true,
+
+        maintainAspectRatio:false
+
+    }
+
+});
+
+</script>
+
+<script>
+
+// ===========================
+// Show Today's Date
+// ===========================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dateElement = document.getElementById("currentDate");
+
+    if (dateElement) {
+
+        const today = new Date();
+
+        const options = {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        };
+
+        dateElement.innerHTML =
+            today.toLocaleDateString("en-IN", options);
+
+    }
+
+});
+
+</script>
+
+<!-- Floating AI Assistant Button -->
+<a href="{{ url_for('ai_chat') }}" class="dashboard-ai-btn" title="Open AI Assistant">
+    <i class="fas fa-robot"></i>
+</a>
+
+{% endblock %}

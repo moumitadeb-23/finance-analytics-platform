@@ -1,0 +1,699 @@
+{% extends "base.html" %}
+
+{% block title %}
+Financial Health Dashboard
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/financial_health.css') }}">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="financial-dashboard">
+
+    <!-- ========================================= -->
+    <!-- HERO HEADER -->
+    <!-- ========================================= -->
+
+    <section class="hero-section">
+
+        <div class="hero-left">
+
+            <div class="hero-title">
+
+                <div class="hero-icon">
+
+                    <i class="fa-solid fa-heart-pulse"></i>
+
+                </div>
+
+                <div>
+
+                    <h1>Financial Health Dashboard</h1>
+
+                    <p>
+                        AI-powered overview of your financial wellness,
+                        investments and spending habits.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="health-score-card">
+
+                <div class="score-ring">
+
+                    <canvas id="healthGauge"></canvas>
+
+                    <div class="score-content">
+
+                        <h2>{{ health_score }}</h2>
+
+                        <span>/100</span>
+
+                    </div>
+
+                </div>
+
+                <h3>{{ health_status }}</h3>
+
+                <small>Overall Financial Score</small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================================= -->
+    <!-- KPI CARDS -->
+    <!-- ========================================= -->
+
+    <section class="kpi-grid">
+
+        <div class="kpi-card income">
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-wallet"></i>
+
+            </div>
+
+            <div class="kpi-info">
+
+                <span>Total Income</span>
+
+                <h2>₹{{ "{:,.0f}".format(total_income) }}</h2>
+
+                <small>
+
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+
+                    Positive Cash Flow
+
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="kpi-card expense">
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-credit-card"></i>
+
+            </div>
+
+            <div class="kpi-info">
+
+                <span>Total Expenses</span>
+
+                <h2>₹{{ "{:,.0f}".format(total_expense) }}</h2>
+
+                <small>
+
+                    <i class="fa-solid fa-money-bill-wave"></i>
+
+                    Monthly Spending
+
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="kpi-card savings">
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-piggy-bank"></i>
+
+            </div>
+
+            <div class="kpi-info">
+
+                <span>Total Savings</span>
+
+                <h2>₹{{ "{:,.0f}".format(total_savings) }}</h2>
+
+                <small>
+
+                    <i class="fa-solid fa-shield-heart"></i>
+
+                    Emergency Fund Ready
+
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="kpi-card investment">
+
+            <div class="kpi-icon">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+            </div>
+
+            <div class="kpi-info">
+
+                <span>Investment Value</span>
+
+                <h2>₹{{ "{:,.0f}".format(total_investment) }}</h2>
+
+                <small>
+
+                    <i class="fa-solid fa-arrow-up-right-dots"></i>
+
+                    Portfolio Growing
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================================= -->
+    <!-- QUICK INSIGHTS -->
+    <!-- ========================================= -->
+
+    <section class="quick-insights">
+
+        <div class="insight-card">
+
+            <i class="fa-solid fa-percent"></i>
+
+            <div>
+
+                <h4>{{ savings_ratio }}%</h4>
+
+                <p>Savings Ratio</p>
+
+            </div>
+
+        </div>
+
+        <div class="insight-card">
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+            <div>
+
+                <h4>{{ expense_ratio }}%</h4>
+
+                <p>Expense Ratio</p>
+
+            </div>
+
+        </div>
+
+        <div class="insight-card">
+
+            <i class="fa-solid fa-coins"></i>
+
+            <div>
+
+                <h4>{{ investment_ratio }}%</h4>
+
+                <p>Investment Ratio</p>
+
+            </div>
+
+        </div>
+
+        <div class="insight-card">
+
+            <i class="fa-solid fa-scale-balanced"></i>
+
+            <div>
+
+                <h4>{{ debt_ratio }}%</h4>
+
+                <p>Debt Ratio</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================================= -->
+    <!-- CHART SECTION STARTS HERE -->
+    <!-- ========================================= -->
+
+    <div class="dashboard-grid">
+
+                <!-- ========================= -->
+        <!-- Income vs Expense -->
+        <!-- ========================= -->
+
+        <div class="dashboard-card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <h3>
+                        <i class="fa-solid fa-chart-column"></i>
+                        Income vs Expense
+                    </h3>
+
+                    <p>Compare your earnings and spending.</p>
+
+                </div>
+
+                <div class="card-badge success">
+                    Monthly
+                </div>
+
+            </div>
+
+            <div class="mini-stats">
+
+                <div class="mini-box income">
+
+                    <span>Income</span>
+
+                    <h4>₹{{ "{:,.0f}".format(total_income) }}</h4>
+
+                </div>
+
+                <div class="mini-box expense">
+
+                    <span>Expense</span>
+
+                    <h4>₹{{ "{:,.0f}".format(total_expense) }}</h4>
+
+                </div>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+                <canvas id="incomeExpenseChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <!-- ========================= -->
+        <!-- Expense Breakdown -->
+        <!-- ========================= -->
+
+        <div class="dashboard-card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <h3>
+
+                        <i class="fa-solid fa-chart-pie"></i>
+
+                        Expense Breakdown
+
+                    </h3>
+
+                    <p>Category-wise spending analysis.</p>
+
+                </div>
+
+                <div class="card-badge warning">
+
+                    Analytics
+
+                </div>
+
+            </div>
+
+            <div class="chart-wrapper donut-chart">
+
+                <canvas id="expenseChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ======================================== -->
+    <!-- SECOND ROW -->
+    <!-- ======================================== -->
+
+    <div class="dashboard-grid">
+
+        <!-- Savings Trend -->
+
+        <div class="dashboard-card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <h3>
+
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+
+                        Savings Trend
+
+                    </h3>
+
+                    <p>Your monthly saving performance.</p>
+
+                </div>
+
+                <div class="card-badge primary">
+
+                    Growth
+
+                </div>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+                <canvas id="savingChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <!-- Investment Performance -->
+
+        <div class="dashboard-card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <h3>
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        Investment Performance
+
+                    </h3>
+
+                    <p>Portfolio growth over time.</p>
+
+                </div>
+
+                <div class="card-badge purple">
+
+                    Portfolio
+
+                </div>
+
+            </div>
+
+            <div class="chart-wrapper">
+
+                <canvas id="investmentChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ======================================== -->
+    <!-- AI INSIGHTS SECTION -->
+    <!-- ======================================== -->
+
+    <section class="ai-section">
+
+        <div class="ai-card">
+
+            <div class="ai-header">
+
+                <div>
+
+                    <h2>
+
+                        <i class="fa-solid fa-robot"></i>
+
+                        AI Financial Coach
+
+                    </h2>
+
+                    <p>Personalized recommendations based on your finances.</p>
+
+                </div>
+
+            </div>
+
+            <div class="recommendation-grid">
+
+                {% for tip in recommendations %}
+
+                <div class="recommendation-card">
+
+                    <div class="recommend-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>{{ tip }}</p>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+        <!-- ======================================== -->
+    <!-- RECENT ACTIVITY & OVERVIEW -->
+    <!-- ======================================== -->
+
+    <section class="bottom-grid">
+
+        <!-- Recent Activity -->
+
+        <div class="dashboard-card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <h3>
+
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+
+                        Recent Financial Activity
+
+                    </h3>
+
+                    <p>Your latest financial movements.</p>
+
+                </div>
+
+                <div class="card-badge success">
+
+                    Live
+
+                </div>
+
+            </div>
+
+            <div class="activity-list">
+
+                <div class="activity-item">
+
+                    <div class="activity-icon income">
+
+                        <i class="fa-solid fa-money-bill-trend-up"></i>
+
+                    </div>
+
+                    <div class="activity-info">
+
+                        <h5>Latest Income</h5>
+
+                        <small>Most recent transaction</small>
+
+                    </div>
+
+                    <div class="activity-value income">
+
+                        ₹{{ "{:,.0f}".format(last_income) }}
+
+                    </div>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <div class="activity-icon expense">
+
+                        <i class="fa-solid fa-credit-card"></i>
+
+                    </div>
+
+                    <div class="activity-info">
+
+                        <h5>Latest Expense</h5>
+
+                        <small>Most recent spending</small>
+
+                    </div>
+
+                    <div class="activity-value expense">
+
+                        ₹{{ "{:,.0f}".format(last_expense) }}
+
+                    </div>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <div class="activity-icon savings">
+
+                        <i class="fa-solid fa-piggy-bank"></i>
+
+                    </div>
+
+                    <div class="activity-info">
+
+                        <h5>Total Savings</h5>
+
+                        <small>Current savings balance</small>
+
+                    </div>
+
+                    <div class="activity-value savings">
+
+                        ₹{{ "{:,.0f}".format(total_savings) }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Financial Summary -->
+
+        <div class="dashboard-card">
+
+            <div class="card-top">
+
+                <div>
+
+                    <h3>
+
+                        <i class="fa-solid fa-chart-simple"></i>
+
+                        Financial Summary
+
+                    </h3>
+
+                    <p>Overall financial metrics.</p>
+
+                </div>
+
+                <div class="card-badge primary">
+
+                    Summary
+
+                </div>
+
+            </div>
+
+            <div class="summary-list">
+
+                <div class="summary-row">
+
+                    <span>Total Income</span>
+
+                    <strong>₹{{ "{:,.0f}".format(total_income) }}</strong>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>Total Expenses</span>
+
+                    <strong>₹{{ "{:,.0f}".format(total_expense) }}</strong>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>Total Savings</span>
+
+                    <strong>₹{{ "{:,.0f}".format(total_savings) }}</strong>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>Investment Value</span>
+
+                    <strong>₹{{ "{:,.0f}".format(total_investment) }}</strong>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>Financial Health</span>
+
+                    <strong>{{ health_status }}</strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ======================================== -->
+<!-- Dashboard Data -->
+<!-- ======================================== -->
+
+<script id="dashboard-data" type="application/json">
+{
+    "healthScore": {{ health_score|tojson }},
+    "expenseLabels": {{ category_labels|tojson }},
+    "expenseValues": {{ category_values|tojson }},
+    "monthLabels": {{ month_labels|tojson }},
+    "monthValues": {{ month_values|tojson }},
+    "totalIncome": {{ total_income|tojson }},
+    "totalExpense": {{ total_expense|tojson }},
+    "investmentValues": {{ investment_values|tojson }}
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static', filename='js/financial_health.js') }}"></script>
+
+{% endblock %}
+

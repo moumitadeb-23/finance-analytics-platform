@@ -1,0 +1,1412 @@
+/* ==========================================================
+   AI BUDGET ADVISOR CSS
+   PART 3A
+========================================================== */
+
+/* ---------- Root Variables ---------- */
+
+:root{
+
+    --primary:#2563eb;
+    --secondary:#64748b;
+    --success:#22c55e;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+    --info:#06b6d4;
+    --dark:#1e293b;
+    --light:#f8fafc;
+
+    --card-radius:18px;
+
+    --transition:0.3s ease;
+
+    --shadow:
+        0 8px 24px rgba(0,0,0,.08);
+
+}
+
+/* ---------- Body ---------- */
+
+body{
+
+    background:#f4f7fb;
+
+    font-family:
+        "Segoe UI",
+        sans-serif;
+
+}
+
+/* ---------- Main Dashboard ---------- */
+
+.budget-page{
+
+    min-height:100vh;
+
+    padding-bottom:40px;
+
+}
+
+/* ---------- Header ---------- */
+
+.budget-page h2{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--dark);
+
+}
+
+.budget-page p{
+
+    color:#6c757d;
+
+}
+
+/* ---------- Cards ---------- */
+
+.card{
+
+    border:none;
+
+    border-radius:var(--card-radius);
+
+    transition:all var(--transition);
+
+    box-shadow:var(--shadow);
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 14px 32px rgba(0,0,0,.15);
+
+}
+
+.card-header{
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    border-radius:
+        var(--card-radius)
+        var(--card-radius)
+        0
+        0 !important;
+
+}
+
+/* ---------- Summary Cards ---------- */
+
+.summary-card{
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+.summary-card i{
+
+    font-size:2.8rem;
+
+    margin-bottom:15px;
+
+}
+
+.summary-card h6{
+
+    color:#6b7280;
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+.summary-card h2{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+/* ---------- Current Budget ---------- */
+
+.current-budget{
+
+    border-left:6px solid var(--primary);
+
+}
+
+/* ---------- Expense ---------- */
+
+.total-expense{
+
+    border-left:6px solid var(--danger);
+
+}
+
+/* ---------- Recommended ---------- */
+
+.recommended-budget{
+
+    border-left:6px solid var(--success);
+
+}
+
+/* ---------- Savings ---------- */
+
+.total-savings{
+
+    border-left:6px solid var(--warning);
+
+}
+
+/* ---------- Budget Allocation Cards ---------- */
+
+.budget-category{
+
+    border-radius:15px;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.budget-category:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.budget-category .display-6{
+
+    font-size:2.5rem;
+
+}
+
+.budget-category h3{
+
+    font-weight:700;
+
+}
+
+.budget-category small{
+
+    color:#6b7280;
+
+}
+
+/* ---------- Budget Utilization ---------- */
+
+.progress{
+
+    border-radius:20px;
+
+    background:#e5e7eb;
+
+    overflow:hidden;
+
+}
+
+.progress-bar{
+
+    font-weight:600;
+
+    font-size:.95rem;
+
+}
+
+/* ---------- Section Spacing ---------- */
+
+.section-title{
+
+    font-size:1.4rem;
+
+    font-weight:700;
+
+    color:#1f2937;
+
+    margin-bottom:20px;
+
+}
+
+/* ---------- Utility ---------- */
+
+.shadow-sm{
+
+    box-shadow:
+        0 5px 12px rgba(0,0,0,.08)!important;
+
+}
+
+.rounded-4{
+
+    border-radius:18px!important;
+
+}
+
+.text-primary{
+
+    color:#2563eb!important;
+
+}
+
+.text-success{
+
+    color:#16a34a!important;
+
+}
+
+.text-danger{
+
+    color:#dc2626!important;
+
+}
+
+.text-warning{
+
+    color:#d97706!important;
+
+}
+
+/* ==========================================================
+   AI BUDGET ADVISOR CSS
+   PART 3B
+========================================================== */
+
+
+/* ---------- Current vs Recommended Budget Table ---------- */
+
+.table{
+
+    margin-bottom:0;
+
+    vertical-align:middle;
+
+}
+
+.table thead{
+
+    background:#2563eb;
+
+    color:#fff;
+
+}
+
+.table thead th{
+
+    font-weight:600;
+
+    border:none;
+
+    padding:15px;
+
+}
+
+.table tbody td{
+
+    padding:15px;
+
+    vertical-align:middle;
+
+    border-color:#e5e7eb;
+
+}
+
+.table-hover tbody tr{
+
+    transition:.25s;
+
+}
+
+.table-hover tbody tr:hover{
+
+    background:#f8fafc;
+
+    transform:scale(1.005);
+
+}
+
+.table-responsive{
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+
+/* ---------- Status Badges ---------- */
+
+.badge{
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+}
+
+.badge.bg-success{
+
+    background:#22c55e!important;
+
+}
+
+.badge.bg-danger{
+
+    background:#ef4444!important;
+
+}
+
+.badge.bg-warning{
+
+    background:#f59e0b!important;
+
+    color:#fff!important;
+
+}
+
+.badge.bg-primary{
+
+    background:#2563eb!important;
+
+}
+
+.badge.bg-secondary{
+
+    background:#6b7280!important;
+
+}
+
+
+/* ---------- Recommendation Alerts ---------- */
+
+.alert{
+
+    border:none;
+
+    border-radius:15px;
+
+    box-shadow:
+
+        0 4px 12px rgba(0,0,0,.06);
+
+    transition:.3s;
+
+}
+
+.alert:hover{
+
+    transform:translateY(-4px);
+
+}
+
+.alert i{
+
+    font-size:1.2rem;
+
+}
+
+.alert-success{
+
+    background:#ecfdf5;
+
+    color:#166534;
+
+}
+
+.alert-warning{
+
+    background:#fffbeb;
+
+    color:#92400e;
+
+}
+
+.alert-danger{
+
+    background:#fef2f2;
+
+    color:#991b1b;
+
+}
+
+.alert-info{
+
+    background:#ecfeff;
+
+    color:#155e75;
+
+}
+
+.alert-primary{
+
+    background:#eff6ff;
+
+    color:#1d4ed8;
+
+}
+
+
+/* ---------- AI Recommendation Cards ---------- */
+
+.ai-card{
+
+    border-left:6px solid #2563eb;
+
+    transition:.3s;
+
+}
+
+.ai-card:hover{
+
+    border-left-color:#22c55e;
+
+}
+
+.ai-card h5{
+
+    font-weight:700;
+
+}
+
+.ai-card p{
+
+    margin-bottom:0;
+
+    color:#475569;
+
+}
+
+
+/* ---------- Saving Tips ---------- */
+
+.saving-tip{
+
+    border-radius:15px;
+
+    padding:18px;
+
+    transition:.3s;
+
+}
+
+.saving-tip:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.saving-tip h6{
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.saving-tip p{
+
+    margin-bottom:0;
+
+    color:#475569;
+
+}
+
+
+/* ---------- Recommendation Icons ---------- */
+
+.fa-lightbulb{
+
+    color:#f59e0b;
+
+}
+
+.fa-wallet{
+
+    color:#16a34a;
+
+}
+
+.fa-robot{
+
+    color:#2563eb;
+
+}
+
+.fa-scale-balanced{
+
+    color:#d97706;
+
+}
+
+
+/* ---------- Financial Summary Cards ---------- */
+
+.financial-card{
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+.financial-card h6{
+
+    color:#64748b;
+
+    margin-bottom:10px;
+
+}
+
+.financial-card h2{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+.financial-card small{
+
+    color:#94a3b8;
+
+}
+
+
+/* ---------- Card Header Colors ---------- */
+
+.bg-primary{
+
+    background:#2563eb!important;
+
+}
+
+.bg-success{
+
+    background:#16a34a!important;
+
+}
+
+.bg-warning{
+
+    background:#f59e0b!important;
+
+}
+
+.bg-danger{
+
+    background:#dc2626!important;
+
+}
+
+.bg-dark{
+
+    background:#1f2937!important;
+
+}
+
+
+/* ---------- Text Utilities ---------- */
+
+.text-muted{
+
+    color:#6b7280!important;
+
+}
+
+.fw-bold{
+
+    font-weight:700!important;
+
+}
+
+.display-4{
+
+    font-weight:700;
+
+}
+
+.display-6{
+
+    font-weight:700;
+
+}
+
+
+/* ---------- Card Body ---------- */
+
+.card-body{
+
+    padding:25px;
+
+}
+
+/* ==========================================================
+   AI BUDGET ADVISOR CSS
+   PART 3C
+========================================================== */
+
+/* ---------- Chart Cards ---------- */
+
+.chart-card{
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+
+    padding:20px;
+
+    transition:.3s;
+
+}
+
+.chart-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 12px 28px rgba(0,0,0,.12);
+
+}
+
+/* ---------- Chart Container ---------- */
+
+/*.chart-container{
+
+    position:relative;
+
+    width:100%;
+
+    height:350px;
+
+    padding:10px;
+
+}
+
+.chart-container canvas{
+
+    width:100%!important;
+
+    height:100%!important;
+
+}*/
+
+/* ---------- Expense Pie Chart ---------- */
+
+/*#expensePieChart{
+
+    max-height:350px;
+
+}
+
+/* ---------- Budget Comparison Chart ---------- */
+
+#budgetComparisonChart{
+
+    max-height:400px;
+
+}*/
+
+/* ---------- Budget Achievement Card ---------- */
+
+.achievement-card{
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+.achievement-card h1{
+
+    font-size:3rem;
+
+    font-weight:700;
+
+    color:#16a34a;
+
+}
+
+.achievement-card p{
+
+    color:#64748b;
+
+    margin-bottom:20px;
+
+}
+
+/* ---------- Achievement Progress ---------- */
+
+.achievement-progress{
+
+    height:24px;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    background:#e5e7eb;
+
+}
+
+.achievement-progress .progress-bar{
+
+    font-weight:600;
+
+    font-size:.9rem;
+
+}
+
+/* ---------- Financial Health ---------- */
+
+.health-card{
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+.health-card h2{
+
+    font-size:2.2rem;
+
+    font-weight:700;
+
+}
+
+.health-card h6{
+
+    color:#64748b;
+
+    margin-bottom:10px;
+
+}
+
+.health-card small{
+
+    color:#94a3b8;
+
+}
+
+/* ---------- Health Score ---------- */
+
+.health-score{
+
+    font-size:3rem;
+
+    font-weight:700;
+
+    color:#2563eb;
+
+}
+
+/* ---------- Health Progress ---------- */
+
+.health-progress{
+
+    height:22px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-top:20px;
+
+}
+
+.health-progress .progress-bar{
+
+    font-weight:600;
+
+}
+
+/* ---------- Chart Legend ---------- */
+
+.chart-legend{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+
+}
+
+.legend-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    font-size:.9rem;
+
+}
+
+.legend-color{
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:50%;
+
+}
+
+/* ---------- Dashboard Sections ---------- */
+
+.dashboard-section{
+
+    margin-bottom:30px;
+
+}
+
+.dashboard-section:last-child{
+
+    margin-bottom:0;
+
+}
+
+/* ---------- Info Box ---------- */
+
+.info-box{
+
+    background:#f8fafc;
+
+    border-left:5px solid #2563eb;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    margin-bottom:20px;
+
+}
+
+.info-box h6{
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.info-box p{
+
+    margin:0;
+
+    color:#475569;
+
+}
+
+/* ---------- Utility Classes ---------- */
+
+.rounded-xl{
+
+    border-radius:20px!important;
+
+}
+
+.shadow-lg{
+
+    box-shadow:0 14px 35px rgba(0,0,0,.12)!important;
+
+}
+
+.border-primary{
+
+    border-left:5px solid #2563eb!important;
+
+}
+
+.border-success{
+
+    border-left:5px solid #16a34a!important;
+
+}
+
+.border-warning{
+
+    border-left:5px solid #f59e0b!important;
+
+}
+
+.border-danger{
+
+    border-left:5px solid #dc2626!important;
+
+}
+
+/* ---------- Smooth Animation ---------- */
+
+.fade-in{
+
+    animation:fadeIn .8s ease-in-out;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================================
+   AI BUDGET ADVISOR CSS
+   PART 3D
+========================================================== */
+
+
+/* ==========================================================
+   DARK MODE
+========================================================== */
+
+body.dark-mode{
+
+    background:#0f172a;
+
+    color:#e2e8f0;
+
+}
+
+body.dark-mode .budget-page{
+
+    background:#0f172a;
+
+}
+
+body.dark-mode .card{
+
+    background:#1e293b;
+
+    color:#e2e8f0;
+
+}
+
+body.dark-mode .card-header{
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+body.dark-mode .table{
+
+    color:#e2e8f0;
+
+}
+
+body.dark-mode .table thead{
+
+    background:#334155;
+
+}
+
+body.dark-mode .table tbody tr{
+
+    border-color:#334155;
+
+}
+
+body.dark-mode .table-hover tbody tr:hover{
+
+    background:#273549;
+
+}
+
+body.dark-mode .progress{
+
+    background:#334155;
+
+}
+
+body.dark-mode .alert{
+
+    background:#1e293b;
+
+    color:#f1f5f9;
+
+}
+
+body.dark-mode .text-muted{
+
+    color:#94a3b8!important;
+
+}
+
+body.dark-mode .info-box{
+
+    background:#1e293b;
+
+}
+
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn{
+
+    border-radius:10px;
+
+    transition:all .3s ease;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+
+.btn-primary{
+
+    background:#2563eb;
+
+    border:none;
+
+}
+
+.btn-success{
+
+    background:#16a34a;
+
+    border:none;
+
+}
+
+.btn-warning{
+
+    border:none;
+
+}
+
+
+/* ==========================================================
+   ICONS
+========================================================== */
+
+.card i{
+
+    transition:.3s ease;
+
+}
+
+.card:hover i{
+
+    transform:scale(1.15);
+
+}
+
+
+/* ==========================================================
+   CARD ANIMATION
+========================================================== */
+
+.card{
+
+    animation:cardFade .5s ease;
+
+}
+
+@keyframes cardFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f1f5f9;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#94a3b8;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#64748b;
+
+}
+
+
+/* ==========================================================
+   TABLE RESPONSIVE
+========================================================== */
+
+.table-responsive{
+
+    overflow-x:auto;
+
+    scrollbar-width:thin;
+
+}
+
+
+/* ==========================================================
+   MOBILE RESPONSIVE
+========================================================== */
+
+@media (max-width:992px){
+
+    .budget-page h2{
+
+        font-size:1.6rem;
+
+    }
+
+    .display-4{
+
+        font-size:2.5rem;
+
+    }
+
+    .display-6{
+
+        font-size:2rem;
+
+    }
+
+    .chart-container{
+
+        height:300px;
+
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    .budget-page{
+
+        padding:15px;
+
+    }
+
+    .card{
+
+        margin-bottom:20px;
+
+    }
+
+    .card-body{
+
+        padding:18px;
+
+    }
+
+    .summary-card{
+
+        padding:20px;
+
+    }
+
+    .summary-card h2{
+
+        font-size:1.6rem;
+
+    }
+
+    .table thead{
+
+        font-size:.85rem;
+
+    }
+
+    .table tbody{
+
+        font-size:.85rem;
+
+    }
+
+    .badge{
+
+        font-size:.72rem;
+
+        padding:6px 10px;
+
+    }
+
+    .chart-container{
+
+        height:260px;
+
+    }
+
+}
+
+
+@media (max-width:576px){
+
+    .budget-page h2{
+
+        font-size:1.4rem;
+
+    }
+
+    .card-header{
+
+        font-size:.9rem;
+
+    }
+
+    .summary-card h2{
+
+        font-size:1.4rem;
+
+    }
+
+    .display-4{
+
+        font-size:2rem;
+
+    }
+
+    .display-6{
+
+        font-size:1.6rem;
+
+    }
+
+    .progress{
+
+        height:18px!important;
+
+    }
+
+    .chart-container{
+
+        height:220px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PRINT SUPPORT
+========================================================== */
+
+@media print{
+
+    .btn,
+
+    .sidebar,
+
+    nav,
+
+    footer{
+
+        display:none!important;
+
+    }
+
+    body{
+
+        background:#ffffff;
+
+    }
+
+    .card{
+
+        box-shadow:none;
+
+        border:1px solid #cccccc;
+
+    }
+
+}
+
+.chart-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    height:350px;
+
+    margin:auto;
+
+}
+
+.chart-wrapper canvas{
+
+    width:100%!important;
+
+    height:100%!important;
+
+}
+
+
+/* ==========================================================
+   END OF FILE
+========================================================== */

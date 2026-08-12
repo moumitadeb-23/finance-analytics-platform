@@ -1,0 +1,629 @@
+{% extends "base.html" %}
+
+{% block title %}Notification Center{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/notification.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="notification-page">
+
+    <!-- ==========================================
+         HERO SECTION
+    =========================================== -->
+
+    <section class="hero-section">
+
+        <div class="hero-left">
+
+            <div class="hero-icon">
+
+                <i class="fas fa-bell"></i>
+
+            </div>
+
+            <div>
+
+                <h1>Notification Center</h1>
+
+                <p>
+
+                    Stay updated with your latest financial activities,
+                    bill reminders, budget alerts and AI insights.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <canvas id="notificationGauge"></canvas>
+
+        </div>
+
+    </section>
+
+    <!-- ==========================================
+         KPI CARDS
+    =========================================== -->
+
+    <section class="summary-grid">
+
+        <div class="summary-card">
+
+            <i class="fas fa-bell"></i>
+
+            <div>
+
+                <h2>{{ total_notifications }}</h2>
+
+                <span>Total Notifications</span>
+
+            </div>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fas fa-envelope"></i>
+
+            <div>
+
+                <h2>{{ unread_notifications }}</h2>
+
+                <span>Unread</span>
+
+            </div>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fas fa-exclamation-circle"></i>
+
+            <div>
+
+                <h2>{{ high_priority }}</h2>
+
+                <span>High Priority</span>
+
+            </div>
+
+        </div>
+
+        <div class="summary-card">
+
+            <i class="fas fa-check-circle"></i>
+
+            <div>
+
+                <h2>{{ completed_notifications }}</h2>
+
+                <span>Completed</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ==========================================
+         ACTION BAR
+    =========================================== -->
+
+    <section class="action-bar">
+
+        <div class="left-actions">
+
+            <h2>
+
+                <i class="fas fa-stream"></i>
+
+                Notification Activity
+
+            </h2>
+
+        </div>
+
+        <div class="right-actions">
+
+            <a href="{{ url_for('mark_all_notifications_read') }}"
+               class="btn-primary">
+
+                <i class="fas fa-check-double"></i>
+
+                Mark All Read
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ==========================================
+         MAIN GRID
+    =========================================== -->
+
+    <div class="main-grid">
+
+        <!-- LEFT COLUMN -->
+
+        <div class="left-column">
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h3>
+
+                        <i class="fas fa-history"></i>
+
+                        Recent Notifications
+
+                    </h3>
+
+                </div>
+
+                <div class="recent-list">
+                    {% for notification in recent_notifications %}
+
+<div class="notification-card {% if notification.is_read == 0 %}unread{% endif %}">
+
+    <div class="notification-top">
+
+        <div class="notification-icon">
+
+            {% if notification.type == "Expense" %}
+                <i class="fas fa-credit-card"></i>
+
+            {% elif notification.type == "Income" %}
+                <i class="fas fa-wallet"></i>
+
+            {% elif notification.type == "Budget Alert" %}
+                <i class="fas fa-chart-pie"></i>
+
+            {% elif notification.type == "Bill Reminder" %}
+                <i class="fas fa-file-invoice-dollar"></i>
+
+            {% elif notification.type == "Investment" %}
+                <i class="fas fa-chart-line"></i>
+
+            {% elif notification.type == "Goal" %}
+                <i class="fas fa-bullseye"></i>
+
+            {% else %}
+                <i class="fas fa-bell"></i>
+
+            {% endif %}
+
+        </div>
+
+        <div class="notification-content">
+
+            <h4>{{ notification.title }}</h4>
+
+            <p>{{ notification.message }}</p>
+
+            <small>
+
+                <i class="fas fa-clock"></i>
+
+                {{ notification.created_at }}
+
+            </small>
+
+        </div>
+
+    </div>
+
+    <div class="notification-footer">
+
+        <div>
+
+            {% if notification.is_read == 0 %}
+
+                <span class="badge unread">
+
+                    Unread
+
+                </span>
+
+            {% else %}
+
+                <span class="badge read">
+
+                    Read
+
+                </span>
+
+            {% endif %}
+
+        </div>
+
+        <div class="notification-actions">
+
+            {% if notification.is_read == 0 %}
+
+            <a
+
+                href="{{ url_for('mark_notification_read', id=notification.id) }}"
+
+                class="btn-read">
+
+                <i class="fas fa-check"></i>
+
+                Read
+
+            </a>
+
+            {% endif %}
+
+            <a
+
+                href="{{ url_for('delete_notification', id=notification.id) }}"
+
+                class="btn-delete"
+
+                onclick="return confirm('Delete this notification?')">
+
+                <i class="fas fa-trash"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+     CENTER COLUMN
+========================================== -->
+
+<div class="center-column">
+
+    <div class="panel panel-large">
+
+        <div class="panel-header">
+
+            <h3>
+
+                <i class="fas fa-table"></i>
+
+                Notification History
+
+            </h3>
+
+            <input
+
+                type="text"
+
+                id="searchNotification"
+
+                placeholder="Search notifications...">
+
+        </div>
+
+        <div class="history-table">
+
+            <table id="notificationTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Title</th>
+
+                        <th>Type</th>
+
+                        <th>Status</th>
+
+                        <th>Priority</th>
+
+                        <th>Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for notification in notifications %}
+
+                <tr>
+
+                    <td>
+
+                        {{ notification.title }}
+
+                    </td>
+
+                    <td>
+
+                        {{ notification.type }}
+
+                    </td>
+
+                    <td>
+
+                        {% if notification.is_read == 0 %}
+
+                        <span class="badge unread">
+
+                            Unread
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge read">
+
+                            Read
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        <span class="priority {{ notification.priority|lower }}">
+
+                            {{ notification.priority }}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        {{ notification.created_at }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     RIGHT COLUMN
+========================================== -->
+
+<div class="right-column">
+
+    <!-- AI INSIGHTS -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+
+                <i class="fas fa-robot"></i>
+
+                AI Financial Insights
+
+            </h3>
+
+        </div>
+
+        <div class="insight-list">
+
+            {% if ai_insights %}
+
+                {% for insight in ai_insights %}
+
+                <div class="insight-card">
+
+                    <div class="insight-icon">
+
+                        <i class="fas fa-lightbulb"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>{{ insight }}</p>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty-card">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <p>No financial insights available.</p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- UPCOMING BILLS -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+
+                <i class="fas fa-file-invoice-dollar"></i>
+
+                Upcoming Bills
+
+            </h3>
+
+        </div>
+
+        <div class="bill-list">
+
+            {% if bills %}
+
+                {% for bill in bills %}
+
+                <div class="bill-item">
+
+                    <div>
+
+                        <strong>{{ bill.bill_name }}</strong>
+
+                        <br>
+
+                        <small>
+
+                            Due : {{ bill.due_date }}
+
+                        </small>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+
+                            ₹{{ bill.amount }}
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty-card">
+
+                    <i class="fas fa-calendar-check"></i>
+
+                    <p>No upcoming bills.</p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- QUICK STATS -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h3>
+
+                <i class="fas fa-chart-bar"></i>
+
+                Quick Statistics
+
+            </h3>
+
+        </div>
+
+        <div class="quick-stats">
+
+            <div class="stat-box">
+
+                <h2>{{ total_notifications }}</h2>
+
+                <span>Total Alerts</span>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h2>{{ unread_notifications }}</h2>
+
+                <span>Unread</span>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h2>{{ upcoming_bills }}</h2>
+
+                <span>Upcoming Bills</span>
+
+            </div>
+
+            <div class="stat-box">
+
+                <h2>{{ budget_usage }}%</h2>
+
+                <span>Budget Used</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+     JSON DATA
+========================================== -->
+
+<script
+id="notification-data"
+type="application/json">
+
+{
+
+    "totalNotifications": {{ total_notifications|tojson }},
+
+    "notificationLabels": {{ notification_labels|tojson }},
+
+    "notificationValues": {{ notification_values|tojson }},
+
+    "monthLabels": {{ month_labels|tojson }},
+
+    "monthlyValues": {{ monthly_notification_values|tojson }}
+
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static',
+filename='js/notification.js') }}"></script>
+
+{% endblock %}

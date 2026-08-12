@@ -1,0 +1,1324 @@
+/*==================================================
+    GOOGLE FONT
+==================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/*==================================================
+    ROOT VARIABLES
+==================================================*/
+
+:root{
+
+    --primary:#4f46e5;
+    --primary-light:#6366f1;
+
+    --success:#10b981;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+    --purple:#8b5cf6;
+
+    --bg:#f5f7fb;
+
+    --card:#ffffff;
+
+    --text:#1f2937;
+
+    --muted:#6b7280;
+
+    --border:#e5e7eb;
+
+    --shadow:
+    0 15px 40px rgba(0,0,0,.08);
+
+    --radius:24px;
+
+    --transition:.35s ease;
+
+}
+
+/*==================================================
+    DARK MODE
+==================================================*/
+
+body.dark-mode{
+
+    --bg:#0f172a;
+
+    --card:#1e293b;
+
+    --text:#f8fafc;
+
+    --muted:#cbd5e1;
+
+    --border:#334155;
+
+}
+
+/*==================================================
+    PAGE
+==================================================*/
+
+.financial-dashboard{
+
+    padding:30px;
+
+    background:var(--bg);
+
+    min-height:100vh;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+/*==================================================
+    HERO SECTION
+==================================================*/
+
+.hero-section{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:35px;
+
+    margin-bottom:35px;
+
+    flex-wrap:wrap;
+
+}
+
+/*==================================================
+    HERO LEFT
+==================================================*/
+
+.hero-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+}
+
+.hero-icon{
+
+    width:80px;
+
+    height:80px;
+
+    border-radius:22px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--purple)
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:34px;
+
+    box-shadow:0 15px 35px rgba(79,70,229,.25);
+
+}
+
+.hero-title h1{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+    margin-bottom:6px;
+
+}
+
+.hero-title p{
+
+    color:var(--muted);
+
+    font-size:15px;
+
+    max-width:600px;
+
+}
+
+/*==================================================
+    HEALTH SCORE CARD
+==================================================*/
+
+.health-score-card{
+
+    background:var(--card);
+
+    width:280px;
+
+    border-radius:28px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    border:1px solid var(--border);
+
+    transition:var(--transition);
+
+}
+
+.health-score-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.score-ring{
+
+    width:180px;
+
+    height:180px;
+
+    margin:auto;
+
+    position:relative;
+
+}
+
+.score-ring canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+
+}
+
+.score-content{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.score-content h2{
+
+    font-size:44px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+    margin:0;
+
+}
+
+.score-content span{
+
+    color:var(--muted);
+
+    font-size:14px;
+
+}
+
+.health-score-card h3{
+
+    margin-top:18px;
+
+    color:var(--success);
+
+    font-size:24px;
+
+}
+
+.health-score-card small{
+
+    color:var(--muted);
+
+}
+
+/*==================================================
+KPI GRID
+==================================================*/
+
+.kpi-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:24px;
+
+    margin-bottom:35px;
+
+}
+
+/*==================================================
+KPI CARD
+==================================================*/
+
+.kpi-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+    padding:28px;
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    transition:all .35s ease;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.10);
+
+}
+
+.kpi-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 25px 55px rgba(0,0,0,.18);
+
+}
+
+/* Decorative Circle */
+
+.kpi-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.10);
+
+    top:-80px;
+
+    right:-60px;
+
+}
+
+.kpi-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    bottom:-45px;
+
+    left:-45px;
+
+}
+
+/*==================================================
+KPI ICON
+==================================================*/
+
+.kpi-icon{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(10px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:30px;
+
+    flex-shrink:0;
+
+    z-index:2;
+
+}
+
+.kpi-info{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.kpi-info span{
+
+    display:block;
+
+    font-size:14px;
+
+    opacity:.90;
+
+    margin-bottom:6px;
+
+}
+
+.kpi-info h2{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:6px;
+
+}
+
+.kpi-info small{
+
+    font-size:13px;
+
+    opacity:.95;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+/*==================================================
+CARD COLORS
+==================================================*/
+
+.kpi-card.income{
+
+    background:linear-gradient(
+        135deg,
+        #10b981,
+        #059669
+    );
+
+}
+
+.kpi-card.expense{
+
+    background:linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+    );
+
+}
+
+.kpi-card.savings{
+
+    background:linear-gradient(
+        135deg,
+        #3b82f6,
+        #2563eb
+    );
+
+}
+
+.kpi-card.investment{
+
+    background:linear-gradient(
+        135deg,
+        #8b5cf6,
+        #6d28d9
+    );
+
+}
+
+/*==================================================
+QUICK INSIGHTS
+==================================================*/
+
+.quick-insights{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:22px;
+
+    margin-bottom:35px;
+
+}
+
+.insight-card{
+
+    background:var(--card);
+
+    border-radius:20px;
+
+    border:1px solid var(--border);
+
+    padding:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    transition:.3s;
+
+    box-shadow:var(--shadow);
+
+}
+
+.insight-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.insight-card i{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--purple)
+    );
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+}
+
+.insight-card h4{
+
+    font-size:28px;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+    margin-bottom:2px;
+
+}
+
+.insight-card p{
+
+    color:var(--muted);
+
+    font-size:14px;
+
+    margin:0;
+
+}
+
+/*==================================================
+DASHBOARD GRID
+==================================================*/
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
+
+    gap:28px;
+
+    margin-bottom:35px;
+
+}
+
+/*==================================================
+DASHBOARD CARD
+==================================================*/
+
+.dashboard-card{
+
+    background:var(--card);
+
+    border-radius:26px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    padding:28px;
+
+    transition:.35s;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.dashboard-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+
+    height:220px;
+
+    border-radius:50%;
+
+    background:rgba(79,70,229,.05);
+
+    right:-110px;
+
+    top:-110px;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 30px 60px rgba(0,0,0,.12);
+
+}
+
+/*==================================================
+CARD HEADER
+==================================================*/
+
+.card-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:22px;
+
+}
+
+.card-top h3{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:6px;
+
+}
+
+.card-top h3 i{
+
+    color:var(--primary);
+
+}
+
+.card-top p{
+
+    color:var(--muted);
+
+    font-size:14px;
+
+    margin:0;
+
+}
+
+/*==================================================
+BADGES
+==================================================*/
+
+.card-badge{
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+}
+
+.card-badge.success{
+
+    background:linear-gradient(135deg,#10b981,#059669);
+
+}
+
+.card-badge.warning{
+
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+
+}
+
+.card-badge.primary{
+
+    background:linear-gradient(135deg,#4f46e5,#6366f1);
+
+}
+
+.card-badge.purple{
+
+    background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+
+}
+
+/*==================================================
+MINI KPI BOXES
+==================================================*/
+
+.mini-stats{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+
+    margin-bottom:25px;
+
+}
+
+.mini-box{
+
+    border-radius:18px;
+
+    padding:18px;
+
+    color:#fff;
+
+}
+
+.mini-box span{
+
+    display:block;
+
+    opacity:.9;
+
+    font-size:13px;
+
+    margin-bottom:6px;
+
+}
+
+.mini-box h4{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:700;
+
+}
+
+.mini-box.income{
+
+    background:linear-gradient(135deg,#10b981,#059669);
+
+}
+
+.mini-box.expense{
+
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+}
+
+/*==================================================
+CHART WRAPPER
+==================================================*/
+
+.chart-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    height:340px;
+
+}
+
+.chart-wrapper canvas{
+
+    width:100% !important;
+
+    height:100% !important;
+
+}
+
+.donut-chart{
+
+    height:380px;
+
+}
+
+/*==================================================
+CHART CARD ANIMATION
+==================================================*/
+
+.dashboard-card{
+
+    animation:fadeUp .7s ease;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*==================================================
+RESPONSIVE
+==================================================*/
+
+@media(max-width:1200px){
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .mini-stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .chart-wrapper{
+
+        height:280px;
+
+    }
+
+    .donut-chart{
+
+        height:300px;
+
+    }
+
+    .card-top{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+    .card-badge{
+
+        align-self:flex-start;
+
+    }
+
+}
+
+/*==================================================
+AI SECTION
+==================================================*/
+
+.ai-section{
+
+    margin-bottom:35px;
+
+}
+
+.ai-card{
+
+    background:var(--card);
+
+    border-radius:28px;
+
+    padding:30px;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+}
+
+.ai-header{
+
+    margin-bottom:25px;
+
+}
+
+.ai-header h2{
+
+    color:var(--text);
+
+    font-size:28px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.ai-header h2 i{
+
+    color:var(--primary);
+
+}
+
+.ai-header p{
+
+    color:var(--muted);
+
+    margin-top:6px;
+
+}
+
+/*==================================================
+AI RECOMMENDATION GRID
+==================================================*/
+
+.recommendation-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:18px;
+
+}
+
+.recommendation-card{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    background:#f8fafc;
+
+    border:1px solid var(--border);
+
+    transition:.3s;
+
+}
+
+.recommendation-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.08);
+
+}
+
+.recommend-icon{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#10b981,#059669);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:22px;
+
+    flex-shrink:0;
+
+}
+
+.recommendation-card p{
+
+    margin:0;
+
+    color:var(--text);
+
+    line-height:1.7;
+
+    font-size:15px;
+
+}
+
+/*==================================================
+BOTTOM GRID
+==================================================*/
+
+.bottom-grid{
+
+    display:grid;
+
+    grid-template-columns:1.3fr .9fr;
+
+    gap:28px;
+
+}
+
+/*==================================================
+ACTIVITY LIST
+==================================================*/
+
+.activity-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.activity-item{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    background:#f8fafc;
+
+    border:1px solid var(--border);
+
+    transition:.3s;
+
+}
+
+.activity-item:hover{
+
+    transform:translateX(6px);
+
+}
+
+.activity-icon{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:24px;
+
+}
+
+.activity-icon.income{
+
+    background:linear-gradient(135deg,#10b981,#059669);
+
+}
+
+.activity-icon.expense{
+
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+}
+
+.activity-icon.savings{
+
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+
+}
+
+.activity-info{
+
+    flex:1;
+
+    margin-left:18px;
+
+}
+
+.activity-info h5{
+
+    color:var(--text);
+
+    margin:0;
+
+    font-weight:600;
+
+}
+
+.activity-info small{
+
+    color:var(--muted);
+
+}
+
+.activity-value{
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.activity-value.income{
+
+    color:#10b981;
+
+}
+
+.activity-value.expense{
+
+    color:#ef4444;
+
+}
+
+.activity-value.savings{
+
+    color:#2563eb;
+
+}
+
+/*==================================================
+SUMMARY LIST
+==================================================*/
+
+.summary-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+.summary-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:16px 18px;
+
+    border-radius:16px;
+
+    background:#f8fafc;
+
+    border:1px solid var(--border);
+
+}
+
+.summary-row span{
+
+    color:var(--muted);
+
+    font-weight:500;
+
+}
+
+.summary-row strong{
+
+    color:var(--text);
+
+    font-size:18px;
+
+}
+
+/*==================================================
+DARK MODE SUPPORT
+==================================================*/
+
+body.dark-mode .recommendation-card,
+body.dark-mode .summary-row,
+body.dark-mode .activity-item{
+
+    background:#172554;
+
+}
+
+/*==================================================
+RESPONSIVE
+==================================================*/
+
+@media(max-width:992px){
+
+    .bottom-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .financial-dashboard{
+
+        padding:20px;
+
+    }
+
+    .hero-section{
+
+        flex-direction:column;
+
+    }
+
+    .hero-title{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .health-score-card{
+
+        width:100%;
+
+        max-width:340px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .hero-title h1{
+
+        font-size:28px;
+
+    }
+
+    .kpi-info h2{
+
+        font-size:24px;
+
+    }
+
+    .card-top h3{
+
+        font-size:20px;
+
+    }
+
+}
+
+/*==================================================
+SCROLLBAR
+==================================================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}

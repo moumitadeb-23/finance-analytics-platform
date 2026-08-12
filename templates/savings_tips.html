@@ -1,0 +1,689 @@
+{% extends "base.html" %}
+
+{% block title %}
+Smart Savings Tips
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- ============================= -->
+    <!-- PAGE HEADER -->
+    <!-- ============================= -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+
+                💰 Smart Savings Tips
+
+            </h2>
+
+            <p class="text-muted">
+
+                AI-powered financial guidance to help you save smarter.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- SUMMARY CARDS -->
+    <!-- ============================= -->
+
+    <div class="row g-4">
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Income</h6>
+
+                    <h3 class="text-success">
+
+                        ₹{{ "{:,.0f}".format(income) }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Expense</h6>
+
+                    <h3 class="text-danger">
+
+                        ₹{{ "{:,.0f}".format(expense) }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Savings</h6>
+
+                    <h3 class="text-primary">
+
+                        ₹{{ "{:,.0f}".format(savings) }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6>Savings Rate</h6>
+
+                    <h3 class="text-warning">
+
+                        {{ savings_rate }}%
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <!-- ============================= -->
+    <!-- AI RECOMMENDATION -->
+    <!-- ============================= -->
+
+    <div class="card shadow border-0 rounded-4 mb-4">
+
+        <div class="card-header bg-primary text-white">
+
+            🤖 AI Personalized Recommendation
+
+        </div>
+
+        <div class="card-body">
+
+            <h5>
+
+                {{ ai_tip }}
+
+            </h5>
+
+        </div>
+
+    </div>
+
+    <!-- ============================= -->
+    <!-- SAVINGS RULE -->
+    <!-- ============================= -->
+
+    <div class="row">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-success text-white">
+
+                    📊 50-30-20 Savings Rule
+
+                </div>
+
+                <div class="card-body">
+
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item">
+
+                            🏠 50% → Needs (Food, Rent, Bills)
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            🛍 30% → Wants (Entertainment, Shopping)
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            💰 20% → Savings & Investments
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-warning text-dark">
+
+                    🚑 Emergency Fund
+
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+
+                        Financial experts recommend keeping an emergency fund equal to
+
+                        <strong>
+
+                            3–6 months of your expenses.
+
+                        </strong>
+
+                    </p>
+
+                    <p>
+
+                        Recommended Emergency Fund:
+
+                    </p>
+
+                    <h3 class="text-primary">
+
+                        ₹{{ "{:,.0f}".format(expense*6) }}
+
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- SAVINGS CALCULATOR -->
+<!-- ========================================= -->
+
+<br>
+
+<div class="card shadow border-0 rounded-4 mb-4">
+
+    <div class="card-header bg-info text-white">
+
+        🧮 Monthly Savings Calculator
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-md-5">
+
+                <label class="form-label">
+
+                    Monthly Income
+
+                </label>
+
+                <input
+                    type="number"
+                    id="incomeInput"
+                    class="form-control"
+                    placeholder="Enter Income">
+
+            </div>
+
+            <div class="col-md-5">
+
+                <label class="form-label">
+
+                    Savings Percentage
+
+                </label>
+
+                <input
+                    type="number"
+                    id="percentInput"
+                    class="form-control"
+                    value="20">
+
+            </div>
+
+            <div class="col-md-2 d-flex align-items-end">
+
+                <button
+                    class="btn btn-primary w-100"
+                    onclick="calculateSavings()">
+
+                    Calculate
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h4 class="text-success">
+
+            Recommended Monthly Savings
+
+        </h4>
+
+        <h2 id="savingResult">
+
+            ₹0
+
+        </h2>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- DAILY SAVINGS TIP -->
+<!-- ========================================= -->
+
+<div class="card shadow border-0 rounded-4 mb-4">
+
+    <div class="card-header bg-success text-white">
+
+        💡 Today's Financial Tip
+
+    </div>
+
+    <div class="card-body">
+
+        <h5 id="dailyTip">
+
+        </h5>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- INVESTMENT SUGGESTIONS -->
+<!-- ========================================= -->
+
+<div class="card shadow border-0 rounded-4 mb-4">
+
+    <div class="card-header bg-dark text-white">
+
+        📈 Beginner Investment Suggestions
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <thead>
+
+                <tr>
+
+                    <th>Risk Level</th>
+
+                    <th>Recommended Investment</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>🟢 Low</td>
+
+                    <td>Fixed Deposit (FD), Public Provident Fund (PPF)</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>🟡 Medium</td>
+
+                    <td>Mutual Funds, SIP</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>🔴 High</td>
+
+                    <td>Stocks & ETFs</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- 7 DAY SAVINGS CHALLENGE -->
+<!-- ========================================= -->
+
+<div class="card shadow border-0 rounded-4">
+
+    <div class="card-header bg-warning">
+
+        🏆 7-Day Savings Challenge
+
+    </div>
+
+    <div class="card-body">
+
+        <ol>
+
+            <li>No online food delivery today.</li>
+
+            <li>Carry your own water bottle.</li>
+
+            <li>Skip unnecessary shopping.</li>
+
+            <li>Walk for nearby places.</li>
+
+            <li>Track every expense today.</li>
+
+            <li>Save ₹100 before spending.</li>
+
+            <li>Review your weekly spending.</li>
+
+        </ol>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================= -->
+
+<script>
+
+function calculateSavings(){
+
+    let income =
+        Number(document.getElementById("incomeInput").value);
+
+    let percent =
+        Number(document.getElementById("percentInput").value);
+
+    if(income <= 0){
+
+        alert("Please enter a valid income.");
+
+        return;
+
+    }
+
+    let saving =
+        income * percent / 100;
+
+    document.getElementById("savingResult").innerHTML =
+
+        "₹" + saving.toLocaleString("en-IN");
+
+}
+
+
+
+const tips = [
+
+"💰 Pay yourself first before spending.",
+
+"🛒 Prepare a shopping list before buying.",
+
+"☕ Reduce unnecessary coffee and snacks.",
+
+"📈 Invest regularly through SIP.",
+
+"💳 Always pay credit card bills on time.",
+
+"🚗 Use public transport whenever possible.",
+
+"📚 Learn one new financial concept every week.",
+
+"🎯 Set a monthly savings target.",
+
+"💡 Track every expense to avoid overspending.",
+
+"🏦 Build an emergency fund covering 6 months of expenses."
+
+];
+
+document.getElementById("dailyTip").innerHTML =
+
+tips[Math.floor(Math.random()*tips.length)];
+
+</script>
+
+<!-- ========================================= -->
+<!-- SAVINGS HEALTH SCORE -->
+<!-- ========================================= -->
+
+<br>
+
+<div class="card shadow border-0 rounded-4 mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        🏆 Savings Health Score
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="progress mb-3" style="height:28px;">
+
+            <div
+                class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                role="progressbar"
+                style="width: {{ savings_rate }}%;">
+
+                {{ savings_rate }}%
+
+            </div>
+
+        </div>
+
+        {% if savings_rate >= 40 %}
+
+            <div class="alert alert-success">
+
+                🎉 <strong>Excellent!</strong>
+                Your savings habits are outstanding. Keep investing regularly.
+
+            </div>
+
+        {% elif savings_rate >= 20 %}
+
+            <div class="alert alert-warning">
+
+                👍 <strong>Good!</strong>
+                Your savings are healthy, but you can improve them further.
+
+            </div>
+
+        {% else %}
+
+            <div class="alert alert-danger">
+
+                ⚠ <strong>Needs Improvement!</strong>
+                Reduce unnecessary expenses and increase your monthly savings.
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- FINANCIAL HABITS -->
+<!-- ========================================= -->
+
+<div class="row">
+
+    <div class="col-lg-6">
+
+        <div class="card shadow border-0 rounded-4">
+
+            <div class="card-header bg-success text-white">
+
+                ✅ Good Financial Habits
+
+            </div>
+
+            <div class="card-body">
+
+                <ul>
+
+                    <li>Track every expense.</li>
+
+                    <li>Save before spending.</li>
+
+                    <li>Create monthly budgets.</li>
+
+                    <li>Invest regularly.</li>
+
+                    <li>Build an emergency fund.</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-6">
+
+        <div class="card shadow border-0 rounded-4">
+
+            <div class="card-header bg-danger text-white">
+
+                ❌ Habits to Avoid
+
+            </div>
+
+            <div class="card-body">
+
+                <ul>
+
+                    <li>Impulse shopping.</li>
+
+                    <li>Late bill payments.</li>
+
+                    <li>Overspending on wants.</li>
+
+                    <li>Ignoring savings goals.</li>
+
+                    <li>Using credit unnecessarily.</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- MONTHLY GOAL -->
+<!-- ========================================= -->
+
+<br>
+
+<div class="card shadow border-0 rounded-4">
+
+    <div class="card-header bg-dark text-white">
+
+        🎯 Monthly Savings Goal
+
+    </div>
+
+    <div class="card-body">
+
+        <h4>
+
+            Aim to save at least
+
+        </h4>
+
+        <h2 class="text-success">
+
+            ₹{{ "{:,.0f}".format(income*0.20) }}
+
+        </h2>
+
+        <p class="text-muted">
+
+            (20% of your total income)
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

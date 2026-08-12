@@ -1,0 +1,1697 @@
+{% extends "base.html" %}
+
+{% block title %}
+Budget Planner
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <!-- ========================================= -->
+    <!-- PAGE HEADER -->
+    <!-- ========================================= -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold display-6">
+                💰 Smart Budget Planner
+            </h2>
+
+            <p class="text-muted fs-5">
+                Manage your monthly and category-wise budgets with AI-powered financial planning.
+            </p>
+
+        </div>
+
+        <div>
+
+            <a href="/dashboard" class="btn btn-primary rounded-pill px-4 py-2 shadow">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================= -->
+    <!-- QUICK FINANCIAL SUMMARY -->
+    <!-- ========================================= -->
+
+    <div class="row g-4 mb-4">
+
+        <!-- Monthly Budget -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-lg rounded-4 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-4">
+
+                        💰
+
+                    </div>
+
+                    <h6 class="text-muted mt-2">
+
+                        Monthly Budget
+
+                    </h6>
+
+                    <h2 class="fw-bold text-primary">
+
+                        ₹{{ "{:,.0f}".format(current_budget) }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Total Expense -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-lg rounded-4 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-4">
+
+                        💸
+
+                    </div>
+
+                    <h6 class="text-muted mt-2">
+
+                        Total Expenses
+
+                    </h6>
+
+                    <h2 class="fw-bold text-danger">
+
+                        ₹{{ "{:,.0f}".format(total_expense) }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Remaining -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-lg rounded-4 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-4">
+
+                        🏦
+
+                    </div>
+
+                    <h6 class="text-muted mt-2">
+
+                        Remaining Budget
+
+                    </h6>
+
+                    <h2 class="fw-bold text-success">
+
+                        ₹{{ "{:,.0f}".format(remaining_budget) }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Budget Used -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <div class="card border-0 shadow-lg rounded-4 h-100">
+
+                <div class="card-body text-center">
+
+                    <div class="display-4">
+
+                        📊
+
+                    </div>
+
+                    <h6 class="text-muted mt-2">
+
+                        Budget Used
+
+                    </h6>
+
+                    <h2 class="fw-bold text-warning">
+
+                        {{ budget_used }}%
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================= -->
+    <!-- AI STATUS CARD -->
+    <!-- ========================================= -->
+
+    <div class="card border-0 shadow-lg rounded-4 mb-5">
+
+        <div class="card-body">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-2 text-center">
+
+                    <span style="font-size:55px;">
+                        🤖
+                    </span>
+
+                </div>
+
+                <div class="col-md-10">
+
+                    <h4 class="fw-bold">
+
+                        Smart Budget Advisor
+
+                    </h4>
+
+                    <p class="text-muted mb-2">
+
+                        AI continuously monitors your spending habits and compares them with your planned budget.
+
+                    </p>
+
+                    <span class="badge bg-success fs-6">
+
+                        ✔ Budget Tracking Active
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+<!-- MONTHLY BUDGET + CATEGORY BUDGET -->
+<!-- ========================================= -->
+
+<div class="row g-4">
+
+    <!-- Monthly Budget -->
+
+    <div class="col-lg-5">
+
+        <div class="card shadow-lg border-0 rounded-4 h-100">
+
+            <div class="card-header bg-primary text-white">
+
+                <h4 class="mb-0">
+
+                    💰 Monthly Budget
+
+                </h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+
+                    <label class="form-label fw-bold">
+
+                        Monthly Budget (₹)
+
+                    </label>
+
+                    <input
+
+                        type="number"
+
+                        class="form-control form-control-lg"
+
+                        name="monthly_budget"
+
+                        placeholder="Enter Monthly Budget"
+
+                        value="{{ current_budget }}"
+
+                        required>
+
+                    <br>
+
+                    <button
+
+                        class="btn btn-primary w-100 btn-lg">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Monthly Budget
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Current Budget -->
+
+    <div class="col-lg-7">
+
+        <div class="card shadow-lg border-0 rounded-4 h-100">
+
+            <div class="card-header bg-success text-white">
+
+                <h4 class="mb-0">
+
+                    📈 Current Budget Overview
+
+                </h4>
+
+            </div>
+
+            <div class="card-body text-center">
+
+                <div class="display-1">
+
+                    💵
+
+                </div>
+
+                <h1 class="display-4 fw-bold text-success">
+
+                    ₹{{ "{:,.0f}".format(current_budget) }}
+
+                </h1>
+
+                <p class="text-muted">
+
+                    Your current monthly spending limit.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================= -->
+<!-- CATEGORY BUDGET PLANNER -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+    <div class="card-header bg-dark text-white">
+
+        <h4 class="mb-0">
+
+            📂 Category Budget Planner
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <form
+
+            method="POST"
+
+            action="/save_category_budget">
+
+            <div class="row">
+
+                <!-- Category -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+
+                        Category
+
+                    </label>
+
+                    <select
+                    class="form-select"
+                    name="category"
+                    required>
+
+                    <option value="">Select Category</option>
+
+                    <option value="Food">🍔 Food</option>
+
+                    <option value="Shopping">🛍 Shopping</option>
+
+                    <option value="Transport">🚕 Transport</option>
+
+                    <option value="Rent">🏠 Rent</option>
+
+                    <option value="Bills">💡 Bills</option>
+
+                    <option value="Entertainment">🎬 Entertainment</option>
+
+                    <option value="Healthcare">🏥 Healthcare</option>
+
+                    <option value="Education">📚 Education</option>
+
+                    <option value="Travel">✈ Travel</option>
+
+                    <option value="Investment">📈 Investment</option>
+
+                    <option value="Other">📦 Other</option>
+
+                    </select>
+
+                </div>
+
+                <!-- Budget -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+
+                        Budget Amount (₹)
+
+                    </label>
+
+                    <input
+
+                        type="number"
+
+                        class="form-control"
+
+                        name="budget"
+
+                        placeholder="Enter Budget"
+
+                        required>
+
+                </div>
+
+            </div>
+
+            <div class="mt-4 text-center">
+
+                <button
+
+                    class="btn btn-success btn-lg px-5">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Save Category Budget
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================= -->
+<!-- SAVED CATEGORY BUDGETS -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4 mb-4">
+
+    <div class="card-header bg-info text-white">
+
+        <h4 class="mb-0">
+
+            📊 Saved Category Budgets
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-hover align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Category</th>
+
+                    <th>Budget</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% if category_budgets %}
+
+                    {% for item in category_budgets %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ item.category }}
+
+                        </td>
+
+                        <td>
+
+                            ₹{{ "{:,.0f}".format(item.budget) }}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <tr>
+
+                        <td colspan="2" class="text-center text-muted">
+
+                            No category budgets added yet.
+
+                        </td>
+
+                    </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- CATEGORY BUDGET ANALYSIS -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+    <div class="card-header bg-warning text-dark">
+
+        <h4>
+
+            🤖 AI Category Budget Analysis
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>Category</th>
+
+                    <th>Budget</th>
+
+                    <th>Spent</th>
+
+                    <th>Remaining</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for item in category_analysis %}
+
+            <tr>
+
+                <td>{{ item.category }}</td>
+
+                <td>₹{{ "%.0f"|format(item.budget) }}</td>
+
+                <td>₹{{ "%.2f"|format(item.spent) }}</td>
+
+                <td>₹{{ "%.2f"|format(item.remaining) }}</td>
+
+                <td>{{ item.status }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- AI RECOMMENDATION -->
+<!-- ========================================= -->
+
+<div class="card border-0 shadow-lg rounded-4 mt-4">
+
+    <div class="card-header bg-success text-white">
+
+        <h4>
+
+            🤖 AI Financial Recommendation
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        {% for item in category_analysis %}
+
+            {% if item.status == "🔴 Over Budget" %}
+
+                <div class="alert alert-danger">
+
+                    <strong>{{ item.category }}</strong>
+
+                    exceeded the planned budget by
+
+                    ₹{{ "%.0f"|format(item.spent-item.budget) }}
+
+                </div>
+
+            {% elif item.status == "🟠 Nearly Full" %}
+
+                <div class="alert alert-warning">
+
+                    <strong>{{ item.category }}</strong>
+
+                    has reached more than 80% of its budget.
+
+                </div>
+
+            {% else %}
+
+                <div class="alert alert-success">
+
+                    Excellent! Spending for
+
+                    <strong>{{ item.category }}</strong>
+
+                    is within budget.
+
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+    <br>
+        <!-- Budget Analytics -->
+
+    <div class="card shadow-lg border-0 rounded-4 mb-4">
+
+        <div class="card-header bg-dark text-white">
+
+            <h4 class="mb-0">
+
+                📊 Budget Analytics
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row text-center mb-4">
+
+                <div class="col-md-4">
+
+                    <div class="card border-0 bg-light">
+
+                        <div class="card-body">
+
+                            <div class="display-6">
+
+                                💸
+
+                            </div>
+
+                            <h6 class="mt-2">
+
+                                Total Expenses
+
+                            </h6>
+
+                            <h3 class="text-danger">
+
+                                ₹{{ "{:,.0f}".format(total_expense) }}
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card border-0 bg-light">
+
+                        <div class="card-body">
+
+                            <div class="display-6">
+
+                                💰
+
+                            </div>
+
+                            <h6 class="mt-2">
+
+                                Remaining Budget
+
+                            </h6>
+
+                            <h3 class="text-success">
+
+                                ₹{{ "{:,.0f}".format(remaining_budget) }}
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card border-0 bg-light">
+
+                        <div class="card-body">
+
+                            <div class="display-6">
+
+                                📈
+
+                            </div>
+
+                            <h6 class="mt-2">
+
+                                Budget Used
+
+                            </h6>
+
+                            <h3 class="text-primary">
+
+                                {{ budget_used }}%
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Progress Bar -->
+
+            <div class="d-flex justify-content-between">
+
+                <strong>Budget Usage</strong>
+
+                <strong>{{ budget_used }}%</strong>
+
+            </div>
+
+            <div class="progress mt-2 mb-4"
+                 style="height:22px; border-radius:15px;">
+
+                <div
+
+                    class="progress-bar
+
+                    {% if budget_used >= 100 %}
+
+                    bg-danger
+
+                    {% elif budget_used >= 80 %}
+
+                    bg-warning
+
+                    {% else %}
+
+                    bg-success
+
+                    {% endif %}"
+
+                    role="progressbar"
+
+                    style="width: {{ budget_used }}%;"
+
+                    aria-valuenow="{{ budget_used }}"
+
+                    aria-valuemin="0"
+
+                    aria-valuemax="100">
+
+                </div>
+
+            </div>
+
+            <!-- Status -->
+
+            {% if current_budget == 0 %}
+
+            <div class="alert alert-secondary">
+
+                ⚪ No monthly budget has been set yet.
+
+            </div>
+
+            {% elif budget_used >= 100 %}
+
+            <div class="alert alert-danger">
+
+                🚨 Your budget has been exceeded.
+                Try reducing unnecessary expenses immediately.
+
+            </div>
+
+            {% elif budget_used >= 80 %}
+
+            <div class="alert alert-warning">
+
+                ⚠️ You have already used
+                <strong>{{ budget_used }}%</strong>
+                of your monthly budget.
+
+            </div>
+
+            {% elif budget_used >= 50 %}
+
+            <div class="alert alert-info">
+
+                📊 You are halfway through your budget.
+                Keep monitoring your spending.
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-success">
+
+                ✅ Excellent!
+                Your spending is well under control.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- AI Budget Recommendation -->
+
+    <div class="card shadow-lg border-0 rounded-4 mb-4">
+
+        <div class="card-header bg-info text-white">
+
+            <h4 class="mb-0">
+
+                🤖 Smart AI Budget Recommendation
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if current_budget == 0 %}
+
+                <p>
+
+                    Set your monthly budget first to receive AI-powered recommendations.
+
+                </p>
+
+            {% elif budget_used >= 100 %}
+
+                <p>
+
+                    🚨 Your expenses have crossed your monthly budget.
+                    Reduce non-essential spending and review your recent transactions.
+
+                </p>
+
+            {% elif budget_used >= 80 %}
+
+                <p>
+
+                    ⚠️ Your budget is almost exhausted.
+                    Spend carefully for the remaining days of this month.
+
+                </p>
+
+            {% elif budget_used >= 50 %}
+
+                <p>
+
+                    👍 Your spending is balanced.
+                    Continue tracking your expenses regularly.
+
+                </p>
+
+            {% else %}
+
+                <p>
+
+                    🎉 Great financial discipline!
+                    You are managing your budget efficiently.
+
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- ========================================= -->
+<!-- AI FINANCIAL HEALTH SCORE -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+    <div class="card-header bg-primary text-white">
+
+        <h4>
+
+            🤖 AI Financial Health Score
+
+        </h4>
+
+    </div>
+
+    <div class="card-body text-center">
+
+        <h1
+            class="display-1 fw-bold text-primary">
+
+            {{ health_score }}
+
+        </h1>
+
+        <h3>
+
+            {{ health_status }}
+
+        </h3>
+
+        <div
+            class="progress mt-4"
+            style="height:25px;">
+
+            <div
+
+                class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+
+                style="width: {{ health_score }}%;">
+
+                {{ health_score }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+    <div class="card-header bg-dark text-white">
+
+        <h4>🧠 AI Spending Personality</h4>
+
+    </div>
+
+    <div class="card-body text-center">
+
+        <h2>{{ spending_personality }}</h2>
+
+        <p class="lead">
+
+            {{ personality_message }}
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+    <div class="card-header bg-success text-white">
+
+        <h4>💡 Today's Financial Quote</h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <blockquote class="blockquote text-center">
+
+            "{{ todays_quote }}"
+
+        </blockquote>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- SMART AI SUGGESTION -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+    <div class="card-header bg-dark text-white">
+
+        <h4>
+
+            💡 Smart AI Suggestions
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if health_score >= 90 %}
+
+            <div class="alert alert-success">
+
+                🎉 Excellent financial discipline.
+                Keep maintaining your savings habit.
+
+            </div>
+
+        {% elif health_score >= 75 %}
+
+            <div class="alert alert-info">
+
+                👍 Good financial management.
+                Try reducing unnecessary expenses.
+
+            </div>
+
+        {% elif health_score >= 60 %}
+
+            <div class="alert alert-warning">
+
+                ⚠ You should monitor your spending
+                more carefully this month.
+
+            </div>
+
+        {% else %}
+
+            <div class="alert alert-danger">
+
+                🚨 High financial risk detected.
+
+                Reduce discretionary spending
+                and review your budget.
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+    <br>
+        <!-- 50-30-20 Budget Rule -->
+
+    <div class="card shadow-lg border-0 rounded-4 mb-4">
+
+        <div class="card-header bg-warning">
+
+            <h4 class="mb-0">
+
+                💎 Smart 50-30-20 Rule
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row text-center">
+
+                <div class="col-md-4">
+
+                    <div class="card border-0 bg-light">
+
+                        <div class="card-body">
+
+                            <div class="display-5">
+
+                                🏠
+
+                            </div>
+
+                            <h5 class="mt-2">
+
+                                Needs
+
+                            </h5>
+
+                            <h2 class="text-primary">
+
+                                50%
+
+                            </h2>
+
+                            <small class="text-muted">
+
+                                Rent, Bills, Food, Transport
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card border-0 bg-light">
+
+                        <div class="card-body">
+
+                            <div class="display-5">
+
+                                🎉
+
+                            </div>
+
+                            <h5 class="mt-2">
+
+                                Wants
+
+                            </h5>
+
+                            <h2 class="text-warning">
+
+                                30%
+
+                            </h2>
+
+                            <small class="text-muted">
+
+                                Shopping, Movies, Entertainment
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card border-0 bg-light">
+
+                        <div class="card-body">
+
+                            <div class="display-5">
+
+                                💰
+
+                            </div>
+
+                            <h5 class="mt-2">
+
+                                Savings
+
+                            </h5>
+
+                            <h2 class="text-success">
+
+                                20%
+
+                            </h2>
+
+                            <small class="text-muted">
+
+                                Investment & Emergency Fund
+
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Smart Budget Tips -->
+
+    <div class="card shadow-lg border-0 rounded-4 mb-4">
+
+        <div class="card-header bg-success text-white">
+
+            <h4 class="mb-0">
+
+                💡 Smart Budget Tips
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <ul>
+
+                        <li>✔ Save at least 20% every month.</li>
+
+                        <li>✔ Avoid impulse purchases.</li>
+
+                        <li>✔ Track every expense.</li>
+
+                        <li>✔ Review your budget weekly.</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <ul>
+
+                        <li>✔ Build an emergency fund.</li>
+
+                        <li>✔ Invest your extra savings.</li>
+
+                        <li>✔ Reduce unnecessary subscriptions.</li>
+
+                        <li>✔ Compare monthly spending.</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Financial Goal -->
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4 class="mb-0">
+
+                🎯 Monthly Financial Goal
+
+            </h4>
+
+        </div>
+
+        <div class="card-body text-center">
+
+            {% if budget_used >= 100 %}
+
+                <h3 class="text-danger">
+
+                    🚨 Budget Exceeded
+
+                </h3>
+
+                <p>
+
+                    Focus on reducing unnecessary spending next month.
+
+                </p>
+
+            {% elif budget_used >= 80 %}
+
+                <h3 class="text-warning">
+
+                    ⚠️ Nearly Reached Budget
+
+                </h3>
+
+                <p>
+
+                    Spend carefully for the rest of the month.
+
+                </p>
+
+            {% elif budget_used >= 50 %}
+
+                <h3 class="text-info">
+
+                    📈 Good Progress
+
+                </h3>
+
+                <p>
+
+                    You're managing your budget well.
+
+                </p>
+
+            {% else %}
+
+                <h3 class="text-success">
+
+                    🏆 Excellent Financial Discipline
+
+                </h3>
+
+                <p>
+
+                    Keep saving and investing consistently.
+
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- AI MONTHLY FORECAST -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+    <div class="card-header bg-info text-white">
+
+        <h4>
+
+            📈 AI Monthly Forecast
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <h6>
+
+                    Predicted Expense
+
+                </h6>
+
+                <h2 class="text-danger">
+
+                    ₹{{ "{:,.0f}".format(predicted_expense) }}
+
+                </h2>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h6>
+
+                    Predicted Savings
+
+                </h6>
+
+                <h2 class="text-success">
+
+                    ₹{{ "{:,.0f}".format(predicted_savings) }}
+
+                </h2>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h6>
+
+                    Forecast Status
+
+                </h6>
+
+                <h4>
+
+                    {{ forecast_status }}
+
+                </h4>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- AI FORECAST ADVICE -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4 mb-4">
+
+    <div class="card-header bg-secondary text-white">
+
+        <h4>
+
+            🤖 AI Spending Forecast
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if forecast_status == "🔴 Budget Likely to Exceed" %}
+
+            <div class="alert alert-danger">
+
+                🚨 Based on your current spending pattern,
+
+                you may exceed your monthly budget.
+
+                Reduce unnecessary expenses immediately.
+
+            </div>
+
+        {% elif forecast_status == "🟠 Close to Budget Limit" %}
+
+            <div class="alert alert-warning">
+
+                ⚠ You are approaching your budget limit.
+
+                Monitor your expenses carefully.
+
+            </div>
+
+        {% else %}
+
+            <div class="alert alert-success">
+
+                🎉 Excellent!
+
+                Your spending trend indicates that you are likely to stay within budget this month.
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- CATEGORY BUDGET PIE CHART -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+    <div class="card-header bg-primary text-white">
+
+        <h4>
+
+            🥧 Category Budget Analysis
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <canvas id="budgetChart"></canvas>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- TOP SPENDING CATEGORY -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+<div class="card-header bg-danger text-white">
+
+<h4>
+
+🔥 Highest Spending Category
+
+</h4>
+
+</div>
+
+<div class="card-body">
+
+{% if category_analysis %}
+
+{% set top = category_analysis|sort(attribute='spent', reverse=True)|first %}
+
+<h2>
+
+{{ top.category }}
+
+</h2>
+
+<h4 class="text-danger">
+
+₹{{ "%.0f"|format(top.spent) }}
+
+</h4>
+
+{% endif %}
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- SAVINGS GOAL -->
+<!-- ========================================= -->
+
+<div class="card shadow-lg border-0 rounded-4 mt-4">
+
+<div class="card-header bg-success text-white">
+
+<h4>
+
+🎯 Savings Goal
+
+</h4>
+
+</div>
+
+<div class="card-body text-center">
+
+<h2>
+
+₹{{ "{:,.0f}".format(predicted_savings) }}
+
+</h2>
+
+<p>
+
+Estimated Savings This Month
+
+</p>
+
+<div class="progress" style="height:28px;">
+
+<div
+
+class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+
+style="width:{{ health_score }}%;">
+
+{{ health_score }}%
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const canvas = document.getElementById("budgetChart");
+
+    if (!canvas) {
+        return;
+    }
+
+    const labels = JSON.parse('{{ chart_labels|tojson|safe }}');
+    const budgetData = JSON.parse('{{ chart_budget|tojson|safe }}');
+    const spentData = JSON.parse('{{ chart_spent|tojson|safe }}');
+
+    new Chart(canvas, {
+
+        type: 'bar',
+
+        data: {
+
+            labels: labels,
+
+            datasets: [
+
+                {
+
+                    label: 'Budget',
+
+                    data: budgetData,
+
+                    backgroundColor: '#3b82f6'
+
+                },
+
+                {
+
+                    label: 'Spent',
+
+                    data: spentData,
+
+                    backgroundColor: '#ef4444'
+
+                }
+
+            ]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+
+                    position: 'top'
+
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true
+
+                }
+
+            }
+
+        }
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

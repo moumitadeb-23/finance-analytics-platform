@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Income
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-success text-white">
+
+                    <h3 class="mb-0">
+
+                        💰 Add New Income
+
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST">
+
+                        <!-- Income Source -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Income Source
+
+                            </label>
+
+                            <input
+
+                                type="text"
+
+                                class="form-control form-control-lg"
+
+                                name="source"
+
+                                placeholder="Example: Salary, Freelancing, Business"
+
+                                required
+
+                            >
+
+                        </div>
+
+                        <!-- Amount -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Amount (₹)
+
+                            </label>
+
+                            <input
+
+                                type="number"
+
+                                class="form-control form-control-lg"
+
+                                name="amount"
+
+                                placeholder="Enter Amount"
+
+                                min="1"
+
+                                required
+
+                            >
+
+                        </div>
+
+                        <!-- Date -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+
+                                Date
+
+                            </label>
+
+                            <input
+
+                                type="date"
+
+                                class="form-control form-control-lg"
+
+                                name="date"
+
+                                required
+
+                            >
+
+                        </div>
+
+                        <!-- Buttons -->
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+                            <a href="/dashboard" class="btn btn-secondary btn-lg">
+
+                                ⬅ Back
+
+                            </a>
+
+                            <button
+
+                                type="reset"
+
+                                class="btn btn-warning btn-lg"
+
+                            >
+
+                                🔄 Reset
+
+                            </button>
+
+                            <button
+
+                                type="submit"
+
+                                class="btn btn-success btn-lg"
+
+                            >
+
+                                💾 Save Income
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- Tips -->
+
+            <div class="card shadow border-0 mt-4">
+
+                <div class="card-header bg-info text-white">
+
+                    💡 Smart Tips
+
+                </div>
+
+                <div class="card-body">
+
+                    <ul class="mb-0">
+
+                        <li>✔ Record every income transaction.</li>
+
+                        <li>✔ Use clear income source names.</li>
+
+                        <li>✔ Enter the correct amount.</li>
+
+                        <li>✔ Select the correct transaction date.</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

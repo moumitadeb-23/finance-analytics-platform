@@ -1,0 +1,1307 @@
+/* ==========================================
+   Finance Analytics Platform REGISTER CSS
+   Premium Glassmorphism Version
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(
+        -45deg,
+        #2563eb,
+        #7c3aed,
+        #0ea5e9,
+        #4f46e5
+    );
+
+    background-size:400% 400%;
+
+    animation:gradientMove 15s ease infinite;
+
+    overflow:hidden;
+
+}
+
+/* Animated Background */
+
+@keyframes gradientMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+/* ==========================================
+   Register Card
+========================================== */
+
+.container{
+
+    width:1150px;
+
+    min-height:700px;
+
+    display:flex;
+
+    overflow:hidden;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(25px);
+
+    -webkit-backdrop-filter:blur(25px);
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+
+    0 30px 60px rgba(0,0,0,.28),
+
+    0 0 80px rgba(255,255,255,.12);
+
+    transition:.4s;
+
+}
+
+.container:hover{
+
+    transform:translateY(-6px);
+
+}
+
+/* ==========================================
+   Left Panel
+========================================== */
+
+.left-panel{
+    animation:leftFloat 5s ease-in-out infinite;
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:70px;
+
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        rgba(37,99,235,.95),
+        rgba(99,102,241,.90)
+    );
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.left-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+
+    height:250px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:50%;
+
+    top:-80px;
+
+    left:-80px;
+
+}
+
+.left-panel::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+
+    height:220px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:50%;
+
+    bottom:-80px;
+
+    right:-80px;
+
+}
+
+.left-panel>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.left-panel h1{
+
+    font-size:68px;
+
+    margin-bottom:15px;
+
+}
+
+.left-panel h2{
+
+    font-size:48px;
+
+    margin-bottom:18px;
+
+}
+
+.left-panel p{
+
+    font-size:19px;
+
+    line-height:32px;
+
+    margin-bottom:35px;
+
+    opacity:.95;
+
+}
+
+.left-panel ul{
+
+    list-style:none;
+
+}
+
+.left-panel li{
+
+    margin:14px 0;
+
+    font-size:18px;
+
+}
+
+/* ==========================================
+   Right Panel
+========================================== */
+
+.right-panel{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:70px;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(20px);
+
+}
+
+form{
+
+    width:100%;
+
+    max-width:430px;
+
+}
+
+form h2{
+
+    text-align:center;
+
+    color:#2563eb;
+
+    margin-bottom:30px;
+
+    font-size:44px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+   Inputs
+========================================== */
+
+input{
+
+    width:100%;
+
+    height:58px;
+
+    border-radius:16px;
+
+    border:1px solid #ddd;
+
+    padding:0 18px;
+
+    margin-bottom:18px;
+
+    font-size:16px;
+
+    transition:.3s;
+
+    background:#fff;
+
+}
+
+input:focus{
+
+border-color:#4f46e5;
+
+box-shadow:
+
+0 0 0 4px
+
+rgba(99,102,241,.12);
+
+transform:scale(1.02);
+
+}
+
+/* ==========================================
+   Password
+========================================== */
+
+.password-box{
+
+    position:relative;
+
+}
+
+.password-box i{
+
+    position:absolute;
+
+    right:18px;
+
+    top:20px;
+
+    color:#777;
+
+    cursor:pointer;
+
+}
+
+/* ==========================================
+   Password Strength
+========================================== */
+
+.strength{
+
+    width:100%;
+
+    height:8px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:#ddd;
+
+    margin-top:5px;
+
+    margin-bottom:10px;
+
+}
+
+#strengthBar{
+
+    width:0;
+
+    height:100%;
+
+    background:red;
+
+    transition:.4s;
+
+}
+
+small{
+
+    display:block;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin-bottom:15px;
+
+}
+
+/* ==========================================
+   Terms
+========================================== */
+
+.terms{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:20px 0;
+
+    font-size:15px;
+
+}
+
+.terms input{
+
+    width:auto;
+
+    height:auto;
+
+    margin:0;
+
+}
+
+/* ==========================================
+   Button
+========================================== */
+
+button{
+
+width:100%;
+
+height:58px;
+
+border:none;
+
+border-radius:15px;
+
+background:linear-gradient(
+
+135deg,
+
+#2563eb,
+
+#4f46e5,
+
+#7c3aed
+
+);
+
+background-size:250%;
+
+color:white;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.4s;
+
+}
+
+button:hover{
+
+background-position:right;
+
+transform:translateY(-3px);
+
+box-shadow:
+
+0 18px 30px
+
+rgba(79,70,229,.35);
+
+}
+
+button:disabled{
+
+    background:#94a3b8;
+
+    cursor:not-allowed;
+
+}
+
+/* ==========================================
+   Footer Links
+========================================== */
+
+form p{
+
+    margin-top:25px;
+
+    text-align:center;
+
+}
+
+form a{
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+form a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================
+   Alert
+========================================== */
+
+.alert-error{
+
+    background:#ffe5e5;
+
+    color:#c62828;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:992px){
+
+    .container{
+
+        width:95%;
+
+        flex-direction:column;
+
+    }
+
+    .left-panel{
+
+        padding:40px;
+
+        text-align:center;
+
+    }
+
+    .right-panel{
+
+        padding:40px;
+
+    }
+
+    .left-panel h1{
+
+        font-size:50px;
+
+    }
+
+    .left-panel h2{
+
+        font-size:36px;
+
+    }
+
+    form h2{
+
+        font-size:34px;
+
+    }
+
+}
+
+.container{
+
+transition:
+
+transform .5s ease,
+
+opacity .5s ease;
+
+}
+
+.container.fade-out{
+
+opacity:0;
+
+transform:
+
+translateX(120px)
+
+scale(.92);
+
+}
+
+/*==========================
+INPUT BOXES
+===========================*/
+
+.input-box{
+
+position:relative;
+
+margin-bottom:22px;
+
+}
+
+.input-box input{
+
+padding-left:50px;
+
+}
+
+.input-box>i:first-child{
+
+position:absolute;
+
+left:18px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+color:#5b7cff;
+
+font-size:16px;
+
+}
+
+.password-box .toggle-password{
+
+position:absolute;
+
+right:18px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+cursor:pointer;
+
+color:#666;
+
+}
+
+@keyframes leftFloat{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-8px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/*==================================================
+PREMIUM BACKGROUND DECORATION
+==================================================*/
+
+body{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+/* Floating Circle 1 */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:320px;
+
+height:320px;
+
+left:-120px;
+
+top:-120px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.12);
+
+filter:blur(2px);
+
+animation:float1 10s ease-in-out infinite;
+
+z-index:-1;
+
+}
+
+/* Floating Circle 2 */
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+width:260px;
+
+height:260px;
+
+right:-80px;
+
+bottom:-80px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.10);
+
+animation:float2 12s ease-in-out infinite;
+
+z-index:-1;
+
+}
+
+/*==================================================
+GLASS CARD
+==================================================*/
+
+.container{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+/* Glass Reflection */
+
+.container::before{
+
+content:"";
+
+position:absolute;
+
+top:-120px;
+
+left:-120px;
+
+width:280px;
+
+height:900px;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.18),
+
+transparent
+
+);
+
+transform:rotate(25deg);
+
+animation:shine 8s linear infinite;
+
+pointer-events:none;
+
+}
+
+/*==================================================
+ANIMATIONS
+==================================================*/
+
+@keyframes shine{
+
+0%{
+
+left:-300px;
+
+}
+
+100%{
+
+left:1300px;
+
+}
+
+}
+
+@keyframes float1{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(25px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes float2{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-25px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/*==================================================
+CARD HOVER
+==================================================*/
+
+.container{
+
+transition:.45s;
+
+}
+
+.container:hover{
+
+transform:translateY(-6px);
+
+box-shadow:
+
+0 35px 80px rgba(0,0,0,.28),
+
+0 0 50px rgba(255,255,255,.18);
+
+}
+
+/*==================================================
+FORM ANIMATION
+==================================================*/
+
+.right-panel form{
+
+animation:fadeUp .8s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/*==================================================
+FEATURE ICONS
+==================================================*/
+
+.feature{
+
+transition:.35s;
+
+cursor:default;
+
+}
+
+.feature:hover{
+
+transform:translateX(12px);
+
+color:#ffffff;
+
+}
+
+.feature i{
+
+transition:.35s;
+
+}
+
+.feature:hover i{
+
+transform:scale(1.2);
+
+color:#ffd54f;
+
+}
+
+/*==================================================
+PREMIUM INPUT EFFECTS
+==================================================*/
+
+.input-box{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.input-box input{
+
+transition:all .35s ease;
+
+}
+
+.input-box input:hover{
+
+border-color:#4f46e5;
+
+}
+
+.input-box input:focus{
+
+transform:translateY(-2px);
+
+box-shadow:
+
+0 10px 25px rgba(79,70,229,.20);
+
+}
+
+.input-box::after{
+
+content:"";
+
+position:absolute;
+
+left:-100%;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+background:linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.35),
+
+transparent
+
+);
+
+transition:.6s;
+
+pointer-events:none;
+
+}
+
+.input-box:hover::after{
+
+left:100%;
+
+}
+
+/*==================================================
+BUTTON
+==================================================*/
+
+button{
+
+position:relative;
+
+overflow:hidden;
+
+transition:.4s;
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#2563eb,
+
+#4f46e5,
+
+#7c3aed
+
+);
+
+background-size:300%;
+
+}
+
+button:hover{
+
+background-position:right center;
+
+transform:translateY(-4px);
+
+box-shadow:
+
+0 20px 35px
+
+rgba(79,70,229,.35);
+
+}
+
+button:active{
+
+transform:scale(.98);
+
+}
+
+/*==================================================
+BUTTON SHINE
+==================================================*/
+
+button::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-100%;
+
+width:100%;
+
+height:100%;
+
+background:
+
+linear-gradient(
+
+120deg,
+
+transparent,
+
+rgba(255,255,255,.35),
+
+transparent
+
+);
+
+transition:.7s;
+
+}
+
+button:hover::before{
+
+left:100%;
+
+}
+
+/*==================================================
+LOGO
+==================================================*/
+
+.logo{
+
+animation:logoFloat 4s ease-in-out infinite;
+
+}
+
+@keyframes logoFloat{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/*==================================================
+HEADINGS
+==================================================*/
+
+.left-panel h1{
+
+letter-spacing:1px;
+
+}
+
+.left-panel h2{
+
+margin-top:20px;
+
+margin-bottom:15px;
+
+font-weight:700;
+
+}
+
+.right-panel h2{
+
+position:relative;
+
+display:inline-block;
+
+left:50%;
+
+transform:translateX(-50%);
+
+}
+
+.right-panel h2::after{
+
+content:"";
+
+position:absolute;
+
+left:50%;
+
+bottom:-10px;
+
+transform:translateX(-50%);
+
+width:80px;
+
+height:4px;
+
+border-radius:30px;
+
+background:linear-gradient(
+
+90deg,
+
+#2563eb,
+
+#7c3aed
+
+);
+
+}
+
+/*==================================================
+LOGIN LINK
+==================================================*/
+
+.login-link{
+
+margin-top:25px;
+
+text-align:center;
+
+}
+
+.login-link a{
+
+transition:.3s;
+
+}
+
+.login-link a:hover{
+
+color:#7c3aed;
+
+letter-spacing:.5px;
+
+}
+
+/*==================================================
+FEATURES
+==================================================*/
+
+.features{
+
+margin-top:40px;
+
+}
+
+.feature{
+
+padding:6px 0;
+
+transition:.3s;
+
+}
+
+.feature:hover{
+
+padding-left:12px;
+
+}
+
+/*==================================================
+TERMS
+==================================================*/
+
+.terms{
+
+transition:.3s;
+
+}
+
+.terms:hover{
+
+transform:translateX(4px);
+
+}
+
+/*==================================================
+PAGE LOAD
+==================================================*/
+
+.container{
+
+animation:pageOpen .8s ease;
+
+}
+
+@keyframes pageOpen{
+
+0%{
+
+opacity:0;
+
+transform:scale(.94);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+}
+
+/*======================================
+Smooth Transition
+=======================================*/
+
+.container{
+
+will-change:transform,opacity;
+
+}
+
+.password-box{
+
+    position:relative;
+
+}
+
+.toggle-password{
+
+    position:absolute;
+
+    right:18px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    color:#777;
+
+    z-index:100;
+
+    pointer-events:auto;
+
+}

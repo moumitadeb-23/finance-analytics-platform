@@ -1,0 +1,975 @@
+/* ==========================================
+   Finance Analytics Platform LOGIN CSS
+   Premium Glassmorphism Version
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(
+        -45deg,
+        #2563eb,
+        #7c3aed,
+        #0ea5e9,
+        #4f46e5
+    );
+
+    background-size:400% 400%;
+
+    animation:gradientMove 15s ease infinite;
+
+    overflow:hidden;
+
+}
+
+/* Animated Background */
+
+@keyframes gradientMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+/* ==========================================
+   Login Card
+========================================== */
+
+.login-container{
+
+width:1150px;
+
+min-height:680px;
+
+display:flex;
+
+flex-direction:row;
+
+justify-content:space-between;
+
+align-items:stretch;
+
+overflow:hidden;
+
+border-radius:28px;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(20px);
+
+-webkit-backdrop-filter:blur(20px);
+
+border:1px solid rgba(255,255,255,.18);
+
+box-shadow:
+
+0 25px 60px rgba(0,0,0,.25);
+
+}
+
+.login-container:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.25);
+
+}
+
+.login-container:hover{
+
+    transform:translateY(-6px);
+
+}
+
+/* ==========================================
+   Left Side
+========================================== */
+
+.left{
+
+width:50%;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+padding:70px;
+
+background:linear-gradient(
+
+135deg,
+
+#2563eb,
+
+#4f46e5
+
+);
+
+color:white;
+
+text-align:center;
+
+position:relative;
+
+}
+
+.left::before{
+
+content:"";
+
+position:absolute;
+
+width:280px;
+
+height:280px;
+
+background:rgba(255,255,255,.12);
+
+border-radius:50%;
+
+top:-100px;
+
+left:-100px;
+
+filter:blur(5px);
+
+animation:float1 6s ease-in-out infinite;
+
+}
+
+.left::after{
+
+content:"";
+
+position:absolute;
+
+width:220px;
+
+height:220px;
+
+background:rgba(255,255,255,.10);
+
+border-radius:50%;
+
+bottom:-70px;
+
+right:-70px;
+
+filter:blur(5px);
+
+animation:float2 8s ease-in-out infinite;
+
+}
+
+/* ==========================================
+   Branding
+========================================== */
+
+.brand{
+
+    z-index:2;
+
+}
+
+.brand h1{
+
+    font-size:70px;
+
+    margin-bottom:10px;
+
+}
+
+.brand h2{
+
+font-size:56px;
+
+font-weight:700;
+
+letter-spacing:1px;
+
+}
+
+.brand p{
+
+    font-size:20px;
+
+    opacity:.95;
+
+    line-height:32px;
+
+}
+
+.left h3{
+
+font-size:42px;
+
+font-weight:700;
+
+margin-top:45px;
+
+}
+
+.left p{
+
+font-size:20px;
+
+line-height:34px;
+
+opacity:.95;
+
+}
+
+/* ==========================================
+   Right Side
+========================================== */
+
+.right{
+
+width:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:60px;
+
+background:rgba(255,255,255,.92);
+
+}
+
+form{
+
+width:100%;
+
+max-width:430px;
+
+padding:45px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.88);
+
+backdrop-filter:blur(30px);
+
+box-shadow:
+
+0 15px 40px rgba(0,0,0,.20);
+
+transition:.4s;
+
+}
+
+form:hover{
+
+transform:translateY(-4px);
+
+}
+
+form h2{
+
+    text-align:center;
+
+    color:#2563eb;
+
+    margin-bottom:35px;
+
+    font-size:45px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+   Inputs
+========================================== */
+
+input{
+
+width:100%;
+
+height:60px;
+
+border-radius:16px;
+
+border:1px solid rgba(0,0,0,.08);
+
+padding:0 18px;
+
+margin-bottom:22px;
+
+font-size:16px;
+
+background:rgba(255,255,255,.92);
+
+transition:.35s;
+
+}
+
+input:focus{
+
+border:2px solid #2563eb;
+
+box-shadow:
+
+0 0 20px rgba(37,99,235,.18);
+
+transform:scale(1.02);
+
+}
+
+/* ==========================================
+   Password
+========================================== */
+
+.password-box{
+
+    position:relative;
+
+}
+
+.password-box i{
+
+    position:absolute;
+
+    right:20px;
+
+    top:21px;
+
+    cursor:pointer;
+
+    color:#777;
+
+}
+
+/* ================================
+   Remember Me
+================================ */
+
+.remember{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin:18px 0 28px;
+
+font-size:15px;
+
+}
+
+.remember-label{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+cursor:pointer;
+
+font-weight:500;
+
+color:#374151;
+
+user-select:none;
+
+}
+
+.remember-label input{
+
+display:none;
+
+}
+
+.checkmark{
+
+width:22px;
+
+height:22px;
+
+border:2px solid #2563eb;
+
+border-radius:6px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+transition:.3s;
+
+background:white;
+
+}
+
+.checkmark::after{
+
+content:"✔";
+
+font-size:13px;
+
+font-weight:bold;
+
+color:white;
+
+display:none;
+
+}
+
+.remember-label input:checked + .checkmark{
+
+background:#2563eb;
+
+border-color:#2563eb;
+
+}
+
+.remember-label input:checked + .checkmark::after{
+
+display:block;
+
+}
+
+.remember a{
+
+color:#2563eb;
+
+font-weight:600;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.remember a:hover{
+
+color:#4f46e5;
+
+text-decoration:underline;
+
+}
+
+/* ==========================================
+   Button
+========================================== */
+
+button{
+
+width:100%;
+
+height:60px;
+
+border:none;
+
+border-radius:16px;
+
+background:linear-gradient(
+135deg,
+#2563eb,
+#7c3aed
+);
+
+color:white;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+overflow:hidden;
+
+position:relative;
+
+transition:.35s;
+
+}
+
+button::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-120%;
+
+width:80%;
+
+height:100%;
+
+background:linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.45),
+
+transparent
+
+);
+
+transform:skewX(-25deg);
+
+transition:.7s;
+
+}
+
+button:hover::before{
+
+left:130%;
+
+}
+
+button:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+
+0 18px 35px rgba(37,99,235,.35);
+
+background:linear-gradient(
+
+135deg,
+
+#3b82f6,
+
+#9333ea
+
+);
+
+}
+
+
+/* ==========================================
+   Links
+========================================== */
+
+form p{
+
+    margin-top:25px;
+
+    text-align:center;
+
+}
+
+form a{
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+}
+
+form a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================
+   Alerts
+========================================== */
+
+.alert-error{
+
+    background:#ffe5e5;
+
+    color:#c62828;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:992px){
+
+    .login-container{
+
+        width:95%;
+
+        flex-direction:column;
+
+    }
+
+    .left{
+
+        padding:40px;
+
+    }
+
+    .right{
+
+        padding:40px;
+
+    }
+
+    .brand h2{
+
+        font-size:38px;
+
+    }
+
+    form h2{
+
+        font-size:34px;
+
+    }
+
+}
+
+/* ===================================================
+   FLOATING BACKGROUND
+=================================================== */
+
+.bg-shape{
+
+position:fixed;
+
+border-radius:50%;
+
+filter:blur(90px);
+
+opacity:.45;
+
+animation:float 10s ease-in-out infinite;
+
+z-index:-1;
+
+}
+
+.shape1{
+
+width:320px;
+
+height:320px;
+
+background:#00d4ff;
+
+top:-80px;
+
+left:-80px;
+
+}
+
+.shape2{
+
+width:260px;
+
+height:260px;
+
+background:#7c3aed;
+
+bottom:-60px;
+
+right:-50px;
+
+animation-delay:3s;
+
+}
+
+.shape3{
+
+width:180px;
+
+height:180px;
+
+background:#38bdf8;
+
+top:50%;
+
+left:55%;
+
+animation-delay:6s;
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-40px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}
+
+/* =====================================
+   Floating Labels
+===================================== */
+
+.input-box{
+
+position:relative;
+
+margin-bottom:25px;
+
+}
+
+.input-box input{
+
+width:100%;
+
+height:60px;
+
+padding:20px 18px 0;
+
+border-radius:16px;
+
+border:1px solid #d6d6d6;
+
+background:#fff;
+
+font-size:16px;
+
+transition:.35s;
+
+}
+
+.input-box label{
+
+position:absolute;
+
+left:18px;
+
+top:18px;
+
+font-size:16px;
+
+color:#777;
+
+pointer-events:none;
+
+transition:.3s;
+
+background:white;
+
+padding:0 6px;
+
+}
+
+.input-box input:focus{
+
+border-color:#2563eb;
+
+box-shadow:0 0 18px rgba(37,99,235,.20);
+
+}
+
+.input-box input:focus+label,
+
+.input-box input:valid+label{
+
+top:-10px;
+
+left:14px;
+
+font-size:13px;
+
+font-weight:600;
+
+color:#2563eb;
+
+}
+
+/* ==========================================
+   3D Glass Hover Effect
+========================================== */
+
+.login-container{
+
+transform-style:preserve-3d;
+
+perspective:1000px;
+
+transition:
+
+transform .25s ease,
+
+box-shadow .25s ease;
+
+cursor:default;
+
+}
+
+.login-container:hover{
+
+box-shadow:
+
+0 35px 80px rgba(0,0,0,.30),
+
+0 15px 35px rgba(37,99,235,.20);
+
+}
+
+@keyframes float1{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-25px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes float2{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(20px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===============================
+Page Transition
+=============================== */
+
+.login-container{
+
+transition:
+
+transform .5s ease,
+
+opacity .5s ease;
+
+}
+
+.login-container.fade-out{
+
+opacity:0;
+
+transform:
+
+translateX(-120px)
+
+scale(.92);
+
+}
+
+/*======================================
+Smooth Transition
+=======================================*/
+
+.login-container{
+
+will-change:transform,opacity;
+
+}
+
+
+.right h2{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.right p{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.register-link{
+    margin-top:18px;
+    text-align:center;
+}
+
+.register-link a{
+    color:#4361ee;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.register-link a:hover{
+    text-decoration:underline;
+}
+
+button{
+    margin-top:15px;
+}

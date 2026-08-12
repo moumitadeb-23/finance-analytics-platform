@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% block title %}
+Expense History
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+
+    <!-- Page Heading -->
+
+    <div class="row mb-4">
+
+        <div class="col-md-8">
+
+            <h2 class="fw-bold">
+                💸 Expense History
+            </h2>
+
+            <p class="text-muted">
+                View and manage all your recorded expenses.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Summary Cards -->
+
+    <div class="row mb-4">
+
+        <div class="col-md-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+
+                        Total Transactions
+
+                    </h6>
+
+                    <h2 class="text-primary">
+
+                        {{ expenses|length }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h6 class="text-muted">
+
+                        Total Expense
+
+                    </h6>
+
+                    <h2 class="text-danger">
+
+                        ₹{{ "%.2f"|format(expenses|sum(attribute='amount')) }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Expense Table -->
+
+    <div class="card shadow border-0 rounded-4">
+
+        <div class="card-header bg-danger text-white">
+
+            <h4 class="mb-0">
+
+                📋 Expense Records
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if expenses %}
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Category</th>
+
+                            <th>Amount</th>
+
+                            <th>Description</th>
+
+                            <th>Date</th>
+
+                            <th class="text-center">
+
+                                Action
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for expense in expenses %}
+
+                        <tr>
+
+                            <td>
+
+                                {{ loop.index }}
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-primary">
+
+                                    {{ expense.category }}
+
+                                </span>
+
+                            </td>
+
+                            <td class="fw-bold text-danger">
+
+                                ₹{{ "%.2f"|format(expense.amount) }}
+
+                            </td>
+
+                            <td>
+
+                                {{ expense.description }}
+
+                            </td>
+
+                            <td>
+
+                                {{ expense.date }}
+
+                            </td>
+
+                            <td class="text-center">
+
+                                <a
+
+                                    href="/delete_expense/{{ expense.id }}"
+
+                                    class="btn btn-sm btn-outline-danger"
+
+                                    onclick="return confirm('Are you sure you want to delete this expense?')">
+
+                                    🗑 Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="text-center py-5">
+
+                <h1>
+
+                    💸
+
+                </h1>
+
+                <h4>
+
+                    No Expenses Found
+
+                </h4>
+
+                <p class="text-muted">
+
+                    Start tracking your expenses by adding your first expense.
+
+                </p>
+
+                <a
+
+                    href="{{ url_for('expense') }}"
+
+                    class="btn btn-danger">
+
+                    ➕ Add Expense
+
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

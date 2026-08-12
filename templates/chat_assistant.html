@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         BASIC META
+    =========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+
+    <title>FinanceAI Assistant | Finance Analytics Platform</title>
+
+    <meta name="description"
+          content="AI Powered Smart Financial Assistant">
+
+    <meta name="theme-color"
+          content="#2563eb">
+
+    <!-- ==========================================
+         GOOGLE FONT
+    =========================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- ==========================================
+         FONT AWESOME
+    =========================================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ==========================================
+         AOS ANIMATION
+    =========================================== -->
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+    <!-- ==========================================
+         HIGHLIGHT JS
+    =========================================== -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+
+    <!-- ==========================================
+         CHART JS
+    =========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- ==========================================
+         MARKDOWN PARSER
+    =========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- ==========================================
+         HIGHLIGHT JS
+    =========================================== -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+    <!-- ==========================================
+         SWEET ALERT
+    =========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- ==========================================
+         ANIMATE ON SCROLL
+    =========================================== -->
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- ==========================================
+         CSS
+    =========================================== -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/chat_assistant.css') }}">
+
+</head>
+
+<body>
+
+<div class="chat-application">
+
+    <!-- ==========================================
+         SIDEBAR
+    =========================================== -->
+
+    <aside class="sidebar">
+
+                <!-- ==========================================
+             SIDEBAR HEADER
+        =========================================== -->
+
+        <div class="sidebar-header">
+
+            <div class="logo">
+
+                <div class="logo-icon">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </div>
+
+                <div class="logo-text">
+
+                    <h2>FinanceAI</h2>
+
+                    <span>Finance Analytics Platform</span>
+
+                </div>
+
+            </div>
+
+            <button id="collapseSidebar"
+                    class="icon-btn">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+        <!-- ==========================================
+             NEW CHAT BUTTON
+        =========================================== -->
+
+        <div class="sidebar-section">
+
+            <button id="newChatBtn"
+                    class="new-chat-button">
+
+                <i class="fa-solid fa-plus"></i>
+
+                <span>New Chat</span>
+
+            </button>
+
+        </div>
+
+        <!-- ==========================================
+             SEARCH CHAT
+        =========================================== -->
+
+        <div class="sidebar-section">
+
+            <div class="search-container">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input type="text"
+                       id="chatSearch"
+                       placeholder="Search conversations...">
+
+            </div>
+
+        </div>
+
+        <!-- ==========================================
+             CHAT HISTORY
+        =========================================== -->
+
+        <div class="sidebar-section history-section">
+
+            <div class="sidebar-title">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <span>Recent Chats</span>
+
+            </div>
+
+            <div id="chatHistory"
+                 class="history-list">
+
+                <!-- Loaded dynamically -->
+
+            </div>
+
+        </div>
+
+        <!-- ==========================================
+             QUICK ACTIONS
+        =========================================== -->
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-title">
+
+                <i class="fa-solid fa-bolt"></i>
+
+                <span>Quick Actions</span>
+
+            </div>
+
+            <button class="sidebar-item"
+                    onclick="location.href='/dashboard'">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Dashboard</span>
+
+            </button>
+
+            <button class="sidebar-item"
+                    onclick="location.href='/analytics'">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>Analytics</span>
+
+            </button>
+
+            <button class="sidebar-item"
+                    onclick="location.href='/investment'">
+
+                <i class="fa-solid fa-coins"></i>
+
+                <span>Investments</span>
+
+            </button>
+
+            <button class="sidebar-item"
+                    onclick="location.href='/financial_goals'">
+
+                <i class="fa-solid fa-bullseye"></i>
+
+                <span>Goals</span>
+
+            </button>
+
+            <button class="sidebar-item"
+                    onclick="location.href='/notification-center'">
+
+                <i class="fa-solid fa-bell"></i>
+
+                <span>Notifications</span>
+
+            </button>
+
+        </div>
+
+        <!-- ==========================================
+             DOCUMENT TOOLS
+        =========================================== -->
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-title">
+
+                <i class="fa-solid fa-folder-open"></i>
+
+                <span>AI Tools</span>
+
+            </div>
+
+            <button id="uploadDocumentBtn"
+                    class="sidebar-item">
+
+                <i class="fa-solid fa-file-arrow-up"></i>
+
+                <span>Upload Document</span>
+
+            </button>
+
+            <button id="generateChartBtn"
+                    class="sidebar-item">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>Generate Chart</span>
+
+            </button>
+
+            <button id="generateReportBtn"
+                    class="sidebar-item">
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+                <span>Generate Report</span>
+
+            </button>
+
+        </div>
+
+        <!-- ==========================================
+             SETTINGS
+        =========================================== -->
+
+        <div class="sidebar-section">
+
+            <div class="sidebar-title">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>Settings</span>
+
+            </div>
+
+            <button
+            id="themeToggle"
+            type="button"
+            class="sidebar-item">
+
+                <i class="fa-solid fa-moon"></i>
+
+                <span>Dark Mode</span>
+
+            </button>
+
+            <button id="clearConversation"
+                    class="sidebar-item">
+
+                <i class="fa-solid fa-trash"></i>
+
+                <span>Clear Conversation</span>
+
+            </button>
+
+        </div>
+
+        <!-- ==========================================
+             USER PROFILE
+        =========================================== -->
+
+
+    </aside>
+
+    <!-- ==========================================
+         MAIN CHAT AREA
+    =========================================== -->
+
+    <main class="chat-main">
+
+        <!-- ==========================================
+             CHAT HEADER
+        =========================================== -->
+
+        <header class="chat-header">
+
+            <div class="header-left">
+
+                <div class="assistant-avatar">
+
+                    <div class="avatar-ring"></div>
+
+                    <i class="fa-solid fa-robot"></i>
+
+                </div>
+
+                <div class="assistant-details">
+
+                    <h2>
+
+                        FinanceAI Assistant
+
+                    </h2>
+
+                    <div class="assistant-status">
+
+                        <span class="status-dot"></span>
+
+                        <span id="assistantStatus">
+
+                            Online
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="header-center">
+
+                <div class="model-badge">
+
+                    <i class="fa-solid fa-microchip"></i>
+
+                    <span id="modelName">
+
+                        Ollama
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="header-right">
+
+                <button id="uploadBtn"
+
+                        class="icon-button"
+
+                        title="Upload File">
+
+                    <i class="fa-solid fa-paperclip"></i>
+
+                </button>
+
+                <button id="voiceBtn"
+
+                        class="icon-button"
+
+                        title="Voice Chat">
+
+                    <i class="fa-solid fa-microphone"></i>
+
+                </button>
+
+                <button id="chartBtn"
+
+                        class="icon-button"
+
+                        title="Generate Chart">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                </button>
+
+                <button id="reportBtn"
+
+                        class="icon-button"
+
+                        title="Generate Report">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                </button>
+
+                <button id="themeBtn"
+
+                        class="icon-button"
+
+                        title="Dark Mode">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </button>
+
+                <button id="settingsBtn"
+
+                        class="icon-button"
+
+                        title="Settings">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ==========================================
+             CHAT CONTAINER
+        =========================================== -->
+
+        <section class="chat-container"
+
+                 id="chatContainer">
+
+                             <!-- ==========================================
+                 WELCOME SCREEN
+            =========================================== -->
+
+            <div class="welcome-screen"
+                 id="welcomeScreen">
+
+                <div class="welcome-logo">
+
+                    <div class="logo-circle">
+
+                        <i class="fa-solid fa-robot"></i>
+
+                    </div>
+
+                </div>
+
+                <h1>
+
+                    Welcome to FinanceAI
+
+                </h1>
+
+                <p>
+
+                    Your intelligent financial assistant powered by Ollama.
+                    Ask anything about your income, expenses, investments,
+                    budgets, reports, analytics or uploaded documents.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 SUGGESTED PROMPTS
+            =========================================== -->
+
+            <div class="suggestion-grid">
+
+                <div class="suggestion-card"
+                     data-prompt="Analyze my monthly expenses">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <h3>
+
+                        Expense Analysis
+
+                    </h3>
+
+                    <p>
+
+                        Analyze my monthly expenses and suggest improvements.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="suggestion-card"
+                     data-prompt="Create my financial report">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    <h3>
+
+                        Financial Report
+
+                    </h3>
+
+                    <p>
+
+                        Generate a complete financial report with AI insights.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="suggestion-card"
+                     data-prompt="How can I improve my savings?">
+
+                    <i class="fa-solid fa-piggy-bank"></i>
+
+                    <h3>
+
+                        Savings Tips
+
+                    </h3>
+
+                    <p>
+
+                        Get personalized recommendations to improve savings.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="suggestion-card"
+                     data-prompt="Show investment performance">
+
+                    <i class="fa-solid fa-coins"></i>
+
+                    <h3>
+
+                        Investment Review
+
+                    </h3>
+
+                    <p>
+
+                        Review portfolio performance with AI suggestions.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="suggestion-card"
+                     data-prompt="Generate budget utilization chart">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    <h3>
+
+                        Budget Chart
+
+                    </h3>
+
+                    <p>
+
+                        Generate beautiful charts from your finance data.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="suggestion-card"
+                     data-prompt="Analyze uploaded document">
+
+                    <i class="fa-solid fa-file-arrow-up"></i>
+
+                    <h3>
+
+                        Document Analysis
+
+                    </h3>
+
+                    <p>
+
+                        Upload PDF, Excel or image and let AI analyze it.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 CHAT MESSAGES
+            =========================================== -->
+
+            <div id="messagesContainer"
+                 class="messages-container">
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 AI THINKING
+            =========================================== -->
+
+            <div id="typingIndicator"
+                 class="typing-indicator hidden">
+
+                <div class="assistant-message">
+
+                    <div class="message-avatar">
+
+                        <i class="fa-solid fa-robot"></i>
+
+                    </div>
+
+                    <div class="message-content">
+
+                        <div class="typing-animation">
+
+                            <span></span>
+
+                            <span></span>
+
+                            <span></span>
+
+                        </div>
+
+                        <div class="typing-text">
+
+                            FinanceAI is thinking...
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 SCROLL TO BOTTOM
+            =========================================== -->
+
+            <button id="scrollBottomBtn"
+                    class="scroll-bottom-button">
+
+                <i class="fa-solid fa-arrow-down"></i>
+
+            </button>
+
+        </section>
+
+                <!-- ==========================================
+             CHAT INPUT AREA
+        =========================================== -->
+
+        <footer class="chat-footer">
+
+            <!-- File Preview -->
+
+            <div id="filePreviewContainer"
+                 class="file-preview-container">
+
+            </div>
+
+            <!-- Upload Progress -->
+
+            <div id="uploadProgress"
+                 class="upload-progress hidden">
+
+                <div class="progress-bar">
+
+                    <div id="progressFill"
+                         class="progress-fill">
+
+                    </div>
+
+                </div>
+
+                <span id="progressText">
+
+                    Uploading...
+
+                </span>
+
+            </div>
+
+            <!-- Drag & Drop -->
+
+            <div id="dropZone"
+                 class="drop-zone hidden">
+
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                <h3>
+
+                    Drop your file here
+
+                </h3>
+
+                <p>
+
+                    PDF, Excel, CSV, JPG, PNG
+
+                </p>
+
+            </div>
+
+            <!-- Input Container -->
+
+            <div class="input-container">
+
+                <!-- Left Buttons -->
+
+                <div class="input-actions-left">
+
+                    <button id="attachFileBtn"
+                            class="icon-button"
+                            title="Attach File">
+
+                        <i class="fa-solid fa-paperclip"></i>
+
+                    </button>
+
+                    <input type="file"
+                           id="fileInput"
+                           hidden
+                           accept=".pdf,.csv,.xlsx,.xls,.png,.jpg,.jpeg">
+
+                    <button id="cameraBtn"
+                            class="icon-button"
+                            title="Upload Image">
+
+                        <i class="fa-solid fa-image"></i>
+
+                    </button>
+
+                    <button id="emojiBtn"
+                            class="icon-button"
+                            title="Emoji">
+
+                        <i class="fa-regular fa-face-smile"></i>
+
+                    </button>
+
+                </div>
+
+                <!-- Message Input -->
+
+                <div class="message-input-wrapper">
+
+                    <textarea id="messageInput"
+
+                              rows="1"
+
+                              maxlength="5000"
+
+                              placeholder="Message FinanceAI..."></textarea>
+
+                </div>
+
+                <!-- Right Buttons -->
+
+                <div class="input-actions-right">
+
+                    <button id="voiceRecordBtn"
+                            class="icon-button"
+                            title="Voice Input">
+
+                        <i class="fa-solid fa-microphone"></i>
+
+                    </button>
+
+                    <button id="chartShortcutBtn"
+                            class="icon-button"
+                            title="Generate Chart">
+
+                        <i class="fa-solid fa-chart-column"></i>
+
+                    </button>
+
+                    <button id="reportShortcutBtn"
+                            class="icon-button"
+                            title="Generate Report">
+
+                        <i class="fa-solid fa-file-pdf"></i>
+
+                    </button>
+
+                    <button id="sendMessageBtn"
+                            class="send-button">
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Keyboard Hint -->
+
+            <div class="input-footer">
+
+                <span>
+
+                    Press <strong>Enter</strong> to send
+
+                </span>
+
+                <span>
+
+                    Shift + Enter for new line
+
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+        <!-- ==========================================
+         CHART VIEWER MODAL
+    =========================================== -->
+
+    <div id="chartModal"
+         class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content chart-modal">
+
+            <div class="modal-header">
+
+                <h2>
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    Generated Chart
+
+                </h2>
+
+                <button class="close-modal">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <img id="generatedChart"
+
+                     src=""
+
+                     alt="Generated Chart">
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button id="downloadChartBtn"
+                        class="primary-btn">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Download
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         REPORT MODAL
+    =========================================== -->
+
+    <div id="reportModal"
+         class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2>
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    AI Report
+
+                </h2>
+
+                <button class="close-modal">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <i class="fa-solid fa-file-circle-check report-icon"></i>
+
+                <h3>
+
+                    Report Generated Successfully
+
+                </h3>
+
+                <p>
+
+                    Your report is ready.
+
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button id="downloadReportBtn"
+
+                        class="primary-btn">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Download PDF
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         IMAGE PREVIEW
+    =========================================== -->
+
+    <div id="imagePreviewModal"
+         class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content image-modal">
+
+            <button class="close-modal image-close">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+            <img id="previewImage"
+
+                 src=""
+
+                 alt="Preview">
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         SETTINGS MODAL
+    =========================================== -->
+
+    <div id="settingsModal"
+         class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content settings-modal">
+
+            <div class="modal-header">
+
+                <h2>
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    Settings
+
+                </h2>
+
+                <button class="close-modal">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="setting-item">
+
+                    <label>
+
+                        Dark Mode
+
+                    </label>
+
+                    <input type="checkbox"
+                           id="darkModeSwitch">
+
+                </div>
+
+                <div class="setting-item">
+
+                    <label>
+
+                        Enable Voice
+
+                    </label>
+
+                    <input type="checkbox"
+                           id="voiceSwitch"
+                           checked>
+
+                </div>
+
+                <div class="setting-item">
+
+                    <label>
+
+                        AI Model
+
+                    </label>
+
+                    <select id="modelSelect">
+
+                        <option value="llama3">
+
+                            Llama 3
+
+                        </option>
+
+                        <option value="mistral">
+
+                            Mistral
+
+                        </option>
+
+                        <option value="phi3">
+
+                            Phi-3
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         VOICE RECORDING
+    =========================================== -->
+
+    <div id="voiceModal"
+         class="modal hidden">
+
+        <div class="modal-overlay"></div>
+
+        <div class="modal-content voice-modal">
+
+            <div class="voice-animation">
+
+                <div class="voice-circle"></div>
+
+                <div class="voice-circle"></div>
+
+                <div class="voice-circle"></div>
+
+            </div>
+
+            <h2>
+
+                Listening...
+
+            </h2>
+
+            <p>
+
+                Speak clearly into your microphone.
+
+            </p>
+
+            <button id="stopRecordingBtn"
+                    class="danger-btn">
+
+                Stop Recording
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         LOADING OVERLAY
+    =========================================== -->
+
+    <div id="loadingOverlay"
+         class="loading-overlay hidden">
+
+        <div class="loader">
+
+            <div class="spinner"></div>
+
+            <h3>
+
+                FinanceAI Working...
+
+            </h3>
+
+            <p>
+
+                Please wait...
+
+            </p>
+
+        </div>
+
+    </div>
+
+        <!-- ==========================================
+         HTML TEMPLATES
+    =========================================== -->
+
+    <!-- ==========================================
+         USER MESSAGE TEMPLATE
+    =========================================== -->
+
+    <template id="userMessageTemplate">
+
+        <div class="message user-message">
+
+            <div class="message-avatar">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+            <div class="message-bubble">
+
+                <div class="message-text"></div>
+
+                <div class="message-time"></div>
+
+            </div>
+
+        </div>
+
+    </template>
+
+
+    <!-- ==========================================
+         AI MESSAGE TEMPLATE
+    =========================================== -->
+
+    <template id="aiMessageTemplate">
+
+        <div class="message ai-message">
+
+            <div class="message-avatar">
+
+                <i class="fa-solid fa-robot"></i>
+
+            </div>
+
+            <div class="message-bubble">
+
+                <div class="message-toolbar">
+
+                    <button class="copy-btn">
+
+                        <i class="fa-regular fa-copy"></i>
+
+                    </button>
+
+                    <button class="regenerate-btn">
+
+                        <i class="fa-solid fa-rotate-right"></i>
+
+                    </button>
+
+                </div>
+
+                <div class="message-text markdown-body"></div>
+
+                <div class="message-time"></div>
+
+            </div>
+
+        </div>
+
+    </template>
+
+
+    <!-- ==========================================
+         CHART TEMPLATE
+    =========================================== -->
+
+    <template id="chartTemplate">
+
+        <div class="message ai-message">
+
+            <div class="message-avatar">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+            </div>
+
+            <div class="message-bubble chart-card">
+
+                <img class="generated-chart"
+
+                     src=""
+
+                     alt="Generated Chart">
+
+                <div class="chart-actions">
+
+                    <button class="download-chart">
+
+                        <i class="fa-solid fa-download"></i>
+
+                        Download
+
+                    </button>
+
+                    <button class="expand-chart">
+
+                        <i class="fa-solid fa-expand"></i>
+
+                        View
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </template>
+
+
+    <!-- ==========================================
+         REPORT TEMPLATE
+    =========================================== -->
+
+    <template id="reportTemplate">
+
+        <div class="message ai-message">
+
+            <div class="message-avatar">
+
+                <i class="fa-solid fa-file-pdf"></i>
+
+            </div>
+
+            <div class="message-bubble report-card">
+
+                <div class="report-icon">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                </div>
+
+                <div class="report-info">
+
+                    <h3>
+
+                        AI Financial Report
+
+                    </h3>
+
+                    <p>
+
+                        PDF generated successfully.
+
+                    </p>
+
+                </div>
+
+                <button class="download-report">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Download
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </template>
+
+
+    <!-- ==========================================
+         DOCUMENT TEMPLATE
+    =========================================== -->
+
+    <template id="documentTemplate">
+
+        <div class="uploaded-document">
+
+            <div class="document-icon">
+
+                <i class="fa-solid fa-file"></i>
+
+            </div>
+
+            <div class="document-details">
+
+                <h4 class="document-name"></h4>
+
+                <span class="document-size"></span>
+
+            </div>
+
+        </div>
+
+    </template>
+
+
+    <!-- ==========================================
+         ERROR TEMPLATE
+    =========================================== -->
+
+    <template id="errorTemplate">
+
+        <div class="message error-message">
+
+            <div class="message-avatar">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+            </div>
+
+            <div class="message-bubble">
+
+                <div class="message-text"></div>
+
+            </div>
+
+        </div>
+
+    </template>
+
+
+    <!-- ==========================================
+         CODE BLOCK TEMPLATE
+    =========================================== -->
+
+    <template id="codeTemplate">
+
+        <div class="code-container">
+
+            <div class="code-header">
+
+                <span class="language-name">
+
+                    Python
+
+                </span>
+
+                <button class="copy-code">
+
+                    <i class="fa-regular fa-copy"></i>
+
+                </button>
+
+            </div>
+
+            <pre>
+
+<code class="language-python"></code>
+
+            </pre>
+
+        </div>
+
+    </template>
+
+        <!-- ==========================================
+         TOAST NOTIFICATION
+    =========================================== -->
+
+    <div id="toastContainer"
+         class="toast-container">
+
+    </div>
+
+
+    <!-- ==========================================
+         CUSTOM CONTEXT MENU
+    =========================================== -->
+
+    <div id="contextMenu"
+         class="context-menu hidden">
+
+        <button id="copyMessage">
+
+            <i class="fa-regular fa-copy"></i>
+
+            Copy
+
+        </button>
+
+        <button id="deleteMessage">
+
+            <i class="fa-regular fa-trash-can"></i>
+
+            Delete
+
+        </button>
+
+        <button id="regenerateMessage">
+
+            <i class="fa-solid fa-rotate-right"></i>
+
+            Regenerate
+
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         FLOATING ACTION BUTTON
+    =========================================== -->
+
+    <button id="floatingChatButton"
+
+            class="floating-chat-btn">
+
+        <i class="fa-solid fa-arrow-up"></i>
+
+    </button>
+
+    
+    <!-- ==========================================
+         JAVASCRIPT FILES
+    =========================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chat_assistant.js') }}"></script>
+
+    <script>
+
+        AOS.init({
+
+            duration: 700,
+
+            once: true
+
+        });
+
+    </script>
+
+</div>
+
+</body>
+
+</html>
