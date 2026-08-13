@@ -574,6 +574,38 @@ The application has been successfully deployed using **PythonAnywhere**.
 - Dark Mode
 - User Authentication
 
+---
+
+# 🖥️ Application Preview
+
+<div align="center">
+
+### 🌐 Landing Page
+
+<img src="screenshots/landing-page.png" alt="Finance Analytics Platform Landing Page" width="100%">
+
+<br><br>
+
+### 📊 Financial Dashboard
+
+<img src="screenshots/dashboard.png" alt="Finance Analytics Platform Dashboard" width="100%">
+
+<br><br>
+
+### 🎯 Financial Goals
+
+<img src="screenshots/financial-goals.png" alt="Financial Goals Dashboard" width="100%">
+
+<br><br>
+
+### 📈 Portfolio Analytics
+
+<img src="screenshots/portfolio-analytics.png" alt="Portfolio Analytics Dashboard" width="100%">
+
+</div>
+
+---
+
 ### 🌐 Live Application
 
 <div align="center">
