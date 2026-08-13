@@ -179,20 +179,6 @@ Users can create and monitor financial goals.
 
 ---
 
-## 🛡️ Fraud Detection
-
-The platform includes a machine-learning-based fraud prediction module.
-
-### Features include:
-
-- Transaction analysis
-- Fraud prediction
-- Machine learning model
-- Prediction history
-- Fraud analysis
-- Fraud prediction dashboard
-
----
 
 ## 📄 Financial Reports
 
