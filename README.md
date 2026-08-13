@@ -293,22 +293,26 @@ The platform includes a modern dark-mode interface for a comfortable user experi
                          │      SQLite DB      │
                          └─────────────────────┘
 
-📁 Project Structure
+---
+
+# 📁 Project Structure
+
+```text
 SmartFinanceInsights/
 │
-├── ai/
+├── 📂 ai/
 │   ├── finance_ai.py
 │   ├── fraud_analysis.py
 │   ├── model.py
 │   ├── predictor.py
 │   └── train_model.py
 │
-├── database/
+├── 📂 database/
 │   ├── create_db.py
 │   ├── db.py
 │   └── schema.sql
 │
-├── finance_ai/
+├── 📂 finance_ai/
 │   ├── chart_engine.py
 │   ├── chat_engine.py
 │   ├── config.py
@@ -321,80 +325,21 @@ SmartFinanceInsights/
 │   ├── tool_router.py
 │   └── utils.py
 │
-├── models/
+├── 📂 models/
 │   ├── encoders.pkl
 │   └── fraud_model.pkl
 │
-├── static/
+├── 📂 static/
 │   ├── css/
 │   ├── js/
 │   └── images/
 │
-├── templates/
+├── 📂 templates/
 │
-├── app.py
-├── package.json
-├── package-lock.json
-├── .gitignore
-├── LICENSE
-├── README.md
-└── TODO.md
-🔄 Application Workflow
-User
-  │
-  ▼
-Login / Registration
-  │
-  ▼
-Dashboard
-  │
-  ├── Income Management
-  │
-  ├── Expense Management
-  │
-  ├── Budget Planning
-  │
-  ├── Investment Portfolio
-  │
-  ├── Financial Goals
-  │
-  ├── Analytics
-  │
-  ├── Financial Health
-  │
-  ├── Reports
-  │
-  ├── Fraud Prediction
-  │
-  └── AI Financial Assistant
-            │
-            ▼
-       Ollama Cloud
-            │
-            ▼
-       GPT-OSS 20B
-            │
-            ▼
-     Intelligent Response
-🤖 AI Assistant Architecture
-User Question
-      │
-      ▼
-Chat Assistant Interface
-      │
-      ▼
-Flask Backend
-      │
-      ▼
-Chat Engine
-      │
-      ▼
-Ollama Cloud API
-      │
-      ▼
-GPT-OSS 20B
-      │
-      ▼
-AI Generated Response
-
-The AI API credentials are stored securely using environment variables and are not included in this repository.
+├── 📄 app.py
+├── 📄 package.json
+├── 📄 package-lock.json
+├── 📄 .gitignore
+├── 📄 LICENSE
+├── 📄 README.md
+└── 📄 TODO.md
