@@ -1,125 +1,300 @@
-# Finance Analytics Platform for Financial Reporting and Budget Tracking
+<div align="center">
 
-## 📌 Project Overview
+# 💰 Smart Finance Insights
 
-The **Finance Analytics Platform for Financial Reporting and Budget Tracking** is a web-based financial management and analytics application developed using Python and Flask.
+### 🤖 AI-Powered Personal Finance Management Platform
 
-The platform helps users manage their personal finances by tracking income, expenses, budgets, investments, financial goals, and financial reports. It also provides interactive analytics, AI-powered financial assistance, fraud prediction, and personalized financial insights.
+Manage your income, expenses, budgets, investments, financial goals, and AI-driven financial insights through one elegant dashboard.
+
+<br>
+
+![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-3.x-000000?style=for-the-badge&logo=flask&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![Ollama](https://img.shields.io/badge/Ollama-Cloud-000000?style=for-the-badge)
+![AI](https://img.shields.io/badge/AI-GPT--OSS%2020B-7C3AED?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-1.0.0-orange?style=for-the-badge)
+
+<br>
+
+**🌐 Live Demo:**  
+https://moumitadev.pythonanywhere.com/
+
+</div>
 
 ---
 
-## 🎯 Objectives
+# 📖 Overview
 
-The main objectives of this project are:
+**Smart Finance Insights** is a modern AI-powered personal finance management platform developed using **Python, Flask, SQLite, JavaScript, and AI technologies**.
 
-- To provide a centralized platform for managing personal financial information.
-- To track income and expenses efficiently.
-- To help users create and monitor budgets.
-- To provide financial analytics through interactive charts.
-- To manage investments and financial goals.
-- To generate financial reports.
-- To provide AI-powered financial recommendations.
-- To assist users in making better financial decisions.
-- To provide fraud prediction and financial analysis features.
+The platform helps users manage their personal finances from a centralized dashboard. Users can track income and expenses, create budgets, manage investments, monitor financial goals, analyze spending patterns, generate reports, and receive AI-powered financial assistance.
+
+The application combines **financial management, data analytics, artificial intelligence, machine learning, and reporting** into a single web-based platform.
 
 ---
 
-## ✨ Key Features
+# ✨ Key Features
 
-### 💰 Financial Management
+## 💵 Income Management
 
-- Income tracking
-- Expense tracking
-- Budget management
-- Bill management
-- Savings tracking
-- Financial goals
-- Investment portfolio management
+- Add monthly income
+- Update income records
+- Delete income records
+- Income overview
+- Monthly statistics
 
-### 📊 Financial Analytics
+---
 
+## 💸 Expense Tracking
+
+- Add expenses
+- Edit expenses
+- Delete expenses
+- Category-wise expense tracking
+- Monthly expense analysis
+- Spending insights
+
+---
+
+## 📊 Interactive Dashboard
+
+- Financial summary
+- Income vs Expense
+- Monthly financial charts
+- Savings overview
+- Budget status
+- Financial Health Score
+
+---
+
+## 🎯 Budget Planning
+
+- Create monthly budgets
+- Category-wise budgeting
+- Track budget utilization
+- Remaining budget calculation
+- Budget alerts
+- AI Budget Advisor
+
+---
+
+## 🤖 AI Financial Assistant
+
+The platform includes an AI-powered conversational financial assistant.
+
+Users can ask normal financial questions and receive intelligent responses.
+
+### AI capabilities include:
+
+- General financial questions
+- Saving recommendations
 - Spending analysis
-- Income vs. expense analysis
+- Financial suggestions
+- Budget-related guidance
+- Personalized financial insights
+
+The deployed application uses **Ollama Cloud with the GPT-OSS 20B model**.
+
+---
+
+## 🧠 AI Financial Insights
+
+The AI module analyzes financial information and provides useful insights based on the user's financial activity.
+
+### Features include:
+
+- Spending insights
+- Savings recommendations
+- Financial health suggestions
+- Budget recommendations
+- Investment-related insights
+
+---
+
+## 📈 Financial Analytics
+
+Interactive financial visualizations help users understand their financial behavior.
+
+### Analytics include:
+
+- Income vs Expense
+- Expense category analysis
 - Budget analysis
-- Portfolio analytics
+- Spending trends
+- Investment portfolio analysis
 - Financial health analysis
-- Interactive charts and visualizations
 
-### 🤖 AI-Powered Features
+---
 
-- AI Financial Assistant
-- Budget Advisor
-- AI-powered financial insights
-- Financial report generation
-- Document analysis
-- Personalized financial recommendations
+## 💼 Investment Portfolio
 
-### 🛡️ Fraud Detection
+Users can manage their investment portfolio through the platform.
 
+### Features include:
+
+- Add investments
+- Edit investments
+- Track invested amount
+- Track current value
+- Purchase date
+- Investment notes
+- Portfolio analytics
+- Asset allocation
+
+---
+
+## 🎯 Financial Goals
+
+Users can create and monitor their financial goals.
+
+### Features include:
+
+- Create financial goals
+- Set target amounts
+- Track progress
+- Update saved amounts
+- Goal completion percentage
+- Active/Achieved status
+
+---
+
+## 🛡️ Fraud Detection
+
+The platform includes a machine-learning-based fraud prediction module.
+
+### Features include:
+
+- Transaction analysis
 - Fraud prediction
-- Machine learning based analysis
+- Machine learning model
 - Prediction history
+- Fraud analysis dashboard
 
-### 📄 Reporting
+---
 
-- Financial report generation
+## 📄 Financial Reports
+
+Users can generate financial reports based on their financial data.
+
+### Supported reports include:
+
+- Financial summaries
 - PDF reports
 - Excel reports
-- Financial summaries
+- Income reports
+- Expense reports
+- Investment information
 
-### 🔔 Additional Features
+---
 
-- User authentication
+## 📅 Financial Calendar
+
+The financial calendar helps users organize and view important financial activities and dates in one place.
+
+---
+
+## 🔔 Notifications
+
+The platform provides financial notifications and alerts for important activities.
+
+Examples include:
+
+- Budget-related notifications
+- Savings notifications
+- Spending notifications
+- Financial achievement notifications
+
+---
+
+## 👤 User Management
+
+The application provides a complete user authentication and profile system.
+
+### Includes:
+
+- User registration
+- Login
+- Logout
 - OTP verification
-- Notifications
+- Forgot password
+- Reset password
 - Profile management
-- Dark mode
-- Financial calendar
-- Savings tips
-- Dataset management
+- User settings
 
 ---
 
-## 🛠️ Technologies Used
+## 🌙 Dark Mode
 
-### Backend
-
-- Python
-- Flask
-- SQLite
-
-### Frontend
-
-- HTML5
-- CSS3
-- JavaScript
-- Chart.js
-
-### Artificial Intelligence & Machine Learning
-
-- Ollama Cloud
-- GPT-OSS 20B
-- Python-based AI modules
-- Machine Learning models
-- EasyOCR for document processing
-
-### Database
-
-- SQLite
-
-### Development & Deployment
-
-- Visual Studio Code
-- Git
-- GitHub
-- PythonAnywhere
+The platform includes a modern dark-mode interface for a comfortable user experience.
 
 ---
 
-## 🏗️ Project Structure
+# 🛠️ Technologies Used
+
+<div align="center">
+
+| Category | Technologies |
+|---|---|
+| **Programming Language** | Python |
+| **Web Framework** | Flask |
+| **Frontend** | HTML5, CSS3, JavaScript |
+| **Database** | SQLite |
+| **Data Visualization** | Chart.js |
+| **AI** | Ollama Cloud, GPT-OSS 20B |
+| **Machine Learning** | Python ML Models |
+| **Document Processing** | PDFPlumber, EasyOCR |
+| **Reporting** | PDF, Excel |
+| **Package Management** | pip, npm |
+| **Version Control** | Git & GitHub |
+| **Deployment** | PythonAnywhere |
+
+</div>
+
+---
+
+# 🏗️ Project Architecture
 
 ```text
-finance-analytics-platform/
+                         ┌─────────────────────┐
+                         │       USER          │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   Web Interface     │
+                         │ HTML/CSS/JavaScript │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │    Flask Backend    │
+                         └──────────┬──────────┘
+                                    │
+              ┌─────────────────────┼─────────────────────┐
+              │                     │                     │
+              ▼                     ▼                     ▼
+      ┌───────────────┐     ┌───────────────┐     ┌───────────────┐
+      │   Financial   │     │   Analytics   │     │   AI / ML     │
+      │   Management  │     │    Engine     │     │    Engine     │
+      └───────┬───────┘     └───────┬───────┘     └───────┬───────┘
+              │                     │                     │
+              ▼                     ▼                     ▼
+        Income/Expense         Charts & Reports      AI Assistant
+        Budget                 Spending Analysis      Budget Advisor
+        Investments            Portfolio Analytics   Fraud Prediction
+        Goals                  Financial Health      AI Insights
+              │                     │                     │
+              └─────────────────────┼─────────────────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │      SQLite DB      │
+                         └─────────────────────┘
+
+📁 Project Structure
+SmartFinanceInsights/
 │
 ├── ai/
 │   ├── finance_ai.py
@@ -160,136 +335,66 @@ finance-analytics-platform/
 ├── app.py
 ├── package.json
 ├── package-lock.json
-├── requirements.txt
-├── README.md
+├── .gitignore
 ├── LICENSE
-└── .gitignore
-
-
+├── README.md
+└── TODO.md
 🔄 Application Workflow
 User
   │
   ▼
-Web Interface
+Login / Registration
   │
   ▼
-Flask Application
+Dashboard
   │
-  ├── Financial Management
-  │       ├── Income
-  │       ├── Expenses
-  │       ├── Budget
-  │       ├── Investments
-  │       └── Financial Goals
+  ├── Income Management
   │
-  ├── Analytics Engine
-  │       ├── Spending Analysis
-  │       ├── Budget Analysis
-  │       └── Portfolio Analysis
+  ├── Expense Management
   │
-  ├── AI Engine
-  │       ├── AI Assistant
-  │       ├── Budget Advisor
-  │       └── Financial Insights
+  ├── Budget Planning
   │
-  ├── ML Module
-  │       └── Fraud Prediction
+  ├── Investment Portfolio
   │
-  └── Reporting Module
-          ├── PDF Reports
-          └── Excel Reports
+  ├── Financial Goals
+  │
+  ├── Analytics
+  │
+  ├── Financial Health
+  │
+  ├── Reports
+  │
+  ├── Fraud Prediction
+  │
+  └── AI Financial Assistant
+            │
+            ▼
+       Ollama Cloud
+            │
+            ▼
+       GPT-OSS 20B
+            │
+            ▼
+     Intelligent Response
+🤖 AI Assistant Architecture
+User Question
+      │
+      ▼
+Chat Assistant Interface
+      │
+      ▼
+Flask Backend
+      │
+      ▼
+Chat Engine
+      │
+      ▼
+Ollama Cloud API
+      │
+      ▼
+GPT-OSS 20B
+      │
+      ▼
+AI Generated Response
 
-
-🤖 AI Financial Assistant
-
-The platform includes an AI-powered financial assistant that can answer general financial questions and provide personalized financial insights.
-
-The application uses Ollama Cloud with the GPT-OSS 20B model for AI-powered conversational responses.
-
-API credentials are stored securely using environment variables and are not included in the GitHub repository.
-
-📊 Financial Analytics
-
-The analytics module provides visual representations of financial data using interactive charts.
-
-Examples include:
-
-Income vs. Expense
-Expense category analysis
-Budget utilization
-Investment portfolio analysis
-Financial health indicators
-
-These visualizations help users understand their financial patterns and make informed decisions.
-
-🛡️ Security and Privacy
-
-Sensitive information is not included in the public repository.
-
-The project uses:
-
-Environment variables for API credentials
-.gitignore for sensitive files
-SQLite database for application data
-Authentication and OTP verification
-
-The .env file and database files are excluded from the GitHub repository.
-
-🚀 Deployment
-
-The application has been deployed using PythonAnywhere.
-
-The deployed application provides access to the Finance Analytics Platform through a web browser.
-
-📋 Requirements
-
-Install the required Python packages using:
-
-pip install -r requirements.txt
-
-For local development, configure the required environment variables in a .env file.
-
-Example:
-
-OLLAMA_HOST=https://ollama.com
-OLLAMA_MODEL=gpt-oss:20b
-OLLAMA_API_KEY=your_api_key_here
-
-Never commit your actual API key to GitHub.
-
-▶️ Running the Application Locally
-
-Clone the repository:
-
-git clone https://github.com/moumitadeb-23/finance-analytics-platform.git
-
-Navigate into the project:
-
-cd finance-analytics-platform
-
-Install dependencies:
-
-pip install -r requirements.txt
-
-Configure your environment variables and then run:
-
-python app.py
-
-The application can then be accessed through the local Flask server.
-
-👩‍💻 Developer
-
-Moumita Deb
-
-GitHub:
-https://github.com/moumitadeb-23
-
-📜 License
-
-This project is licensed under the MIT License.
-
-See the LICENSE file for details.
-
-⭐ Acknowledgement
-
-This project was developed as an academic project to demonstrate the practical application of web development, financial analytics, artificial intelligence, machine learning, database management, and reporting technologies.
+The AI API credentials are stored securely using environment variables and are not included in this repository.
